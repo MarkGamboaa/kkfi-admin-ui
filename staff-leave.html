@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Leave Management - KKFI Admin</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <div class="layout">
+    <div id="sidebar-container"></div>
+
+    <!-- MAIN CONTENT -->
+    <main class="content">
+      <div class="page-header">
+        <div style="display: flex; align-items: center; gap: 15px;">
+          <a href="staff.html" class="back-btn">‹</a>
+          <h1 class="page-title">📅 Leave Management</h1>
+        </div>
+        <div class="header-actions">
+          <button class="btn btn-primary" onclick="openAddLeaveModal()">+ New Leave Request</button>
+          <button class="btn btn-filter">🔽 Filter</button>
+          <button class="btn btn-filter">↕️ Sort</button>
+          <button class="btn btn-outline">📊 Export Report</button>
+        </div>
+      </div>
+
+      <!-- Stats Cards -->
+      <div class="stats-cards">
+        <div class="stat-card">
+          <div class="stat-icon pending-leave" style="background: #fff3e6; color: #f5a623;">⏳</div>
+          <div class="stat-info">
+            <h3>8</h3>
+            <p>Pending Requests</p>
+            <div class="stat-meta">
+              <span>This Week: <strong>3</strong></span>
+              <span>This Month: <strong>8</strong></span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="stat-card">
+          <div class="stat-icon approved-leave" style="background: #e6f7ed; color: #28a745;">✅</div>
+          <div class="stat-info">
+            <h3>45</h3>
+            <p>Approved This Year</p>
+            <div class="stat-meta">
+              <span>Vacation: <strong>28</strong></span>
+              <span>Sick: <strong>17</strong></span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="stat-card">
+          <div class="stat-icon on-leave" style="background: #e8f4fd; color: #5b5f97;">🏖️</div>
+          <div class="stat-info">
+            <h3>3</h3>
+            <p>Currently On Leave</p>
+            <div class="stat-meta">
+              <span>Vacation: <strong>2</strong></span>
+              <span>Sick: <strong>1</strong></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Filter Tabs -->
+      <div class="filter-tabs" style="margin-bottom: 20px;">
+        <button class="filter-tab active" onclick="filterLeaves('all')">All Requests</button>
+        <button class="filter-tab" onclick="filterLeaves('pending')">Pending (8)</button>
+        <button class="filter-tab" onclick="filterLeaves('approved')">Approved (45)</button>
+        <button class="filter-tab" onclick="filterLeaves('rejected')">Rejected (5)</button>
+        <button class="filter-tab" onclick="filterLeaves('cancelled')">Cancelled (2)</button>
+      </div>
+
+      <!-- Leave Requests Table -->
+      <div class="table-container">
+        <div class="table-header">
+          <div class="table-controls">
+            <div class="rows-per-page">
+              Row Per Page
+              <select>
+                <option>10</option>
+                <option>25</option>
+                <option>50</option>
+              </select>
+              Entries
+            </div>
+          </div>
+          <div class="search-box">
+            <input type="text" placeholder="Search by name or ID...">
+          </div>
+        </div>
+        
+        <table>
+          <thead>
+            <tr>
+              <th class="checkbox-cell"><input type="checkbox" id="selectAll"></th>
+              <th class="sortable">Leave ID</th>
+              <th class="sortable">Staff Name</th>
+              <th class="sortable">Leave Type</th>
+              <th class="sortable">Start Date</th>
+              <th class="sortable">End Date</th>
+              <th class="sortable">Days</th>
+              <th class="sortable">Status</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Pending Requests -->
+            <tr class="leave-pending">
+              <td class="checkbox-cell"><input type="checkbox"></td>
+              <td><span class="id-link">LV-2026-018</span></td>
+              <td>
+                <div class="user-cell">
+                  <div class="user-avatar">MC</div>
+                  Maria Clara Dela Cruz
+                </div>
+              </td>
+              <td><span class="leave-type vacation">🏖️ Vacation</span></td>
+              <td>Feb 28, 2026</td>
+              <td>Mar 03, 2026</td>
+              <td>3</td>
+              <td><span class="status-badge pending">Pending</span></td>
+              <td class="actions-cell">
+                <button class="btn btn-icon" title="Approve" onclick="approveLeave('LV-2026-018', 'Maria Clara Dela Cruz')">✅</button>
+                <button class="btn btn-icon" title="Reject" onclick="rejectLeave('LV-2026-018')">❌</button>
+                <button class="btn btn-icon" title="View" onclick="viewLeaveDetails('LV-2026-018')">👁️</button>
+              </td>
+            </tr>
+            <tr class="leave-pending">
+              <td class="checkbox-cell"><input type="checkbox"></td>
+              <td><span class="id-link">LV-2026-017</span></td>
+              <td>
+                <div class="user-cell">
+                  <div class="user-avatar">PE</div>
+                  Pedro Enriquez Ramos
+                </div>
+              </td>
+              <td><span class="leave-type sick">🏥 Sick Leave</span></td>
+              <td>Feb 24, 2026</td>
+              <td>Feb 25, 2026</td>
+              <td>2</td>
+              <td><span class="status-badge pending">Pending</span></td>
+              <td class="actions-cell">
+                <button class="btn btn-icon" title="Approve" onclick="approveLeave('LV-2026-017', 'Pedro Enriquez Ramos')">✅</button>
+                <button class="btn btn-icon" title="Reject" onclick="rejectLeave('LV-2026-017')">❌</button>
+                <button class="btn btn-icon" title="View" onclick="viewLeaveDetails('LV-2026-017')">👁️</button>
+              </td>
+            </tr>
+            <tr class="leave-pending">
+              <td class="checkbox-cell"><input type="checkbox"></td>
+              <td><span class="id-link">LV-2026-016</span></td>
+              <td>
+                <div class="user-cell">
+                  <div class="user-avatar">LB</div>
+                  Luisa Bautista Morales
+                </div>
+              </td>
+              <td><span class="leave-type emergency">⚡ Emergency</span></td>
+              <td>Feb 22, 2026</td>
+              <td>Feb 22, 2026</td>
+              <td>1</td>
+              <td><span class="status-badge pending">Pending</span></td>
+              <td class="actions-cell">
+                <button class="btn btn-icon" title="Approve" onclick="approveLeave('LV-2026-016', 'Luisa Bautista Morales')">✅</button>
+                <button class="btn btn-icon" title="Reject" onclick="rejectLeave('LV-2026-016')">❌</button>
+                <button class="btn btn-icon" title="View" onclick="viewLeaveDetails('LV-2026-016')">👁️</button>
+              </td>
+            </tr>
+            <tr class="leave-pending">
+              <td class="checkbox-cell"><input type="checkbox"></td>
+              <td><span class="id-link">LV-2026-015</span></td>
+              <td>
+                <div class="user-cell">
+                  <div class="user-avatar">JR</div>
+                  Juan Reyes Santos
+                </div>
+              </td>
+              <td><span class="leave-type vacation">🏖️ Vacation</span></td>
+              <td>Feb 25, 2026</td>
+              <td>Feb 27, 2026</td>
+              <td>3</td>
+              <td><span class="status-badge pending">Pending</span></td>
+              <td class="actions-cell">
+                <button class="btn btn-icon" title="Approve" onclick="approveLeave('LV-2026-015', 'Juan Reyes Santos')">✅</button>
+                <button class="btn btn-icon" title="Reject" onclick="rejectLeave('LV-2026-015')">❌</button>
+                <button class="btn btn-icon" title="View" onclick="viewLeaveDetails('LV-2026-015')">👁️</button>
+              </td>
+            </tr>
+            <!-- Approved Requests -->
+            <tr class="leave-approved">
+              <td class="checkbox-cell"><input type="checkbox"></td>
+              <td><span class="id-link">LV-2026-014</span></td>
+              <td>
+                <div class="user-cell">
+                  <div class="user-avatar">CR</div>
+                  Carmen Rojas Torres
+                </div>
+              </td>
+              <td><span class="leave-type vacation">🏖️ Vacation</span></td>
+              <td>Feb 20, 2026</td>
+              <td>Feb 21, 2026</td>
+              <td>2</td>
+              <td><span class="status-badge approved">Approved</span></td>
+              <td class="actions-cell">
+                <button class="btn btn-icon" title="View" onclick="viewLeaveDetails('LV-2026-014')">👁️</button>
+                <button class="btn btn-icon" title="Edit" onclick="editLeave('LV-2026-014')">✏️</button>
+                <button class="btn btn-icon" title="Cancel" onclick="cancelLeave('LV-2026-014')">🚫</button>
+              </td>
+            </tr>
+            <tr class="leave-approved">
+              <td class="checkbox-cell"><input type="checkbox"></td>
+              <td><span class="id-link">LV-2026-013</span></td>
+              <td>
+                <div class="user-cell">
+                  <div class="user-avatar">AL</div>
+                  Angela Lopez Villanueva
+                </div>
+              </td>
+              <td><span class="leave-type sick">🏥 Sick Leave</span></td>
+              <td>Feb 18, 2026</td>
+              <td>Feb 19, 2026</td>
+              <td>2</td>
+              <td><span class="status-badge approved">Approved</span></td>
+              <td class="actions-cell">
+                <button class="btn btn-icon" title="View" onclick="viewLeaveDetails('LV-2026-013')">👁️</button>
+                <button class="btn btn-icon" title="Edit" onclick="editLeave('LV-2026-013')">✏️</button>
+                <button class="btn btn-icon" title="Cancel" onclick="cancelLeave('LV-2026-013')">🚫</button>
+              </td>
+            </tr>
+            <tr class="leave-approved">
+              <td class="checkbox-cell"><input type="checkbox"></td>
+              <td><span class="id-link">LV-2026-012</span></td>
+              <td>
+                <div class="user-cell">
+                  <div class="user-avatar">RM</div>
+                  Roberto Mendoza Garcia
+                </div>
+              </td>
+              <td><span class="leave-type vacation">🏖️ Vacation</span></td>
+              <td>Feb 14, 2026</td>
+              <td>Feb 14, 2026</td>
+              <td>1</td>
+              <td><span class="status-badge approved">Approved</span></td>
+              <td class="actions-cell">
+                <button class="btn btn-icon" title="View" onclick="viewLeaveDetails('LV-2026-012')">👁️</button>
+                <button class="btn btn-icon" title="Edit" onclick="editLeave('LV-2026-012')">✏️</button>
+                <button class="btn btn-icon" title="Cancel" onclick="cancelLeave('LV-2026-012')">🚫</button>
+              </td>
+            </tr>
+            <!-- Rejected Request -->
+            <tr class="leave-rejected">
+              <td class="checkbox-cell"><input type="checkbox"></td>
+              <td><span class="id-link">LV-2026-011</span></td>
+              <td>
+                <div class="user-cell">
+                  <div class="user-avatar">PE</div>
+                  Pedro Enriquez Ramos
+                </div>
+              </td>
+              <td><span class="leave-type vacation">🏖️ Vacation</span></td>
+              <td>Feb 10, 2026</td>
+              <td>Feb 15, 2026</td>
+              <td>6</td>
+              <td><span class="status-badge rejected">Rejected</span></td>
+              <td class="actions-cell">
+                <button class="btn btn-icon" title="View" onclick="viewLeaveDetails('LV-2026-011')">👁️</button>
+                <button class="btn btn-icon" title="Resubmit" onclick="resubmitLeave('LV-2026-011')">🔄</button>
+              </td>
+            </tr>
+            <!-- Currently On Leave -->
+            <tr class="leave-ongoing">
+              <td class="checkbox-cell"><input type="checkbox"></td>
+              <td><span class="id-link">LV-2026-010</span></td>
+              <td>
+                <div class="user-cell">
+                  <div class="user-avatar">MC</div>
+                  Maria Clara Dela Cruz
+                </div>
+              </td>
+              <td><span class="leave-type vacation">🏖️ Vacation</span></td>
+              <td>Feb 17, 2026</td>
+              <td>Feb 21, 2026</td>
+              <td>5</td>
+              <td><span class="status-badge on-leave">On Leave</span></td>
+              <td class="actions-cell">
+                <button class="btn btn-icon" title="View" onclick="viewLeaveDetails('LV-2026-010')">👁️</button>
+                <button class="btn btn-icon" title="End Early" onclick="endLeaveEarly('LV-2026-010')">⏹️</button>
+              </td>
+            </tr>
+            <tr class="leave-ongoing">
+              <td class="checkbox-cell"><input type="checkbox"></td>
+              <td><span class="id-link">LV-2026-009</span></td>
+              <td>
+                <div class="user-cell">
+                  <div class="user-avatar">PE</div>
+                  Pedro Enriquez Ramos
+                </div>
+              </td>
+              <td><span class="leave-type sick">🏥 Sick Leave</span></td>
+              <td>Feb 18, 2026</td>
+              <td>Feb 20, 2026</td>
+              <td>3</td>
+              <td><span class="status-badge sick-leave">Sick Leave</span></td>
+              <td class="actions-cell">
+                <button class="btn btn-icon" title="View" onclick="viewLeaveDetails('LV-2026-009')">👁️</button>
+                <button class="btn btn-icon" title="End Early" onclick="endLeaveEarly('LV-2026-009')">⏹️</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="pagination">
+          <span class="disabled">Pre</span>
+          <a href="#" class="active">1</a>
+          <a href="#">2</a>
+          <a href="#">3</a>
+          <span>...</span>
+          <a href="#">10</a>
+          <a href="#">Next</a>
+        </div>
+      </div>
+
+      <!-- Staff Leave Balances Section -->
+      <section class="form-section" style="margin-top: 25px;">
+        <h3 class="section-title">Staff Leave Balances</h3>
+        <div class="leave-balances-grid">
+          <div class="leave-balance-card">
+            <div class="staff-info-mini">
+              <div class="user-avatar">JR</div>
+              <div>
+                <strong>Juan Reyes Santos</strong>
+                <span>Program Manager</span>
+              </div>
+            </div>
+            <div class="balance-bars">
+              <div class="balance-item">
+                <span>Vacation</span>
+                <div class="balance-bar">
+                  <div class="balance-fill" style="width: 66.67%;"></div>
+                </div>
+                <span>10/15</span>
+              </div>
+              <div class="balance-item">
+                <span>Sick</span>
+                <div class="balance-bar">
+                  <div class="balance-fill sick" style="width: 80%;"></div>
+                </div>
+                <span>12/15</span>
+              </div>
+              <div class="balance-item">
+                <span>Emergency</span>
+                <div class="balance-bar">
+                  <div class="balance-fill emergency" style="width: 100%;"></div>
+                </div>
+                <span>5/5</span>
+              </div>
+            </div>
+          </div>
+          
+          <div class="leave-balance-card">
+            <div class="staff-info-mini">
+              <div class="user-avatar">MC</div>
+              <div>
+                <strong>Maria Clara Dela Cruz</strong>
+                <span>Finance Officer</span>
+              </div>
+            </div>
+            <div class="balance-bars">
+              <div class="balance-item">
+                <span>Vacation</span>
+                <div class="balance-bar">
+                  <div class="balance-fill" style="width: 46.67%;"></div>
+                </div>
+                <span>7/15</span>
+              </div>
+              <div class="balance-item">
+                <span>Sick</span>
+                <div class="balance-bar">
+                  <div class="balance-fill sick" style="width: 86.67%;"></div>
+                </div>
+                <span>13/15</span>
+              </div>
+              <div class="balance-item">
+                <span>Emergency</span>
+                <div class="balance-bar">
+                  <div class="balance-fill emergency" style="width: 80%;"></div>
+                </div>
+                <span>4/5</span>
+              </div>
+            </div>
+          </div>
+          
+          <div class="leave-balance-card">
+            <div class="staff-info-mini">
+              <div class="user-avatar">RM</div>
+              <div>
+                <strong>Roberto Mendoza Garcia</strong>
+                <span>HR Coordinator</span>
+              </div>
+            </div>
+            <div class="balance-bars">
+              <div class="balance-item">
+                <span>Vacation</span>
+                <div class="balance-bar">
+                  <div class="balance-fill" style="width: 93.33%;"></div>
+                </div>
+                <span>14/15</span>
+              </div>
+              <div class="balance-item">
+                <span>Sick</span>
+                <div class="balance-bar">
+                  <div class="balance-fill sick" style="width: 93.33%;"></div>
+                </div>
+                <span>14/15</span>
+              </div>
+              <div class="balance-item">
+                <span>Emergency</span>
+                <div class="balance-bar">
+                  <div class="balance-fill emergency" style="width: 100%;"></div>
+                </div>
+                <span>5/5</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="leave-balance-card">
+            <div class="staff-info-mini">
+              <div class="user-avatar">AL</div>
+              <div>
+                <strong>Angela Lopez Villanueva</strong>
+                <span>Administrative Assistant</span>
+              </div>
+            </div>
+            <div class="balance-bars">
+              <div class="balance-item">
+                <span>Vacation</span>
+                <div class="balance-bar">
+                  <div class="balance-fill" style="width: 53.33%;"></div>
+                </div>
+                <span>8/15</span>
+              </div>
+              <div class="balance-item">
+                <span>Sick</span>
+                <div class="balance-bar">
+                  <div class="balance-fill sick" style="width: 66.67%;"></div>
+                </div>
+                <span>10/15</span>
+              </div>
+              <div class="balance-item">
+                <span>Emergency</span>
+                <div class="balance-bar">
+                  <div class="balance-fill emergency" style="width: 60%;"></div>
+                </div>
+                <span>3/5</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- Add/Create Leave Request Modal -->
+  <div id="addLeaveModal" class="modal" style="display: none;">
+    <div class="modal-content" style="max-width: 550px;">
+      <div class="modal-header">
+        <h3>📅 Create New Leave Request</h3>
+        <button class="modal-close" onclick="closeAddLeaveModal()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form id="addLeaveForm">
+          <div class="form-group" style="margin-bottom: 15px;">
+            <label>Staff Member <span style="color: #dc3545;">*</span></label>
+            <select id="staffSelect" required>
+              <option value="">Select staff member</option>
+              <option value="STF-001">Juan Reyes Santos - Program Manager</option>
+              <option value="STF-002">Maria Clara Dela Cruz - Finance Officer</option>
+              <option value="STF-003">Roberto Mendoza Garcia - HR Coordinator</option>
+              <option value="STF-004">Angela Lopez Villanueva - Administrative Assistant</option>
+              <option value="STF-005">Pedro Enriquez Ramos - Scholar Coordinator</option>
+              <option value="STF-006">Carmen Rojas Torres - IT Specialist</option>
+              <option value="STF-007">Francisco Gomez Padilla - Executive Director</option>
+              <option value="STF-008">Luisa Bautista Morales - Communications Officer</option>
+            </select>
+          </div>
+          <div class="form-group" style="margin-bottom: 15px;">
+            <label>Leave Type <span style="color: #dc3545;">*</span></label>
+            <select id="leaveType" required>
+              <option value="">Select leave type</option>
+              <option value="vacation">🏖️ Vacation Leave</option>
+              <option value="sick">🏥 Sick Leave</option>
+              <option value="emergency">⚡ Emergency Leave</option>
+              <option value="bereavement">🕯️ Bereavement Leave</option>
+              <option value="maternity">👶 Maternity Leave</option>
+              <option value="paternity">👨‍👧 Paternity Leave</option>
+            </select>
+          </div>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 15px;">
+            <div class="form-group">
+              <label>Start Date <span style="color: #dc3545;">*</span></label>
+              <input type="date" id="startDate" required>
+            </div>
+            <div class="form-group">
+              <label>End Date <span style="color: #dc3545;">*</span></label>
+              <input type="date" id="endDate" required>
+            </div>
+          </div>
+          <div class="form-group" style="margin-bottom: 15px;">
+            <label>Number of Days</label>
+            <input type="number" id="leaveDays" value="0" disabled style="background: #f8f9fc;">
+          </div>
+          <div class="form-group" style="margin-bottom: 15px;">
+            <label>Reason <span style="color: #dc3545;">*</span></label>
+            <textarea id="leaveReason" rows="3" placeholder="Provide reason for leave request..." style="width: 100%; padding: 12px; border: 1px solid #e0e0e0; border-radius: 8px; font-size: 14px;" required></textarea>
+          </div>
+          <div class="form-group">
+            <label>Supporting Document (Optional)</label>
+            <input type="file" accept=".pdf,.jpg,.jpeg,.png">
+            <small style="color: #888; font-size: 12px;">For sick leave, medical certificate may be required</small>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-outline" onclick="closeAddLeaveModal()">Cancel</button>
+        <button class="btn btn-secondary" onclick="saveAsDraft()">Save as Draft</button>
+        <button class="btn btn-primary" onclick="submitNewLeave()">Submit Request</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- View Leave Details Modal -->
+  <div id="viewLeaveModal" class="modal" style="display: none;">
+    <div class="modal-content" style="max-width: 550px;">
+      <div class="modal-header">
+        <h3>📋 Leave Request Details</h3>
+        <button class="modal-close" onclick="closeViewLeaveModal()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="leave-detail-header">
+          <div class="user-cell" style="margin-bottom: 15px;">
+            <div class="user-avatar" style="width: 50px; height: 50px; font-size: 18px;">JR</div>
+            <div>
+              <strong style="font-size: 16px;">Juan Reyes Santos</strong>
+              <div style="color: #666; font-size: 13px;">Program Manager | STF-001</div>
+            </div>
+          </div>
+        </div>
+        <div class="info-grid" style="gap: 15px;">
+          <div class="info-item">
+            <label>Leave ID</label>
+            <span id="viewLeaveId">LV-2026-015</span>
+          </div>
+          <div class="info-item">
+            <label>Leave Type</label>
+            <span id="viewLeaveType">🏖️ Vacation Leave</span>
+          </div>
+          <div class="info-item">
+            <label>Start Date</label>
+            <span id="viewStartDate">February 25, 2026</span>
+          </div>
+          <div class="info-item">
+            <label>End Date</label>
+            <span id="viewEndDate">February 27, 2026</span>
+          </div>
+          <div class="info-item">
+            <label>Number of Days</label>
+            <span id="viewDays">3 days</span>
+          </div>
+          <div class="info-item">
+            <label>Status</label>
+            <span id="viewStatus" class="status-badge pending">Pending</span>
+          </div>
+          <div class="info-item" style="grid-column: 1 / -1;">
+            <label>Reason</label>
+            <span id="viewReason">Family vacation to celebrate parents' wedding anniversary.</span>
+          </div>
+          <div class="info-item">
+            <label>Filed On</label>
+            <span id="viewFiledDate">February 15, 2026</span>
+          </div>
+          <div class="info-item">
+            <label>Approved By</label>
+            <span id="viewApprovedBy">-</span>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-outline" onclick="closeViewLeaveModal()">Close</button>
+        <button class="btn btn-success" onclick="approveLeaveFromModal()">✅ Approve</button>
+        <button class="btn btn-danger" onclick="rejectLeaveFromModal()">❌ Reject</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Edit Leave Modal -->
+  <div id="editLeaveModal" class="modal" style="display: none;">
+    <div class="modal-content" style="max-width: 550px;">
+      <div class="modal-header">
+        <h3>✏️ Edit Leave Request</h3>
+        <button class="modal-close" onclick="closeEditLeaveModal()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form id="editLeaveForm">
+          <div class="form-group" style="margin-bottom: 15px;">
+            <label>Leave ID</label>
+            <input type="text" id="editLeaveId" value="LV-2026-014" disabled style="background: #f8f9fc;">
+          </div>
+          <div class="form-group" style="margin-bottom: 15px;">
+            <label>Staff Member</label>
+            <input type="text" value="Carmen Rojas Torres - IT Specialist" disabled style="background: #f8f9fc;">
+          </div>
+          <div class="form-group" style="margin-bottom: 15px;">
+            <label>Leave Type <span style="color: #dc3545;">*</span></label>
+            <select required>
+              <option value="vacation" selected>🏖️ Vacation Leave</option>
+              <option value="sick">🏥 Sick Leave</option>
+              <option value="emergency">⚡ Emergency Leave</option>
+              <option value="bereavement">🕯️ Bereavement Leave</option>
+            </select>
+          </div>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 15px;">
+            <div class="form-group">
+              <label>Start Date <span style="color: #dc3545;">*</span></label>
+              <input type="date" value="2026-02-20" required>
+            </div>
+            <div class="form-group">
+              <label>End Date <span style="color: #dc3545;">*</span></label>
+              <input type="date" value="2026-02-21" required>
+            </div>
+          </div>
+          <div class="form-group" style="margin-bottom: 15px;">
+            <label>Reason</label>
+            <textarea rows="3" style="width: 100%; padding: 12px; border: 1px solid #e0e0e0; border-radius: 8px; font-size: 14px;">Personal errands and appointments.</textarea>
+          </div>
+          <div class="form-group" style="margin-bottom: 15px;">
+            <label>Status</label>
+            <select>
+              <option value="pending">Pending</option>
+              <option value="approved" selected>Approved</option>
+              <option value="rejected">Rejected</option>
+              <option value="cancelled">Cancelled</option>
+            </select>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-outline" onclick="closeEditLeaveModal()">Cancel</button>
+        <button class="btn btn-danger" onclick="deleteLeave()">🗑️ Delete</button>
+        <button class="btn btn-primary" onclick="updateLeave()">💾 Save Changes</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Reject Leave Modal -->
+  <div id="rejectModal" class="modal" style="display: none;">
+    <div class="modal-content" style="max-width: 450px;">
+      <div class="modal-header">
+        <h3>❌ Reject Leave Request</h3>
+        <button class="modal-close" onclick="closeRejectModal()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to reject this leave request?</p>
+        <p><strong>Leave ID:</strong> <span id="rejectLeaveId">LV-2026-018</span></p>
+        <div class="form-group" style="margin-top: 15px;">
+          <label>Reason for Rejection <span style="color: #dc3545;">*</span></label>
+          <textarea id="rejectReason" rows="3" placeholder="Please provide a reason for rejection..." style="width: 100%; padding: 12px; border: 1px solid #e0e0e0; border-radius: 8px; font-size: 14px;" required></textarea>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-outline" onclick="closeRejectModal()">Cancel</button>
+        <button class="btn btn-danger" onclick="confirmReject()">Reject Request</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Calculate days between dates
+    document.getElementById('startDate')?.addEventListener('change', calculateDays);
+    document.getElementById('endDate')?.addEventListener('change', calculateDays);
+
+    function calculateDays() {
+      const startDate = document.getElementById('startDate').value;
+      const endDate = document.getElementById('endDate').value;
+      
+      if (startDate && endDate) {
+        const start = new Date(startDate);
+        const end = new Date(endDate);
+        const diffTime = Math.abs(end - start);
+        const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)) + 1;
+        document.getElementById('leaveDays').value = diffDays;
+      }
+    }
+
+    // Filter tabs
+    function filterLeaves(status) {
+      document.querySelectorAll('.filter-tab').forEach(tab => tab.classList.remove('active'));
+      event.target.classList.add('active');
+      
+      // In a real app, this would filter the table
+      console.log('Filtering by:', status);
+    }
+
+    // Add Leave Modal
+    function openAddLeaveModal() {
+      document.getElementById('addLeaveModal').style.display = 'flex';
+    }
+
+    function closeAddLeaveModal() {
+      document.getElementById('addLeaveModal').style.display = 'none';
+    }
+
+    function submitNewLeave() {
+      alert('Leave request submitted successfully!');
+      closeAddLeaveModal();
+      location.reload();
+    }
+
+    function saveAsDraft() {
+      alert('Leave request saved as draft.');
+      closeAddLeaveModal();
+    }
+
+    // View Leave Details Modal
+    function viewLeaveDetails(leaveId) {
+      document.getElementById('viewLeaveModal').style.display = 'flex';
+      document.getElementById('viewLeaveId').textContent = leaveId;
+    }
+
+    function closeViewLeaveModal() {
+      document.getElementById('viewLeaveModal').style.display = 'none';
+    }
+
+    function approveLeaveFromModal() {
+      alert('Leave request approved!');
+      closeViewLeaveModal();
+      location.reload();
+    }
+
+    function rejectLeaveFromModal() {
+      closeViewLeaveModal();
+      document.getElementById('rejectModal').style.display = 'flex';
+    }
+
+    // Edit Leave Modal
+    function editLeave(leaveId) {
+      document.getElementById('editLeaveModal').style.display = 'flex';
+      document.getElementById('editLeaveId').value = leaveId;
+    }
+
+    function closeEditLeaveModal() {
+      document.getElementById('editLeaveModal').style.display = 'none';
+    }
+
+    function updateLeave() {
+      alert('Leave request updated successfully!');
+      closeEditLeaveModal();
+      location.reload();
+    }
+
+    function deleteLeave() {
+      if (confirm('Are you sure you want to delete this leave request? This cannot be undone.')) {
+        alert('Leave request deleted.');
+        closeEditLeaveModal();
+        location.reload();
+      }
+    }
+
+    // Approve/Reject functions
+    function approveLeave(leaveId, staffName) {
+      if (confirm('Approve leave request ' + leaveId + ' for ' + staffName + '?')) {
+        alert('Leave request ' + leaveId + ' approved!');
+        location.reload();
+      }
+    }
+
+    function rejectLeave(leaveId) {
+      document.getElementById('rejectLeaveId').textContent = leaveId;
+      document.getElementById('rejectModal').style.display = 'flex';
+    }
+
+    function closeRejectModal() {
+      document.getElementById('rejectModal').style.display = 'none';
+    }
+
+    function confirmReject() {
+      const reason = document.getElementById('rejectReason').value;
+      if (!reason) {
+        alert('Please provide a reason for rejection.');
+        return;
+      }
+      alert('Leave request rejected.');
+      closeRejectModal();
+      location.reload();
+    }
+
+    // Other actions
+    function cancelLeave(leaveId) {
+      if (confirm('Cancel leave request ' + leaveId + '? The staff member will be notified.')) {
+        alert('Leave request cancelled.');
+        location.reload();
+      }
+    }
+
+    function resubmitLeave(leaveId) {
+      openAddLeaveModal();
+    }
+
+    function endLeaveEarly(leaveId) {
+      if (confirm('End leave ' + leaveId + ' early? The end date will be set to today.')) {
+        alert('Leave ended early. Staff member has been notified.');
+        location.reload();
+      }
+    }
+
+    // Select all checkbox
+    document.getElementById('selectAll')?.addEventListener('change', function() {
+      const checkboxes = document.querySelectorAll('tbody input[type="checkbox"]');
+      checkboxes.forEach(cb => cb.checked = this.checked);
+    });
+
+    // Close modals when clicking outside
+    document.querySelectorAll('.modal').forEach(modal => {
+      modal.addEventListener('click', function(e) {
+        if (e.target === this) {
+          this.style.display = 'none';
+        }
+      });
+    });
+  </script>
+  <script src="js/sidebar.js"></script>
+</body>
+</html>

@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Edit Scholar - KKFI Admin</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <div class="layout">
+    <div id="sidebar-container"></div>
+
+    <!-- MAIN CONTENT -->
+    <main class="content">
+      
+      <!-- Header -->
+      <div class="applicant-header">
+        <a href="scholar-details.html" class="back-btn">‹</a>
+        <div class="applicant-avatar">MA</div>
+        <div class="applicant-info">
+          <h2>Edit Scholar Profile</h2>
+          <div class="app-id">LM619284</div>
+        </div>
+      </div>
+
+      <!-- Personal Information -->
+      <section class="form-section">
+        <h3 class="section-title">Personal Information</h3>
+        <div class="form-grid">
+          <div class="form-group">
+            <label>First Name <span style="color: #dc3545;">*</span></label>
+            <input type="text" value="Maria" placeholder="Enter first name">
+          </div>
+          <div class="form-group">
+            <label>Middle Name</label>
+            <input type="text" value="Santos" placeholder="Enter middle name">
+          </div>
+          <div class="form-group">
+            <label>Last Name <span style="color: #dc3545;">*</span></label>
+            <input type="text" value="Andres" placeholder="Enter last name">
+          </div>
+          <div class="form-group">
+            <label>Suffix</label>
+            <input type="text" value="" placeholder="Jr., Sr., III, etc.">
+          </div>
+          <div class="form-group">
+            <label>Birthdate <span style="color: #dc3545;">*</span></label>
+            <input type="date" value="2003-05-15">
+          </div>
+          <div class="form-group">
+            <label>Age</label>
+            <input type="number" value="22" disabled>
+          </div>
+          <div class="form-group">
+            <label>Gender <span style="color: #dc3545;">*</span></label>
+            <select>
+              <option>Male</option>
+              <option selected>Female</option>
+              <option>Other</option>
+              <option>Prefer not to say</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Civil Status</label>
+            <select>
+              <option selected>Single</option>
+              <option>Married</option>
+              <option>Widowed</option>
+              <option>Separated</option>
+            </select>
+          </div>
+        </div>
+      </section>
+
+      <!-- Contact Information -->
+      <section class="form-section">
+        <h3 class="section-title">Contact Information</h3>
+        <div class="form-grid">
+          <div class="form-group">
+            <label>Email Address <span style="color: #dc3545;">*</span></label>
+            <input type="email" value="maria.andres@email.com" placeholder="Enter email">
+          </div>
+          <div class="form-group">
+            <label>Mobile Number <span style="color: #dc3545;">*</span></label>
+            <input type="tel" value="+63 917 123 4567" placeholder="Enter mobile number">
+          </div>
+          <div class="form-group" style="grid-column: span 2;">
+            <label>Home Address <span style="color: #dc3545;">*</span></label>
+            <input type="text" value="123 Sampaguita St., Brgy. San Jose, Quezon City" placeholder="Enter complete address">
+          </div>
+          <div class="form-group">
+            <label>City/Municipality</label>
+            <input type="text" value="Quezon City" placeholder="Enter city">
+          </div>
+          <div class="form-group">
+            <label>Province</label>
+            <input type="text" value="Metro Manila" placeholder="Enter province">
+          </div>
+          <div class="form-group">
+            <label>Zip Code</label>
+            <input type="text" value="1105" placeholder="Enter zip code">
+          </div>
+        </div>
+      </section>
+
+      <!-- Educational Information -->
+      <section class="form-section">
+        <h3 class="section-title">Educational Information</h3>
+        <div class="form-grid">
+          <div class="form-group">
+            <label>University/College <span style="color: #dc3545;">*</span></label>
+            <select>
+              <option>PUP Manila</option>
+              <option selected>Bulacan State University</option>
+              <option>Pamantasan ng Lungsod ng Maynila (PLM)</option>
+              <option>TUP Manila</option>
+              <option>Bulacan Agricultural State College</option>
+              <option>EARIST</option>
+              <option>Philippine Normal University</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Campus</label>
+            <input type="text" value="Taft Avenue, Manila" placeholder="Enter campus">
+          </div>
+          <div class="form-group">
+            <label>Course/Program <span style="color: #dc3545;">*</span></label>
+            <input type="text" value="BS Computer Science" placeholder="Enter course/program">
+          </div>
+          <div class="form-group">
+            <label>Year Level <span style="color: #dc3545;">*</span></label>
+            <select>
+              <option>1st Year</option>
+              <option>2nd Year</option>
+              <option selected>3rd Year</option>
+              <option>4th Year</option>
+              <option>5th Year</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Current GPA</label>
+            <input type="number" step="0.01" value="3.45" placeholder="Enter GPA">
+          </div>
+          <div class="form-group">
+            <label>Expected Graduation</label>
+            <input type="text" value="May 2027" placeholder="e.g., May 2027">
+          </div>
+          <div class="form-group">
+            <label>Student ID Number</label>
+            <input type="text" value="2022-12345" placeholder="Enter student ID">
+          </div>
+        </div>
+      </section>
+
+      <!-- Scholarship Information -->
+      <section class="form-section">
+        <h3 class="section-title">Scholarship Information</h3>
+        <div class="form-grid">
+          <div class="form-group">
+            <label>Scholar ID</label>
+            <input type="text" value="LM619284" disabled>
+          </div>
+          <div class="form-group">
+            <label>Scholarship Type <span style="color: #dc3545;">*</span></label>
+            <select>
+              <option selected>Tertiary Scholarship Program</option>
+              <option>KKFI Employee-Child Education Grant</option>
+              <option>Vocational & Technology Scholarship</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Scholarship Start Date</label>
+            <input type="date" value="2023-06-15">
+          </div>
+          <div class="form-group">
+            <label>Status <span style="color: #dc3545;">*</span></label>
+            <select>
+              <option selected>Active</option>
+              <option>On Hold</option>
+              <option>Terminated</option>
+              <option>Graduated</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Monthly Allowance (₱)</label>
+            <input type="number" value="15000" placeholder="Enter amount">
+          </div>
+          <div class="form-group">
+            <label>Tuition Coverage (%)</label>
+            <input type="number" value="100" min="0" max="100" placeholder="Enter percentage">
+          </div>
+        </div>
+      </section>
+
+      <!-- Emergency Contact -->
+      <section class="form-section">
+        <h3 class="section-title">Emergency Contact</h3>
+        <div class="form-grid">
+          <div class="form-group">
+            <label>Contact Name <span style="color: #dc3545;">*</span></label>
+            <input type="text" value="Rosa Santos Andres" placeholder="Enter contact name">
+          </div>
+          <div class="form-group">
+            <label>Relationship</label>
+            <input type="text" value="Mother" placeholder="Enter relationship">
+          </div>
+          <div class="form-group">
+            <label>Contact Number <span style="color: #dc3545;">*</span></label>
+            <input type="tel" value="+63 918 987 6543" placeholder="Enter contact number">
+          </div>
+          <div class="form-group">
+            <label>Alternate Contact Number</label>
+            <input type="tel" value="" placeholder="Enter alternate number">
+          </div>
+        </div>
+      </section>
+
+      <!-- Notes -->
+      <section class="form-section">
+        <h3 class="section-title">Admin Notes</h3>
+        <div class="form-group">
+          <textarea rows="4" placeholder="Add notes about this scholar..." style="width: 100%; padding: 12px 15px; border: 1px solid #e0e0e0; border-radius: 8px; font-size: 14px; resize: vertical;">Excellent student. Consistently meets all requirements. Active participant in KKFI events.</textarea>
+        </div>
+      </section>
+
+      <!-- Action Bar -->
+      <div class="action-bar">
+        <button class="btn btn-primary">💾 Save Changes</button>
+        <a href="scholar-details.html" class="btn btn-outline">Cancel</a>
+        <button class="btn btn-danger" style="margin-left: auto;">🗑️ Delete Scholar</button>
+      </div>
+
+    </main>
+  </div>
+  <script src="js/sidebar.js"></script>
+</body>
+</html>

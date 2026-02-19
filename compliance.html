@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Compliance Monitoring - KKFI Admin</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <div class="layout">
+    <div id="sidebar-container"></div>
+
+    <!-- MAIN CONTENT -->
+    <main class="content">
+      <div class="page-header">
+        <h1 class="page-title">Academic Compliance</h1>
+        <div class="header-actions">
+          <div class="date-range">📅 15 May 2024 - 23 Jan 2026</div>
+          <button class="btn btn-filter">🔽 Filter</button>
+          <button class="btn btn-filter">↕️ Sort By A-Z</button>
+        </div>
+      </div>
+
+      <div class="table-container">
+        <div class="table-header">
+          <div class="table-controls">
+            <div class="rows-per-page">
+              Row Per Page
+              <select>
+                <option>10</option>
+                <option>25</option>
+                <option>50</option>
+              </select>
+              Entries
+            </div>
+          </div>
+          <div class="search-box">
+            <input type="text" placeholder="Search">
+          </div>
+        </div>
+        
+        <table>
+          <thead>
+            <tr>
+              <th class="checkbox-cell"><input type="checkbox"></th>
+              <th class="sortable">ID</th>
+              <th class="sortable">Scholar</th>
+              <th class="sortable">Email</th>
+              <th class="sortable">Date of Join</th>
+              <th class="sortable">Mobile</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="checkbox-cell"><input type="checkbox"></td>
+              <td><a href="scholar-details.html" class="id-link">LM823748</a></td>
+              <td>
+                <div class="user-cell">
+                  <div class="user-avatar">CN</div>
+                  Carlo Navarro Flores
+                </div>
+              </td>
+              <td>carlo.flores@email.com</td>
+              <td>22 Apr 2024</td>
+              <td><span class="status-badge compliant">Compliant</span></td>
+              <td class="actions-cell"><button class="action-menu-btn">⋮</button></td>
+            </tr>
+            <tr>
+              <td class="checkbox-cell"><input type="checkbox"></td>
+              <td><a href="scholar-details.html" class="id-link">LM823747</a></td>
+              <td>
+                <div class="user-cell">
+                  <div class="user-avatar">MC</div>
+                  Maria Cruz Dela Rosa
+                </div>
+              </td>
+              <td>maria.cruz@email.com</td>
+              <td>30 Apr 2024</td>
+              <td><span class="status-badge compliant">Compliant</span></td>
+              <td class="actions-cell"><button class="action-menu-btn">⋮</button></td>
+            </tr>
+            <tr>
+              <td class="checkbox-cell"><input type="checkbox"></td>
+              <td><a href="compliance-details.html" class="id-link">LM823746</a></td>
+              <td>
+                <div class="user-cell">
+                  <div class="user-avatar">MD</div>
+                  Mark Dizon Bautista
+                </div>
+              </td>
+              <td>mark.bautista@email.com</td>
+              <td>05 May 2024</td>
+              <td><span class="status-badge non-compliant">Non-Compliant</span></td>
+              <td class="actions-cell"><a href="compliance-details.html" class="btn btn-outline" style="padding: 5px 10px; font-size: 12px;">View</a></td>
+            </tr>
+            <tr>
+              <td class="checkbox-cell"><input type="checkbox"></td>
+              <td><a href="scholar-details.html" class="id-link">LM823745</a></td>
+              <td>
+                <div class="user-cell">
+                  <div class="user-avatar">MT</div>
+                  Michelle Torres Ramirez
+                </div>
+              </td>
+              <td>michelle.ramirez@email.com</td>
+              <td>16 May 2024</td>
+              <td><span class="status-badge compliant">Compliant</span></td>
+              <td class="actions-cell"><button class="action-menu-btn">⋮</button></td>
+            </tr>
+            <tr>
+              <td class="checkbox-cell"><input type="checkbox"></td>
+              <td><a href="scholar-details.html" class="id-link">LM823744</a></td>
+              <td>
+                <div class="user-cell">
+                  <div class="user-avatar">DA</div>
+                  Daniel Aquino Valdez
+                </div>
+              </td>
+              <td>daniel.valdez@email.com</td>
+              <td>28 May 2024</td>
+              <td><span class="status-badge at-risk">At Risk</span></td>
+              <td class="actions-cell"><button class="action-menu-btn">⋮</button></td>
+            </tr>
+            <tr>
+              <td class="checkbox-cell"><input type="checkbox"></td>
+              <td><a href="scholar-details.html" class="id-link">LM823743</a></td>
+              <td>
+                <div class="user-cell">
+                  <div class="user-avatar">AM</div>
+                  Ana Mendoza Villanueva
+                </div>
+              </td>
+              <td>ana.villanueva@email.com</td>
+              <td>06 Jun 2024</td>
+              <td><span class="status-badge at-risk">At Risk</span></td>
+              <td class="actions-cell"><button class="action-menu-btn">⋮</button></td>
+            </tr>
+            <tr>
+              <td class="checkbox-cell"><input type="checkbox"></td>
+              <td><a href="scholar-details.html" class="id-link">LM823742</a></td>
+              <td>
+                <div class="user-cell">
+                  <div class="user-avatar">BD</div>
+                  Bryan Dominguez Salazar
+                </div>
+              </td>
+              <td>bryan.salazar@email.com</td>
+              <td>10 Jun 2024</td>
+              <td><span class="status-badge non-compliant">Non-Compliant</span></td>
+              <td class="actions-cell"><button class="action-menu-btn">⋮</button></td>
+            </tr>
+            <tr>
+              <td class="checkbox-cell"><input type="checkbox"></td>
+              <td><a href="scholar-details.html" class="id-link">LM823741</a></td>
+              <td>
+                <div class="user-cell">
+                  <div class="user-avatar">KJ</div>
+                  Kimberly Joy Castillo Pineda
+                </div>
+              </td>
+              <td>kimberly.pineda@email.com</td>
+              <td>18 Jun 2024</td>
+              <td><span class="status-badge compliant">Compliant</span></td>
+              <td class="actions-cell"><button class="action-menu-btn">⋮</button></td>
+            </tr>
+            <tr>
+              <td class="checkbox-cell"><input type="checkbox"></td>
+              <td><a href="scholar-details.html" class="id-link">LM823740</a></td>
+              <td>
+                <div class="user-cell">
+                  <div class="user-avatar">JF</div>
+                  Janelle Faith Peralta Quinto
+                </div>
+              </td>
+              <td>janelle.quinto@email.com</td>
+              <td>20 Jul 2024</td>
+              <td><span class="status-badge compliant">Compliant</span></td>
+              <td class="actions-cell"><button class="action-menu-btn">⋮</button></td>
+            </tr>
+            <tr>
+              <td class="checkbox-cell"><input type="checkbox"></td>
+              <td><a href="scholar-details.html" class="id-link">LM823739</a></td>
+              <td>
+                <div class="user-cell">
+                  <div class="user-avatar">SG</div>
+                  Stephanie Gutierrez Manalo
+                </div>
+              </td>
+              <td>stephanie.manalo@email.com</td>
+              <td>26 Jul 2024</td>
+              <td><span class="status-badge compliant">Compliant</span></td>
+              <td class="actions-cell"><button class="action-menu-btn">⋮</button></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="pagination">
+          <span class="disabled">Pre</span>
+          <a href="#" class="active">1</a>
+          <a href="#">2</a>
+          <span>...</span>
+          <a href="#">20</a>
+          <a href="#">Next</a>
+        </div>
+      </div>
+
+    </main>
+  </div>
+  <script src="js/sidebar.js"></script>
+</body>
+</html>

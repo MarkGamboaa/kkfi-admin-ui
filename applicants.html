@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Applicants - KKFI Admin</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <div class="layout">
+    <div id="sidebar-container"></div>
+
+    <!-- MAIN CONTENT -->
+    <main class="content">
+      <div class="page-header">
+        <h1 class="page-title">Applicants</h1>
+        <div class="header-actions">
+          <div class="date-range">📅 15 May 2020 - 24 May 2024</div>
+          <button class="btn btn-filter">🔽 Filter</button>
+          <button class="btn btn-filter">↕️ Sort By A-Z</button>
+        </div>
+      </div>
+
+      <div class="table-container">
+        <div class="table-header">
+          <div class="table-controls">
+            <div class="rows-per-page">
+              Row Per Page
+              <select>
+                <option>10</option>
+                <option>25</option>
+                <option>50</option>
+              </select>
+              Entries
+            </div>
+          </div>
+          <div class="search-box">
+            <input type="text" placeholder="Search">
+          </div>
+        </div>
+        
+        <table>
+          <thead>
+            <tr>
+              <th class="checkbox-cell"><input type="checkbox"></th>
+              <th class="sortable">ID</th>
+              <th class="sortable">Applicant Name</th>
+              <th class="sortable">School</th>
+              <th class="sortable">Application Status</th>
+              <th class="sortable">Date Submitted</th>
+              <th>Scholarship Type</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr onclick="window.location='applicant-details.html'" style="cursor:pointer">
+              <td class="checkbox-cell"><input type="checkbox"></td>
+              <td><a href="applicant-details.html" class="id-link">R124556</a></td>
+              <td>Juan Miguel Santos Reyes</td>
+              <td>PUP Manila</td>
+              <td><span class="status-badge new">New</span></td>
+              <td>15 May 2024</td>
+              <td>Tertiary Scholarship Program</td>
+            </tr>
+            <tr onclick="window.location='applicant-details.html'" style="cursor:pointer">
+              <td class="checkbox-cell"><input type="checkbox"></td>
+              <td><a href="applicant-details.html" class="id-link">R124555</a></td>
+              <td>Maria Angelica Cruz Dela Rosa</td>
+              <td>Bulacan State University</td>
+              <td><span class="status-badge under-review">Under Review</span></td>
+              <td>15 May 2024</td>
+              <td>Vocational & Technology Scholarship</td>
+            </tr>
+            <tr onclick="window.location='applicant-details.html'" style="cursor:pointer">
+              <td class="checkbox-cell"><input type="checkbox"></td>
+              <td><a href="applicant-details.html" class="id-link">R124554</a></td>
+              <td>Jose Antonio Garcia Lopez</td>
+              <td>TUP Manila</td>
+              <td><span class="status-badge under-review">Under Review</span></td>
+              <td>13 May 2024</td>
+              <td>Tertiary Scholarship Program</td>
+            </tr>
+            <tr onclick="window.location='applicant-details.html'" style="cursor:pointer">
+              <td class="checkbox-cell"><input type="checkbox"></td>
+              <td><a href="applicant-details.html" class="id-link">R124553</a></td>
+              <td>Ana Patricia Mendoza Villanueva</td>
+              <td>PLM</td>
+              <td><span class="status-badge approved">Approved</span></td>
+              <td>12 May 2024</td>
+              <td>Tertiary Scholarship Program</td>
+            </tr>
+            <tr onclick="window.location='applicant-details.html'" style="cursor:pointer">
+              <td class="checkbox-cell"><input type="checkbox"></td>
+              <td><a href="applicant-details.html" class="id-link">R124552</a></td>
+              <td>Mark Anthony Dizon Bautista</td>
+              <td>EARIST</td>
+              <td><span class="status-badge approved">Approved</span></td>
+              <td>11 May 2024</td>
+              <td>Tertiary Scholarship Program</td>
+            </tr>
+            <tr onclick="window.location='applicant-details.html'" style="cursor:pointer">
+              <td class="checkbox-cell"><input type="checkbox"></td>
+              <td><a href="applicant-details.html" class="id-link">R124551</a></td>
+              <td>Carlo Emmanuel Navarro Flores</td>
+              <td>Bulacan Agricultural State College</td>
+              <td><span class="status-badge approved">Approved</span></td>
+              <td>10 May 2024</td>
+              <td>Vocational & Technology Scholarship</td>
+            </tr>
+            <tr onclick="window.location='applicant-details.html'" style="cursor:pointer">
+              <td class="checkbox-cell"><input type="checkbox"></td>
+              <td><a href="applicant-details.html" class="id-link">R24550</a></td>
+              <td>Michelle Andrea Torres Ramirez</td>
+              <td>Bulacan State University</td>
+              <td><span class="status-badge approved">Approved</span></td>
+              <td>09 May 2024</td>
+              <td>Tertiary Scholarship Program</td>
+            </tr>
+            <tr onclick="window.location='applicant-details.html'" style="cursor:pointer">
+              <td class="checkbox-cell"><input type="checkbox"></td>
+              <td><a href="applicant-details.html" class="id-link">R24549</a></td>
+              <td>Daniel Christian Aquino Valdez</td>
+              <td>Philippine Normal University</td>
+              <td><span class="status-badge approved">Approved</span></td>
+              <td>08 May 2024</td>
+              <td>Tertiary Scholarship Program</td>
+            </tr>
+            <tr onclick="window.location='applicant-details.html'" style="cursor:pointer">
+              <td class="checkbox-cell"><input type="checkbox"></td>
+              <td><a href="applicant-details.html" class="id-link">R124548</a></td>
+              <td>Kimberly Joy Castillo Pineda</td>
+              <td>PUP Manila</td>
+              <td><span class="status-badge approved">Approved</span></td>
+              <td>07 May 2024</td>
+              <td>KKFI Employee-Child Education Grant</td>
+            </tr>
+            <tr onclick="window.location='applicant-details.html'" style="cursor:pointer">
+              <td class="checkbox-cell"><input type="checkbox"></td>
+              <td><a href="applicant-details.html" class="id-link">R124547</a></td>
+              <td>Joshua Paul Fernandez Ortega</td>
+              <td>Bulacan State University</td>
+              <td><span class="status-badge approved">Approved</span></td>
+              <td>04 May 2024</td>
+              <td>Tertiary Scholarship Program</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="pagination">
+          <span class="disabled">Pre</span>
+          <a href="#" class="active">1</a>
+          <a href="#">2</a>
+          <span>...</span>
+          <a href="#">20</a>
+          <a href="#">Next</a>
+        </div>
+      </div>
+
+    </main>
+  </div>
+  <script src="js/sidebar.js"></script>
+</body>
+</html>

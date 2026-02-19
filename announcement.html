@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Announcements - KKFI Admin</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <div class="layout">
+    <div id="sidebar-container"></div>
+
+    <!-- MAIN CONTENT -->
+    <main class="content">
+      
+      <div class="announcement-list">
+        <div class="announcement-filters">
+          <select class="announcement-dropdown">
+            <option>All</option>
+            <option>Published</option>
+            <option>Draft</option>
+            <option>Scheduled</option>
+          </select>
+          
+          <div class="announcement-search-bar">
+            <input type="text" class="announcement-search" placeholder="🔍 Search...">
+            <a href="add-announcement.html" class="btn btn-primary">+ Add Announcement</a>
+            <button class="btn btn-icon">✉️</button>
+            <button class="btn btn-icon">🗑️</button>
+          </div>
+        </div>
+
+        <div class="announcement-item" onclick="window.location='view-announcement.html'">
+          <input type="checkbox" class="announcement-checkbox">
+          <div class="announcement-icon">📣</div>
+          <div class="announcement-content">
+            <h4>Scholarship Application Now Open</h4>
+            <p>We are pleased to announce that the 2024-2025 Scholarship Application is now officially open. This program is intended to support deserving students who demonstrate academic poten...</p>
+          </div>
+          <div class="announcement-meta">
+            <button class="action-menu-btn">⋮</button>
+            <div>Posted on:</div>
+            <div>Feb 6, 2026, 7:00 AM</div>
+          </div>
+        </div>
+
+        <div class="announcement-item" onclick="window.location='view-announcement.html'">
+          <input type="checkbox" class="announcement-checkbox">
+          <div class="announcement-icon">👋</div>
+          <div class="announcement-content">
+            <h4>KKFI Scholars' Orientation and Community Day</h4>
+            <p>The Kapatiran-Kaunlaran Foundation, Inc. (KKFI) invites all scholars to participate in the KKFI Scholars' Orientation and Community Day. This event aims to formally welcome new scholars...</p>
+          </div>
+          <div class="announcement-meta">
+            <button class="action-menu-btn">⋮</button>
+            <div>Posted on:</div>
+            <div>Feb 6, 2026, 7:00 AM</div>
+          </div>
+        </div>
+
+      </div>
+
+    </main>
+  </div>
+
+  <!-- Add Announcement Modal (Hidden by default) -->
+  <div class="modal-overlay hidden" id="addAnnouncementModal">
+    <div class="modal">
+      <div class="modal-header">
+        <h3>Add New Announcement</h3>
+        <button class="modal-close" onclick="closeModal()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label>Title</label>
+          <input type="text" placeholder="Enter announcement title">
+        </div>
+        <div class="form-group">
+          <label>Content</label>
+          <textarea rows="6" placeholder="Enter announcement content" style="width:100%; padding:12px; border:1px solid #e0e0e0; border-radius:8px; resize:vertical;"></textarea>
+        </div>
+        <div class="form-group">
+          <label>Schedule</label>
+          <input type="datetime-local">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-outline" onclick="closeModal()">Cancel</button>
+        <button class="btn btn-primary">Publish</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/sidebar.js"></script>
+</body>
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Add Announcement - KKFI Admin</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <div class="layout">
+    <div id="sidebar-container"></div>
+
+    <!-- MAIN CONTENT -->
+    <main class="content">
+      <div class="page-header">
+        <h1 class="page-title">Add New Announcement</h1>
+      </div>
+
+      <section class="form-section">
+        <div class="form-group">
+          <label>Announcement Title</label>
+          <input type="text" placeholder="Enter announcement title">
+        </div>
+        
+        <div class="form-group" style="margin-top: 20px;">
+          <label>Announcement Type</label>
+          <select style="width: 100%; padding: 12px 15px; border: 1px solid #e0e0e0; border-radius: 8px; font-size: 14px;">
+            <option>General Announcement</option>
+            <option>Scholarship Update</option>
+            <option>Event Invitation</option>
+            <option>Deadline Reminder</option>
+            <option>Important Notice</option>
+          </select>
+        </div>
+
+        <div class="form-group" style="margin-top: 20px;">
+          <label>Target Audience</label>
+          <select style="width: 100%; padding: 12px 15px; border: 1px solid #e0e0e0; border-radius: 8px; font-size: 14px;">
+            <option>All (Scholars & Applicants)</option>
+            <option>Scholars Only</option>
+            <option>Applicants Only</option>
+            <option>Specific Groups</option>
+          </select>
+        </div>
+
+        <div class="form-group" style="margin-top: 20px;">
+          <label>Content</label>
+          <textarea rows="10" placeholder="Write your announcement content here..." style="width: 100%; padding: 15px; border: 1px solid #e0e0e0; border-radius: 8px; font-size: 14px; resize: vertical; font-family: inherit;"></textarea>
+        </div>
+
+        <div class="form-grid two-col" style="margin-top: 20px;">
+          <div class="form-group">
+            <label>Publish Date</label>
+            <input type="date">
+          </div>
+          <div class="form-group">
+            <label>Publish Time</label>
+            <input type="time">
+          </div>
+        </div>
+
+        <div class="form-group" style="margin-top: 20px;">
+          <label>
+            <input type="checkbox" style="width: auto; margin-right: 8px;">
+            Send email notification to recipients
+          </label>
+        </div>
+
+        <div class="form-group" style="margin-top: 10px;">
+          <label>
+            <input type="checkbox" style="width: auto; margin-right: 8px;">
+            Pin this announcement to the top
+          </label>
+        </div>
+      </section>
+
+      <!-- Action Bar -->
+      <div class="action-bar">
+        <a href="announcement.html" class="btn btn-outline">Cancel</a>
+        <button class="btn btn-secondary">💾 Save as Draft</button>
+        <button class="btn btn-primary">📢 Publish Now</button>
+      </div>
+
+    </main>
+  </div>
+  <script src="js/sidebar.js"></script>
+</body>
+</html>

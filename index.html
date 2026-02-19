@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard - KKFI Admin</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <div class="layout">
+    <div id="sidebar-container"></div>
+
+    <!-- MAIN CONTENT -->
+    <main class="content dashboard-content">
+      
+      <div class="dashboard-header">
+        <h1 class="dashboard-title">Dashboard Overview</h1>
+        <div class="dashboard-date">February 19, 2026</div>
+      </div>
+
+      <!-- Key Metrics Row -->
+      <div class="metrics-row">
+        <div class="metric-card">
+          <div class="metric-icon scholars-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+          </div>
+          <div class="metric-details">
+            <span class="metric-value">120</span>
+            <span class="metric-label">Total Scholars</span>
+          </div>
+        </div>
+        
+        <div class="metric-card">
+          <div class="metric-icon applicants-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"/></svg>
+          </div>
+          <div class="metric-details">
+            <span class="metric-value">42</span>
+            <span class="metric-label">Total Applicants</span>
+            <span class="metric-change neutral">18 pending review</span>
+          </div>
+        </div>
+        
+        <div class="metric-card">
+          <div class="metric-icon renewals-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+          </div>
+          <div class="metric-details">
+            <span class="metric-value">23</span>
+            <span class="metric-label">Pending Renewals</span>
+            <span class="metric-change warning">8 due this week</span>
+          </div>
+        </div>
+        
+        <div class="metric-card">
+          <div class="metric-icon docs-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+          </div>
+          <div class="metric-details">
+            <span class="metric-value">15</span>
+            <span class="metric-label">Documents Pending</span>
+            <span class="metric-change neutral">Awaiting verification</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Main Dashboard Grid -->
+      <div class="dashboard-grid">
+        
+        <!-- Compliance Status -->
+        <div class="dashboard-card compliance-card">
+          <h3 class="card-title">Compliance Status</h3>
+          <div class="compliance-donut-container">
+            <svg class="donut-chart small" viewBox="0 0 100 100">
+              <!-- Background circle -->
+              <circle cx="50" cy="50" r="40" fill="none" stroke="#e8eaf6" stroke-width="10"/>
+              <!-- Non-Compliant 5% (red) - 6 scholars -->
+              <circle cx="50" cy="50" r="40" fill="none" stroke="#dc3545" stroke-width="10"
+                stroke-dasharray="12.57 251.33" stroke-dashoffset="-238.76" transform="rotate(-90 50 50)"/>
+              <!-- At Risk 7.5% (yellow) - 9 scholars -->
+              <circle cx="50" cy="50" r="40" fill="none" stroke="#ffc107" stroke-width="10"
+                stroke-dasharray="18.85 251.33" stroke-dashoffset="-219.91" transform="rotate(-90 50 50)"/>
+              <!-- Compliant 87.5% (green) - 105 scholars -->
+              <circle cx="50" cy="50" r="40" fill="none" stroke="#28a745" stroke-width="10"
+                stroke-dasharray="219.91 251.33" stroke-dashoffset="0" transform="rotate(-90 50 50)"/>
+            </svg>
+            <div class="compliance-center">
+              <span class="compliance-pct">87.5%</span>
+              <span class="compliance-label">Compliant</span>
+            </div>
+          </div>
+          <div class="compliance-breakdown">
+            <div class="compliance-item compliant">
+              <span class="compliance-dot"></span>
+              <span class="compliance-text">Compliant</span>
+              <span class="compliance-count">105</span>
+            </div>
+            <div class="compliance-item at-risk">
+              <span class="compliance-dot"></span>
+              <span class="compliance-text">At Risk</span>
+              <span class="compliance-count">9</span>
+            </div>
+            <div class="compliance-item non-compliant">
+              <span class="compliance-dot"></span>
+              <span class="compliance-text">Non-Compliant</span>
+              <span class="compliance-count">6</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Top Scholars by GWA -->
+        <div class="dashboard-card">
+          <h3 class="card-title">Top Scholars by GWA</h3>
+          <div class="scholars-list">
+            <div class="scholar-row">
+              <span class="scholar-rank">1</span>
+              <div class="scholar-avatar">MC</div>
+              <div class="scholar-info">
+                <span class="scholar-name">Maria Cruz Dela Rosa</span>
+                <span class="scholar-program">BS Computer Science</span>
+              </div>
+              <span class="scholar-gwa">1.25</span>
+            </div>
+            <div class="scholar-row">
+              <span class="scholar-rank">2</span>
+              <div class="scholar-avatar">CN</div>
+              <div class="scholar-info">
+                <span class="scholar-name">Carlo Navarro Flores</span>
+                <span class="scholar-program">BS Engineering</span>
+              </div>
+              <span class="scholar-gwa">1.35</span>
+            </div>
+            <div class="scholar-row">
+              <span class="scholar-rank">3</span>
+              <div class="scholar-avatar">AM</div>
+              <div class="scholar-info">
+                <span class="scholar-name">Ana Mendoza Villanueva</span>
+                <span class="scholar-program">BS Nursing</span>
+              </div>
+              <span class="scholar-gwa">1.45</span>
+            </div>
+            <div class="scholar-row">
+              <span class="scholar-rank">4</span>
+              <div class="scholar-avatar">MT</div>
+              <div class="scholar-info">
+                <span class="scholar-name">Michelle Torres Ramirez</span>
+                <span class="scholar-program">BS Accountancy</span>
+              </div>
+              <span class="scholar-gwa">1.55</span>
+            </div>
+            <div class="scholar-row">
+              <span class="scholar-rank">5</span>
+              <div class="scholar-avatar">DA</div>
+              <div class="scholar-info">
+                <span class="scholar-name">Daniel Aquino Valdez</span>
+                <span class="scholar-program">BS Architecture</span>
+              </div>
+              <span class="scholar-gwa">1.65</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Scholars by Course -->
+        <div class="dashboard-card">
+          <h3 class="card-title">Scholars by Course</h3>
+          <div class="horizontal-bar-chart compact">
+            <div class="bar-item">
+              <span class="bar-label">BS Computer Science</span>
+              <div class="bar-container">
+                <div class="bar dark" style="width: 85%;"></div>
+              </div>
+              <span class="bar-value">42</span>
+            </div>
+            <div class="bar-item">
+              <span class="bar-label">BS Engineering</span>
+              <div class="bar-container">
+                <div class="bar" style="width: 75%;"></div>
+              </div>
+              <span class="bar-value">38</span>
+            </div>
+            <div class="bar-item">
+              <span class="bar-label">BS Nursing</span>
+              <div class="bar-container">
+                <div class="bar" style="width: 65%;"></div>
+              </div>
+              <span class="bar-value">32</span>
+            </div>
+            <div class="bar-item">
+              <span class="bar-label">BS Accountancy</span>
+              <div class="bar-container">
+                <div class="bar light" style="width: 55%;"></div>
+              </div>
+              <span class="bar-value">28</span>
+            </div>
+            <div class="bar-item">
+              <span class="bar-label">BS Education</span>
+              <div class="bar-container">
+                <div class="bar light" style="width: 50%;"></div>
+              </div>
+              <span class="bar-value">25</span>
+            </div>
+            <div class="bar-item">
+              <span class="bar-label">BS Architecture</span>
+              <div class="bar-container">
+                <div class="bar lighter" style="width: 40%;"></div>
+              </div>
+              <span class="bar-value">20</span>
+            </div>
+            <div class="bar-item">
+              <span class="bar-label">MBA</span>
+              <div class="bar-container">
+                <div class="bar lighter" style="width: 35%;"></div>
+              </div>
+              <span class="bar-value">18</span>
+            </div>
+            <div class="bar-item">
+              <span class="bar-label">MA Education</span>
+              <div class="bar-container">
+                <div class="bar lightest" style="width: 28%;"></div>
+              </div>
+              <span class="bar-value">14</span>
+            </div>
+            <div class="bar-item">
+              <span class="bar-label">MS Engineering</span>
+              <div class="bar-container">
+                <div class="bar lightest" style="width: 22%;"></div>
+              </div>
+              <span class="bar-value">11</span>
+            </div>
+            <div class="bar-item">
+              <span class="bar-label">Other Courses</span>
+              <div class="bar-container">
+                <div class="bar lightest" style="width: 75%;"></div>
+              </div>
+              <span class="bar-value">56</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Top Compliant Students -->
+        <div class="dashboard-card wide-card">
+          <h3 class="card-title">Top Compliant Students</h3>
+          <div class="compliant-list">
+            <div class="compliant-row">
+              <span class="compliant-rank">1</span>
+              <div class="compliant-avatar">AR</div>
+              <div class="compliant-info">
+                <span class="compliant-name">Ana Reyes Santos</span>
+                <span class="compliant-program">BS Nursing - PLM</span>
+              </div>
+              <div class="compliant-stats">
+                <span class="compliant-score">100%</span>
+                <span class="compliant-badge on-time">Always On Time</span>
+              </div>
+            </div>
+            <div class="compliant-row">
+              <span class="compliant-rank">2</span>
+              <div class="compliant-avatar">JM</div>
+              <div class="compliant-info">
+                <span class="compliant-name">Juan Miguel Garcia</span>
+                <span class="compliant-program">BS Accountancy - PUP Manila</span>
+              </div>
+              <div class="compliant-stats">
+                <span class="compliant-score">100%</span>
+                <span class="compliant-badge on-time">Always On Time</span>
+              </div>
+            </div>
+            <div class="compliant-row">
+              <span class="compliant-rank">3</span>
+              <div class="compliant-avatar">RL</div>
+              <div class="compliant-info">
+                <span class="compliant-name">Roberto Lim Tan</span>
+                <span class="compliant-program">BS Civil Engineering - TUP Manila</span>
+              </div>
+              <div class="compliant-stats">
+                <span class="compliant-score">96%</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Scholars by School/University -->
+        <div class="dashboard-card">
+          <h3 class="card-title">Scholars by School</h3>
+          <div class="horizontal-bar-chart compact">
+            <div class="bar-item">
+              <span class="bar-label">PUP Manila</span>
+              <div class="bar-container">
+                <div class="bar dark" style="width: 90%;"></div>
+              </div>
+              <span class="bar-value">28</span>
+            </div>
+            <div class="bar-item">
+              <span class="bar-label">Bulacan State University</span>
+              <div class="bar-container">
+                <div class="bar" style="width: 75%;"></div>
+              </div>
+              <span class="bar-value">22</span>
+            </div>
+            <div class="bar-item">
+              <span class="bar-label">PLM</span>
+              <div class="bar-container">
+                <div class="bar" style="width: 65%;"></div>
+              </div>
+              <span class="bar-value">18</span>
+            </div>
+            <div class="bar-item">
+              <span class="bar-label">TUP Manila</span>
+              <div class="bar-container">
+                <div class="bar light" style="width: 55%;"></div>
+              </div>
+              <span class="bar-value">15</span>
+            </div>
+            <div class="bar-item">
+              <span class="bar-label">Bulacan Agricultural State College</span>
+              <div class="bar-container">
+                <div class="bar light" style="width: 45%;"></div>
+              </div>
+              <span class="bar-value">12</span>
+            </div>
+            <div class="bar-item">
+              <span class="bar-label">EARIST</span>
+              <div class="bar-container">
+                <div class="bar lighter" style="width: 38%;"></div>
+              </div>
+              <span class="bar-value">10</span>
+            </div>
+            <div class="bar-item">
+              <span class="bar-label">Philippine Normal University</span>
+              <div class="bar-container">
+                <div class="bar lighter" style="width: 30%;"></div>
+              </div>
+              <span class="bar-value">8</span>
+            </div>
+            <div class="bar-item">
+              <span class="bar-label">Other Schools</span>
+              <div class="bar-container">
+                <div class="bar lightest" style="width: 25%;"></div>
+              </div>
+              <span class="bar-value">7</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Scholars by Scholarship Type -->
+        <div class="dashboard-card">
+          <h3 class="card-title">Scholars by Type</h3>
+          <div class="scholarship-types">
+            <div class="type-item">
+              <div class="type-icon tertiary">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"/></svg>
+              </div>
+              <div class="type-details">
+                <span class="type-name">Tertiary Scholarship Program</span>
+                <span class="type-desc">College & University Students</span>
+              </div>
+              <span class="type-count">72</span>
+            </div>
+            <div class="type-item">
+              <div class="type-icon employee">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
+              </div>
+              <div class="type-details">
+                <span class="type-name">KKFI Employee-Child Education Grant</span>
+                <span class="type-desc">Dependents of KKFI Employees</span>
+              </div>
+              <span class="type-count">28</span>
+            </div>
+            <div class="type-item">
+              <div class="type-icon vocational">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+              </div>
+              <div class="type-details">
+                <span class="type-name">Vocational & Technology Scholarship</span>
+                <span class="type-desc">Technical & Skills Training</span>
+              </div>
+              <span class="type-count">20</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Graduation Rate -->
+        <div class="dashboard-card graduation-card">
+          <h3 class="card-title">Graduation Rate</h3>
+          <div class="graduation-donut-container">
+            <svg class="donut-chart" viewBox="0 0 100 100">
+              <circle cx="50" cy="50" r="40" fill="none" stroke="#e8eaf6" stroke-width="10"/>
+              <!-- Graduated 87% -->
+              <circle cx="50" cy="50" r="40" fill="none" stroke="#5b5f97" stroke-width="10"
+                stroke-dasharray="218.69 251.33" stroke-dashoffset="0" transform="rotate(-90 50 50)"/>
+            </svg>
+            <div class="graduation-center">
+              <span class="graduation-pct">87%</span>
+              <span class="graduation-label">Success Rate</span>
+            </div>
+          </div>
+          <div class="graduation-stats">
+            <div class="grad-stat">
+              <span class="grad-stat-value">104</span>
+              <span class="grad-stat-label">Graduated</span>
+            </div>
+            <div class="grad-stat">
+              <span class="grad-stat-value">12</span>
+              <span class="grad-stat-label">In Progress</span>
+            </div>
+            <div class="grad-stat">
+              <span class="grad-stat-value">4</span>
+              <span class="grad-stat-label">Discontinued</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </main>
+  </div>
+  <script src="js/sidebar.js"></script>
+</body>
+</html>

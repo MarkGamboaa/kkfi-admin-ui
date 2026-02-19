@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Staff Details - KKFI Admin</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <div class="layout">
+    <div id="sidebar-container"></div>
+
+    <!-- MAIN CONTENT -->
+    <main class="content">
+      
+      <!-- Header -->
+      <div class="applicant-header">
+        <a href="staff.html" class="back-btn">‹</a>
+        <div class="applicant-avatar">JR</div>
+        <div class="applicant-info">
+          <h2>Juan Reyes Santos <span class="status-badge active">Active</span></h2>
+          <div class="app-id">STF-001 | Program Manager</div>
+          <div class="app-date">Hired: June 15, 2018 (7 years)</div>
+        </div>
+        <div class="header-actions" style="margin-left: auto;">
+          <a href="edit-staff.html" class="btn btn-primary">✏️ Edit Profile</a>
+          <button class="btn btn-outline" onclick="openLeaveModal()">📅 Request Leave</button>
+        </div>
+      </div>
+
+      <!-- Quick Stats -->
+      <div class="stats-cards">
+        <div class="stat-card">
+          <div class="stat-icon leave" style="background: #e6f7ed;">🏖️</div>
+          <div class="stat-info">
+            <h3>10</h3>
+            <p>Vacation Leave Remaining</p>
+            <div class="stat-meta">
+              <span>Used: <strong>5</strong></span>
+              <span>Total: <strong>15</strong></span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="stat-card">
+          <div class="stat-icon sick" style="background: #fff3e6;">🏥</div>
+          <div class="stat-info">
+            <h3>12</h3>
+            <p>Sick Leave Remaining</p>
+            <div class="stat-meta">
+              <span>Used: <strong>3</strong></span>
+              <span>Total: <strong>15</strong></span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="stat-card">
+          <div class="stat-icon emergency" style="background: #fce4ec;">⚡</div>
+          <div class="stat-info">
+            <h3>5</h3>
+            <p>Emergency Leave Remaining</p>
+            <div class="stat-meta">
+              <span>Used: <strong>0</strong></span>
+              <span>Total: <strong>5</strong></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Personal Information -->
+      <section class="form-section">
+        <h3 class="section-title">Personal Information</h3>
+        <div class="info-grid">
+          <div class="info-item">
+            <label>Full Name</label>
+            <span>Juan Reyes Santos</span>
+          </div>
+          <div class="info-item">
+            <label>Birthdate</label>
+            <span>March 15, 1985 (40 years old)</span>
+          </div>
+          <div class="info-item">
+            <label>Gender</label>
+            <span>Male</span>
+          </div>
+          <div class="info-item">
+            <label>Civil Status</label>
+            <span>Married</span>
+          </div>
+          <div class="info-item">
+            <label>Email Address</label>
+            <span>juan.reyes@kkfi.org</span>
+          </div>
+          <div class="info-item">
+            <label>Mobile Number</label>
+            <span>+63 917 123 4567</span>
+          </div>
+          <div class="info-item">
+            <label>Landline</label>
+            <span>(02) 8123-4567</span>
+          </div>
+          <div class="info-item">
+            <label>Address</label>
+            <span>456 Mabini St., Brgy. Palanan, Makati City, Metro Manila 1235</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Employment Information -->
+      <section class="form-section">
+        <h3 class="section-title">Employment Information</h3>
+        <div class="info-grid">
+          <div class="info-item">
+            <label>Staff ID</label>
+            <span>STF-001</span>
+          </div>
+          <div class="info-item">
+            <label>Position</label>
+            <span>Program Manager</span>
+          </div>
+          <div class="info-item">
+            <label>Department</label>
+            <span>Programs</span>
+          </div>
+          <div class="info-item">
+            <label>Employment Type</label>
+            <span>Full-time</span>
+          </div>
+          <div class="info-item">
+            <label>Date Hired</label>
+            <span>June 15, 2018</span>
+          </div>
+          <div class="info-item">
+            <label>Employment Status</label>
+            <span class="status-badge active">Active</span>
+          </div>
+          <div class="info-item">
+            <label>Reports To</label>
+            <span>Francisco Gomez - Executive Director</span>
+          </div>
+          <div class="info-item">
+            <label>Work Schedule</label>
+            <span>Monday - Friday (8AM - 5PM)</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Compensation & Benefits -->
+      <section class="form-section">
+        <h3 class="section-title">Compensation & Benefits</h3>
+        <div class="info-grid">
+          <div class="info-item">
+            <label>Monthly Salary</label>
+            <span>₱45,000.00</span>
+          </div>
+          <div class="info-item">
+            <label>SSS Number</label>
+            <span>33-1234567-8</span>
+          </div>
+          <div class="info-item">
+            <label>PhilHealth Number</label>
+            <span>12-345678901-2</span>
+          </div>
+          <div class="info-item">
+            <label>Pag-IBIG Number</label>
+            <span>1234-5678-9012</span>
+          </div>
+          <div class="info-item">
+            <label>TIN Number</label>
+            <span>123-456-789-000</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Leave History -->
+      <section class="form-section">
+        <div class="section-header-row">
+          <h3 class="section-title" style="margin-bottom: 0; border-bottom: none; padding-bottom: 0;">Leave History</h3>
+          <a href="staff-leave.html" class="btn btn-outline">View All Leaves</a>
+        </div>
+        
+        <div class="table-container" style="box-shadow: none; padding: 0; margin-top: 15px;">
+          <table>
+            <thead>
+              <tr>
+                <th>Leave ID</th>
+                <th>Type</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>Days</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><span class="id-link">LV-2026-015</span></td>
+                <td>🏖️ Vacation Leave</td>
+                <td>Feb 25, 2026</td>
+                <td>Feb 27, 2026</td>
+                <td>3</td>
+                <td><span class="status-badge pending">Pending</span></td>
+                <td class="actions-cell">
+                  <button class="btn btn-icon" title="Approve" onclick="approveLeave('LV-2026-015')">✅</button>
+                  <button class="btn btn-icon" title="Reject" onclick="rejectLeave('LV-2026-015')">❌</button>
+                </td>
+              </tr>
+              <tr>
+                <td><span class="id-link">LV-2026-008</span></td>
+                <td>🏥 Sick Leave</td>
+                <td>Jan 20, 2026</td>
+                <td>Jan 22, 2026</td>
+                <td>3</td>
+                <td><span class="status-badge approved">Approved</span></td>
+                <td class="actions-cell">
+                  <button class="btn btn-icon" title="View">👁️</button>
+                </td>
+              </tr>
+              <tr>
+                <td><span class="id-link">LV-2025-142</span></td>
+                <td>🏖️ Vacation Leave</td>
+                <td>Dec 20, 2025</td>
+                <td>Dec 24, 2025</td>
+                <td>5</td>
+                <td><span class="status-badge approved">Approved</span></td>
+                <td class="actions-cell">
+                  <button class="btn btn-icon" title="View">👁️</button>
+                </td>
+              </tr>
+              <tr>
+                <td><span class="id-link">LV-2025-098</span></td>
+                <td>🏖️ Vacation Leave</td>
+                <td>Aug 15, 2025</td>
+                <td>Aug 18, 2025</td>
+                <td>4</td>
+                <td><span class="status-badge approved">Approved</span></td>
+                <td class="actions-cell">
+                  <button class="btn btn-icon" title="View">👁️</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Emergency Contact -->
+      <section class="form-section">
+        <h3 class="section-title">Emergency Contact</h3>
+        <div class="info-grid">
+          <div class="info-item">
+            <label>Contact Name</label>
+            <span>Maria Santos (Spouse)</span>
+          </div>
+          <div class="info-item">
+            <label>Contact Number</label>
+            <span>+63 918 987 6543</span>
+          </div>
+          <div class="info-item">
+            <label>Alternate Number</label>
+            <span>+63 917 111 2222</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Documents Section -->
+      <section class="form-section">
+        <h3 class="section-title">Uploaded Documents</h3>
+        <div class="documents-grid">
+          <div class="document-card" onclick="window.location='document-viewer.html'">
+            <div class="document-info">
+              <h4>📄 Resume/CV</h4>
+              <p class="doc-status complete">✓ Uploaded - Feb 15, 2018</p>
+            </div>
+            <div class="document-icon complete">👁️</div>
+          </div>
+          <div class="document-card" onclick="window.location='document-viewer.html'">
+            <div class="document-info">
+              <h4>🪪 Government ID (Front)</h4>
+              <p class="doc-status complete">✓ Uploaded - Feb 15, 2018</p>
+            </div>
+            <div class="document-icon complete">👁️</div>
+          </div>
+          <div class="document-card" onclick="window.location='document-viewer.html'">
+            <div class="document-info">
+              <h4>🪪 Government ID (Back)</h4>
+              <p class="doc-status complete">✓ Uploaded - Feb 15, 2018</p>
+            </div>
+            <div class="document-icon complete">👁️</div>
+          </div>
+          <div class="document-card" onclick="window.location='document-viewer.html'">
+            <div class="document-info">
+              <h4>📋 NBI Clearance</h4>
+              <p class="doc-status complete">✓ Uploaded - Feb 15, 2018</p>
+            </div>
+            <div class="document-icon complete">👁️</div>
+          </div>
+          <div class="document-card" onclick="window.location='document-viewer.html'">
+            <div class="document-info">
+              <h4>📃 Birth Certificate</h4>
+              <p class="doc-status complete">✓ Uploaded - Feb 15, 2018</p>
+            </div>
+            <div class="document-icon complete">👁️</div>
+          </div>
+          <div class="document-card" onclick="window.location='document-viewer.html'">
+            <div class="document-info">
+              <h4>📷 2x2 Photo</h4>
+              <p class="doc-status complete">✓ Uploaded - Feb 15, 2018</p>
+            </div>
+            <div class="document-icon complete">👁️</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Action Buttons -->
+      <div class="action-bar">
+        <a href="staff.html" class="btn btn-outline">← Back to Staff List</a>
+        <a href="edit-staff.html" class="btn btn-primary">✏️ Edit Staff Profile</a>
+        <button class="btn btn-danger" onclick="confirmDelete('STF-001')">🗑️ Delete Staff</button>
+      </div>
+
+    </main>
+  </div>
+
+  <!-- Leave Request Modal -->
+  <div id="leaveModal" class="modal" style="display: none;">
+    <div class="modal-content" style="max-width: 500px;">
+      <div class="modal-header">
+        <h3>📅 Request Leave</h3>
+        <button class="modal-close" onclick="closeLeaveModal()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form id="leaveForm">
+          <div class="form-group" style="margin-bottom: 15px;">
+            <label>Leave Type <span style="color: #dc3545;">*</span></label>
+            <select required>
+              <option value="">Select leave type</option>
+              <option value="vacation">🏖️ Vacation Leave (10 days available)</option>
+              <option value="sick">🏥 Sick Leave (12 days available)</option>
+              <option value="emergency">⚡ Emergency Leave (5 days available)</option>
+              <option value="bereavement">🕯️ Bereavement Leave (5 days available)</option>
+              <option value="maternity">👶 Maternity/Paternity Leave</option>
+            </select>
+          </div>
+          <div class="form-group" style="margin-bottom: 15px;">
+            <label>Start Date <span style="color: #dc3545;">*</span></label>
+            <input type="date" required>
+          </div>
+          <div class="form-group" style="margin-bottom: 15px;">
+            <label>End Date <span style="color: #dc3545;">*</span></label>
+            <input type="date" required>
+          </div>
+          <div class="form-group" style="margin-bottom: 15px;">
+            <label>Reason <span style="color: #dc3545;">*</span></label>
+            <textarea rows="3" placeholder="Please provide a reason for your leave request..." style="width: 100%; padding: 12px; border: 1px solid #e0e0e0; border-radius: 8px; font-size: 14px;"></textarea>
+          </div>
+          <div class="form-group">
+            <label>Supporting Document (Optional)</label>
+            <input type="file" accept=".pdf,.jpg,.jpeg,.png">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-outline" onclick="closeLeaveModal()">Cancel</button>
+        <button class="btn btn-primary" onclick="submitLeaveRequest()">Submit Request</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Delete Confirmation Modal -->
+  <div id="deleteModal" class="modal" style="display: none;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>⚠️ Confirm Delete</h3>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to delete this staff record? This action cannot be undone.</p>
+        <p><strong>Staff ID:</strong> <span id="deleteStaffId"></span></p>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-outline" onclick="closeDeleteModal()">Cancel</button>
+        <button class="btn btn-danger" onclick="deleteStaff()">Delete</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Leave Modal Functions
+    function openLeaveModal() {
+      document.getElementById('leaveModal').style.display = 'flex';
+    }
+
+    function closeLeaveModal() {
+      document.getElementById('leaveModal').style.display = 'none';
+    }
+
+    function submitLeaveRequest() {
+      alert('Leave request submitted successfully! Awaiting approval.');
+      closeLeaveModal();
+    }
+
+    // Delete Modal Functions
+    function confirmDelete(staffId) {
+      document.getElementById('deleteModal').style.display = 'flex';
+      document.getElementById('deleteStaffId').textContent = staffId;
+    }
+
+    function closeDeleteModal() {
+      document.getElementById('deleteModal').style.display = 'none';
+    }
+
+    function deleteStaff() {
+      alert('Staff record deleted successfully!');
+      closeDeleteModal();
+      window.location.href = 'staff.html';
+    }
+
+    // Leave approval functions
+    function approveLeave(leaveId) {
+      if (confirm('Approve leave request ' + leaveId + '?')) {
+        alert('Leave request approved!');
+        location.reload();
+      }
+    }
+
+    function rejectLeave(leaveId) {
+      if (confirm('Reject leave request ' + leaveId + '?')) {
+        alert('Leave request rejected!');
+        location.reload();
+      }
+    }
+
+    // Close modals when clicking outside
+    document.getElementById('leaveModal').addEventListener('click', function(e) {
+      if (e.target === this) {
+        closeLeaveModal();
+      }
+    });
+
+    document.getElementById('deleteModal').addEventListener('click', function(e) {
+      if (e.target === this) {
+        closeDeleteModal();
+      }
+    });
+  </script>
+  <script src="js/sidebar.js"></script>
+</body>
+</html>

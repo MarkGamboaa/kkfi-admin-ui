@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Compliance Details - KKFI Admin</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <div class="layout">
+    <div id="sidebar-container"></div>
+
+    <!-- MAIN CONTENT -->
+    <main class="content">
+      
+      <!-- Header -->
+      <div class="applicant-header">
+        <a href="compliance.html" class="back-btn">‹</a>
+        <div class="applicant-avatar">MD</div>
+        <div class="applicant-info">
+          <h2>
+            Mark Dizon Bautista
+            <span class="status-badge non-compliant">Non-Compliant</span>
+          </h2>
+          <div class="app-id">LM823746</div>
+          <div class="app-date">Scholar since: 05 May 2024</div>
+        </div>
+      </div>
+
+      <!-- Compliance Overview -->
+      <section class="form-section">
+        <h3 class="section-title">Compliance Overview</h3>
+        <div class="form-grid">
+          <div class="form-group">
+            <label>Current GPA</label>
+            <input type="text" value="2.3" disabled style="color: #dc3545; font-weight: bold;">
+          </div>
+          <div class="form-group">
+            <label>Required GPA</label>
+            <input type="text" value="2.5" disabled>
+          </div>
+          <div class="form-group">
+            <label>GPA Status</label>
+            <input type="text" value="Below Required" disabled style="color: #dc3545;">
+          </div>
+          <div class="form-group">
+            <label>Last Grade Submission</label>
+            <input type="text" value="Nov 15, 2025" disabled>
+          </div>
+          <div class="form-group">
+            <label>Community Service Hours</label>
+            <input type="text" value="8 of 20 hours" disabled style="color: #f5a623;">
+          </div>
+          <div class="form-group">
+            <label>Attendance at Events</label>
+            <input type="text" value="1 of 3 required" disabled style="color: #dc3545;">
+          </div>
+        </div>
+      </section>
+
+      <!-- Compliance Requirements -->
+      <section class="form-section">
+        <h3 class="section-title">Requirements Checklist</h3>
+        <div class="documents-grid">
+          <div class="document-card">
+            <div class="document-info">
+              <h4>Maintain Minimum GPA (2.5)</h4>
+              <span class="doc-status error">Current: 2.3 - Not Met</span>
+            </div>
+            <div class="document-icon error">✕</div>
+          </div>
+          
+          <div class="document-card">
+            <div class="document-info">
+              <h4>Submit Grades Every Semester</h4>
+              <span class="doc-status complete">Submitted on Nov 15, 2025</span>
+            </div>
+            <div class="document-icon complete">✓</div>
+          </div>
+          
+          <div class="document-card">
+            <div class="document-info">
+              <h4>Complete 20 Community Service Hours</h4>
+              <span class="doc-status error">8 hours completed - Incomplete</span>
+            </div>
+            <div class="document-icon error">✕</div>
+          </div>
+          
+          <div class="document-card">
+            <div class="document-info">
+              <h4>Attend 3 KKFI Events per Year</h4>
+              <span class="doc-status error">1 of 3 attended</span>
+            </div>
+            <div class="document-icon error">✕</div>
+          </div>
+          
+          <div class="document-card">
+            <div class="document-info">
+              <h4>Submit Narrative Report</h4>
+              <span class="doc-status complete">Submitted on Dec 01, 2025</span>
+            </div>
+            <div class="document-icon complete">✓</div>
+          </div>
+          
+          <div class="document-card">
+            <div class="document-info">
+              <h4>No Academic Violations</h4>
+              <span class="doc-status complete">No violations recorded</span>
+            </div>
+            <div class="document-icon complete">✓</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Compliance History -->
+      <section class="form-section">
+        <h3 class="section-title">Compliance History</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Period</th>
+              <th>GPA</th>
+              <th>Service Hours</th>
+              <th>Events Attended</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>AY 2025-2026 (1st Sem)</td>
+              <td style="color: #dc3545;">2.3</td>
+              <td>8 hrs</td>
+              <td>1</td>
+              <td><span class="status-badge non-compliant">Non-Compliant</span></td>
+            </tr>
+            <tr>
+              <td>AY 2024-2025 (2nd Sem)</td>
+              <td>2.6</td>
+              <td>22 hrs</td>
+              <td>3</td>
+              <td><span class="status-badge compliant">Compliant</span></td>
+            </tr>
+            <tr>
+              <td>AY 2024-2025 (1st Sem)</td>
+              <td>2.8</td>
+              <td>25 hrs</td>
+              <td>4</td>
+              <td><span class="status-badge compliant">Compliant</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- Notes Section -->
+      <section class="form-section">
+        <h3 class="section-title">Notes & Communications</h3>
+        <div style="background: #fff8e1; border-left: 4px solid #f5a623; padding: 15px; border-radius: 0 8px 8px 0; margin-bottom: 15px;">
+          <strong style="color: #f57f17;">Warning Notice Sent</strong>
+          <p style="color: #666; font-size: 13px; margin-top: 5px;">A compliance warning was sent on Jan 10, 2026 regarding GPA and community service requirements.</p>
+        </div>
+        <div class="form-group">
+          <label>Add Note</label>
+          <textarea rows="4" placeholder="Enter notes about this scholar's compliance..." style="width: 100%; padding: 12px 15px; border: 1px solid #e0e0e0; border-radius: 8px; font-size: 14px; resize: vertical;"></textarea>
+        </div>
+      </section>
+
+      <!-- Action Bar -->
+      <div class="action-bar">
+        <button class="btn btn-primary">📧 Send Reminder</button>
+        <button class="btn btn-outline">📄 Generate Compliance Report</button>
+        <button class="btn btn-secondary">⚠️ Issue Warning</button>
+        <button class="btn btn-danger">🚫 Suspend Scholarship</button>
+      </div>
+
+    </main>
+  </div>
+  <script src="js/sidebar.js"></script>
+</body>
+</html>

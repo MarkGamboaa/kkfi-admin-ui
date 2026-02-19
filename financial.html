@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Financial Tracking - KKFI Admin</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <div class="layout">
+    <div id="sidebar-container"></div>
+
+    <!-- MAIN CONTENT -->
+    <main class="content">
+      <div class="page-header">
+        <h1 class="page-title">Applicants</h1>
+        <div class="header-actions">
+          <div class="date-range">📅 15 May 2020 - 24 May 2024</div>
+          <button class="btn btn-filter">🔽 Filter</button>
+          <button class="btn btn-filter">↕️ Sort By A-Z</button>
+        </div>
+      </div>
+
+      <div class="table-container">
+        <div class="table-header">
+          <div class="table-controls">
+            <div class="rows-per-page">
+              Row Per Page
+              <select>
+                <option>10</option>
+                <option>25</option>
+                <option>50</option>
+              </select>
+              Entries
+            </div>
+          </div>
+          <div class="search-box">
+            <input type="text" placeholder="Search">
+          </div>
+        </div>
+        
+        <table>
+          <thead>
+            <tr>
+              <th class="checkbox-cell"><input type="checkbox"></th>
+              <th class="sortable">ID</th>
+              <th class="sortable">Applicant Name</th>
+              <th class="sortable">School Year</th>
+              <th class="sortable">Total Released (₱)</th>
+              <th class="sortable">Last Release Date</th>
+              <th class="sortable">Next Scheduled Release</th>
+              <th>Status</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr onclick="window.location='financial-details.html'" style="cursor:pointer">
+              <td class="checkbox-cell"><input type="checkbox"></td>
+              <td><a href="financial-details.html" class="id-link">R124556</a></td>
+              <td>Juan Miguel Santos Reyes</td>
+              <td>2025-2026</td>
+              <td>₱14,000</td>
+              <td>Jan 15, 2026</td>
+              <td>Feb 15, 2026</td>
+              <td><span class="status-badge on-track">On Track</span></td>
+              <td class="row-arrow">›</td>
+            </tr>
+            <tr onclick="window.location='financial-details.html'" style="cursor:pointer">
+              <td class="checkbox-cell"><input type="checkbox"></td>
+              <td><a href="financial-details.html" class="id-link">R124555</a></td>
+              <td>Maria Angelica Cruz Dela Rosa</td>
+              <td>2025-2026</td>
+              <td>₱15,000</td>
+              <td>Feb 10, 2026</td>
+              <td>—</td>
+              <td><span class="status-badge pending-docs">Pending Docs</span></td>
+              <td class="row-arrow">›</td>
+            </tr>
+            <tr onclick="window.location='financial-details.html'" style="cursor:pointer">
+              <td class="checkbox-cell"><input type="checkbox"></td>
+              <td><a href="financial-details.html" class="id-link">R124554</a></td>
+              <td>Jose Antonio Garcia Lopez</td>
+              <td>2025-2026</td>
+              <td>₱12,500</td>
+              <td>Dec 18, 2025</td>
+              <td>—</td>
+              <td><span class="status-badge on-hold">On Hold</span></td>
+              <td class="row-arrow">›</td>
+            </tr>
+            <tr onclick="window.location='financial-details.html'" style="cursor:pointer">
+              <td class="checkbox-cell"><input type="checkbox"></td>
+              <td><a href="financial-details.html" class="id-link">R124553</a></td>
+              <td>Ana Patricia Mendoza Villanueva</td>
+              <td>2025-2026</td>
+              <td>₱10,500</td>
+              <td>Nov 22, 2025</td>
+              <td>Dec 22, 2025</td>
+              <td><span class="status-badge on-track">On Track</span></td>
+              <td class="row-arrow">›</td>
+            </tr>
+            <tr onclick="window.location='financial-details.html'" style="cursor:pointer">
+              <td class="checkbox-cell"><input type="checkbox"></td>
+              <td><a href="financial-details.html" class="id-link">R124552</a></td>
+              <td>Mark Anthony Dizon Bautista</td>
+              <td>2025-2026</td>
+              <td>₱15,000</td>
+              <td>Jan 20, 2026</td>
+              <td>—</td>
+              <td><span class="status-badge at-risk">At Risk</span></td>
+              <td class="row-arrow">›</td>
+            </tr>
+            <tr onclick="window.location='financial-details.html'" style="cursor:pointer">
+              <td class="checkbox-cell"><input type="checkbox"></td>
+              <td><a href="financial-details.html" class="id-link">R124551</a></td>
+              <td>Carlo Emmanuel Navarro Flores</td>
+              <td>2025-2026</td>
+              <td>₱9,000</td>
+              <td>Oct 30, 2025</td>
+              <td>Nov 30, 2025</td>
+              <td><span class="status-badge on-track">On Track</span></td>
+              <td class="row-arrow">›</td>
+            </tr>
+            <tr onclick="window.location='financial-details.html'" style="cursor:pointer">
+              <td class="checkbox-cell"><input type="checkbox"></td>
+              <td><a href="financial-details.html" class="id-link">R24550</a></td>
+              <td>Michelle Andrea Torres Ramirez</td>
+              <td>2025-2026</td>
+              <td>₱13,500</td>
+              <td>Jan 05, 2026</td>
+              <td>Feb 05, 2026</td>
+              <td><span class="status-badge on-track">On Track</span></td>
+              <td class="row-arrow">›</td>
+            </tr>
+            <tr onclick="window.location='financial-details.html'" style="cursor:pointer">
+              <td class="checkbox-cell"><input type="checkbox"></td>
+              <td><a href="financial-details.html" class="id-link">R24549</a></td>
+              <td>Daniel Christian Aquino Valdez</td>
+              <td>2025-2026</td>
+              <td>₱7,500</td>
+              <td>Sep 25, 2025</td>
+              <td>Oct 25, 2025</td>
+              <td><span class="status-badge on-track">On Track</span></td>
+              <td class="row-arrow">›</td>
+            </tr>
+            <tr onclick="window.location='financial-details.html'" style="cursor:pointer">
+              <td class="checkbox-cell"><input type="checkbox"></td>
+              <td><a href="financial-details.html" class="id-link">R124548</a></td>
+              <td>Kimberly Joy Castillo Pineda</td>
+              <td>2025-2026</td>
+              <td>₱15,000</td>
+              <td>Feb 01, 2026</td>
+              <td>Mar 01, 2026</td>
+              <td><span class="status-badge on-track">On Track</span></td>
+              <td class="row-arrow">›</td>
+            </tr>
+            <tr onclick="window.location='financial-details.html'" style="cursor:pointer">
+              <td class="checkbox-cell"><input type="checkbox"></td>
+              <td><a href="financial-details.html" class="id-link">R124547</a></td>
+              <td>Joshua Paul Fernandez Ortega</td>
+              <td>2025-2026</td>
+              <td>₱6,000</td>
+              <td>Aug 28, 2025</td>
+              <td>Sep 28, 2025</td>
+              <td><span class="status-badge on-track">On Track</span></td>
+              <td class="row-arrow">›</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="pagination">
+          <span class="disabled">Pre</span>
+          <a href="#" class="active">1</a>
+          <a href="#">2</a>
+          <span>...</span>
+          <a href="#">20</a>
+          <a href="#">Next</a>
+        </div>
+      </div>
+
+    </main>
+  </div>
+  <script src="js/sidebar.js"></script>
+</body>
+</html>

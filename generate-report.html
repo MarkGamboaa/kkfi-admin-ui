@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Generate Report - KKFI Admin</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <div class="layout">
+    <div id="sidebar-container"></div>
+
+    <!-- MAIN CONTENT -->
+    <main class="content">
+      
+      <header class="page-header">
+        <a href="reports.html" class="back-btn">‹</a>
+        <h1>📊 Generate Report</h1>
+      </header>
+
+      <!-- Report Type Selection -->
+      <section class="form-section">
+        <h3 class="section-title">Select Report Type</h3>
+        <div class="stats-grid" style="grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));">
+          <div class="stat-card" style="cursor: pointer; border: 2px solid #5b5f97;">
+            <div class="stat-icon">📋</div>
+            <div class="stat-value">Scholar List</div>
+            <div class="stat-label">All active scholars</div>
+          </div>
+          <div class="stat-card" style="cursor: pointer;">
+            <div class="stat-icon">📊</div>
+            <div class="stat-value">Compliance</div>
+            <div class="stat-label">GPA & requirements</div>
+          </div>
+          <div class="stat-card" style="cursor: pointer;">
+            <div class="stat-icon">💰</div>
+            <div class="stat-value">Financial</div>
+            <div class="stat-label">Disbursements</div>
+          </div>
+          <div class="stat-card" style="cursor: pointer;">
+            <div class="stat-icon">📝</div>
+            <div class="stat-value">Applications</div>
+            <div class="stat-label">Applicant data</div>
+          </div>
+          <div class="stat-card" style="cursor: pointer;">
+            <div class="stat-icon">🔄</div>
+            <div class="stat-value">Renewals</div>
+            <div class="stat-label">Renewal status</div>
+          </div>
+          <div class="stat-card" style="cursor: pointer;">
+            <div class="stat-icon">📈</div>
+            <div class="stat-value">Summary</div>
+            <div class="stat-label">Overall statistics</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Report Configuration -->
+      <section class="form-section">
+        <h3 class="section-title">Report Configuration</h3>
+        <div class="form-grid">
+          <div class="form-group">
+            <label>Academic Year</label>
+            <select>
+              <option>All Years</option>
+              <option selected>AY 2025-2026</option>
+              <option>AY 2024-2025</option>
+              <option>AY 2023-2024</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Semester</label>
+            <select>
+              <option>All Semesters</option>
+              <option selected>1st Semester</option>
+              <option>2nd Semester</option>
+              <option>Summer</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Date Range (From)</label>
+            <input type="date" value="2025-07-01">
+          </div>
+          <div class="form-group">
+            <label>Date Range (To)</label>
+            <input type="date" value="2025-12-31">
+          </div>
+          <div class="form-group">
+            <label>University Filter</label>
+            <select>
+              <option>All Universities</option>
+              <option>PUP Manila</option>
+              <option>Bulacan State University</option>
+              <option>Pamantasan ng Lungsod ng Maynila (PLM)</option>
+              <option>TUP Manila</option>
+              <option>Bulacan Agricultural State College</option>
+              <option>EARIST</option>
+              <option>Philippine Normal University</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Status Filter</label>
+            <select>
+              <option>All Statuses</option>
+              <option>Active Only</option>
+              <option>Compliant Only</option>
+              <option>Non-Compliant Only</option>
+              <option>At Risk Only</option>
+            </select>
+          </div>
+        </div>
+      </section>
+
+      <!-- Data Fields Selection -->
+      <section class="form-section">
+        <h3 class="section-title">Select Data Fields</h3>
+        <p style="color: #666; font-size: 14px; margin-bottom: 15px;">Choose which fields to include in the report:</p>
+        
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">
+          <div>
+            <h4 style="font-size: 14px; color: #5b5f97; margin-bottom: 10px;">Personal Information</h4>
+            <label style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px; cursor: pointer;">
+              <input type="checkbox" checked> Full Name
+            </label>
+            <label style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px; cursor: pointer;">
+              <input type="checkbox" checked> Scholar ID
+            </label>
+            <label style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px; cursor: pointer;">
+              <input type="checkbox"> Birthdate
+            </label>
+            <label style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px; cursor: pointer;">
+              <input type="checkbox"> Contact Number
+            </label>
+            <label style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px; cursor: pointer;">
+              <input type="checkbox" checked> Email Address
+            </label>
+          </div>
+          
+          <div>
+            <h4 style="font-size: 14px; color: #5b5f97; margin-bottom: 10px;">Academic Information</h4>
+            <label style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px; cursor: pointer;">
+              <input type="checkbox" checked> University
+            </label>
+            <label style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px; cursor: pointer;">
+              <input type="checkbox" checked> Course/Program
+            </label>
+            <label style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px; cursor: pointer;">
+              <input type="checkbox" checked> Year Level
+            </label>
+            <label style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px; cursor: pointer;">
+              <input type="checkbox" checked> GPA
+            </label>
+            <label style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px; cursor: pointer;">
+              <input type="checkbox"> Expected Graduation
+            </label>
+          </div>
+          
+          <div>
+            <h4 style="font-size: 14px; color: #5b5f97; margin-bottom: 10px;">Scholarship Information</h4>
+            <label style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px; cursor: pointer;">
+              <input type="checkbox" checked> Scholarship Type
+            </label>
+            <label style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px; cursor: pointer;">
+              <input type="checkbox" checked> Start Date
+            </label>
+            <label style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px; cursor: pointer;">
+              <input type="checkbox" checked> Compliance Status
+            </label>
+            <label style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px; cursor: pointer;">
+              <input type="checkbox"> Community Service Hours
+            </label>
+            <label style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px; cursor: pointer;">
+              <input type="checkbox" checked> Total Disbursed
+            </label>
+          </div>
+        </div>
+      </section>
+
+      <!-- Export Options -->
+      <section class="form-section">
+        <h3 class="section-title">Export Options</h3>
+        <div class="form-grid">
+          <div class="form-group">
+            <label>File Format</label>
+            <select>
+              <option>PDF Document</option>
+              <option>Excel Spreadsheet (.xlsx)</option>
+              <option>CSV File</option>
+              <option>Print Preview</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Paper Size (for PDF/Print)</label>
+            <select>
+              <option>A4</option>
+              <option>Letter</option>
+              <option>Legal</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Orientation</label>
+            <select>
+              <option>Portrait</option>
+              <option>Landscape</option>
+            </select>
+          </div>
+        </div>
+      </section>
+
+      <!-- Report Preview Info -->
+      <section class="form-section">
+        <h3 class="section-title">Report Preview</h3>
+        <div style="background: #f5f7fa; border-radius: 8px; padding: 30px; text-align: center; border: 2px dashed #e0e0e0;">
+          <div style="font-size: 48px; margin-bottom: 15px;">📄</div>
+          <h4 style="color: #333; margin-bottom: 5px;">Scholar List Report</h4>
+          <p style="color: #666; font-size: 14px; margin-bottom: 15px;">AY 2025-2026 | 1st Semester | All Universities</p>
+          <p style="color: #5b5f97; font-weight: 600;">Estimated: 284 records</p>
+        </div>
+      </section>
+
+      <!-- Action Bar -->
+      <div class="action-bar">
+        <button class="btn btn-primary">📥 Generate & Download</button>
+        <button class="btn btn-outline">👁️ Preview Report</button>
+        <a href="reports.html" class="btn btn-outline">Cancel</a>
+      </div>
+
+    </main>
+  </div>
+  <script src="js/sidebar.js"></script>
+</body>
+</html>

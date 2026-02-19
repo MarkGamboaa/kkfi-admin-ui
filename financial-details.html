@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Financial Details - KKFI Admin</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <div class="layout">
+    <div id="sidebar-container"></div>
+
+    <!-- MAIN CONTENT -->
+    <main class="content">
+      
+      <!-- Header -->
+      <div class="applicant-header">
+        <a href="financial.html" class="back-btn">‹</a>
+        <div class="applicant-avatar">JM</div>
+        <div class="applicant-info">
+          <h2>
+            Juan Miguel Santos Reyes
+            <span class="status-badge on-track">On Track</span>
+          </h2>
+          <div class="app-id">R124556</div>
+          <div class="app-date">School Year 2025-2026</div>
+        </div>
+      </div>
+
+      <!-- Financial Summary -->
+      <section class="form-section">
+        <h3 class="section-title">Financial Summary</h3>
+        <div class="form-grid">
+          <div class="form-group">
+            <label>Total Amount Allocated</label>
+            <input type="text" value="₱56,000" disabled>
+          </div>
+          <div class="form-group">
+            <label>Total Amount Released</label>
+            <input type="text" value="₱14,000" disabled>
+          </div>
+          <div class="form-group">
+            <label>Remaining Balance</label>
+            <input type="text" value="₱42,000" disabled>
+          </div>
+          <div class="form-group">
+            <label>Last Release Date</label>
+            <input type="text" value="Jan 15, 2026" disabled>
+          </div>
+          <div class="form-group">
+            <label>Next Scheduled Release</label>
+            <input type="text" value="Feb 15, 2026" disabled>
+          </div>
+          <div class="form-group">
+            <label>Payment Method</label>
+            <input type="text" value="Bank Transfer" disabled>
+          </div>
+        </div>
+      </section>
+
+      <!-- Disbursement History -->
+      <section class="form-section">
+        <h3 class="section-title">Disbursement History</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Transaction ID</th>
+              <th>Date</th>
+              <th>Amount</th>
+              <th>Type</th>
+              <th>Status</th>
+              <th>Remarks</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>#TXN-2026-0115</td>
+              <td>Jan 15, 2026</td>
+              <td>₱7,000</td>
+              <td>Monthly Allowance</td>
+              <td><span class="status-badge compliant">Completed</span></td>
+              <td>2nd Semester - January</td>
+            </tr>
+            <tr>
+              <td>#TXN-2025-1215</td>
+              <td>Dec 15, 2025</td>
+              <td>₱7,000</td>
+              <td>Monthly Allowance</td>
+              <td><span class="status-badge compliant">Completed</span></td>
+              <td>2nd Semester - December</td>
+            </tr>
+            <tr>
+              <td>#TXN-2025-1001</td>
+              <td>Oct 01, 2025</td>
+              <td>₱0</td>
+              <td>Book Allowance</td>
+              <td><span class="status-badge pending">Pending</span></td>
+              <td>Awaiting receipts</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- Action Bar -->
+      <div class="action-bar">
+        <button class="btn btn-primary">💳 Process Disbursement</button>
+        <button class="btn btn-outline">📄 Generate Statement</button>
+      </div>
+
+    </main>
+  </div>
+  <script src="js/sidebar.js"></script>
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Submitted Documents - KKFI Admin</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <div class="layout">
+    <div id="sidebar-container"></div>
+
+    <!-- MAIN CONTENT -->
+    <main class="content">
+      
+      <div class="page-header">
+        <h1 class="page-title">Submitted Documents</h1>
+      </div>
+
+      <div class="form-section">
+        <div class="documents-grid">
+          <div class="document-card" onclick="window.location='document-viewer.html'">
+            <div class="document-info">
+              <h4>School ID.pdf</h4>
+              <span class="doc-status error">Uploaded Document unclear or blurred</span>
+            </div>
+            <div class="document-icon error">✕</div>
+          </div>
+          
+          <div class="document-card" onclick="window.location='document-viewer.html'">
+            <div class="document-info">
+              <h4>Current Report Card.pdf</h4>
+              <span class="doc-status complete">Complete</span>
+            </div>
+            <div class="document-icon complete">✓</div>
+          </div>
+          
+          <div class="document-card" onclick="window.location='document-viewer.html'">
+            <div class="document-info">
+              <h4>Certificate of Enrollment or Admission.pdf</h4>
+              <span class="doc-status complete">Complete</span>
+            </div>
+            <div class="document-icon complete">✓</div>
+          </div>
+          
+          <div class="document-card" onclick="window.location='document-viewer.html'">
+            <div class="document-info">
+              <h4>Birth Certificate (PSA).pdf</h4>
+              <span class="doc-status complete">Complete</span>
+            </div>
+            <div class="document-icon complete">✓</div>
+          </div>
+          
+          <div class="document-card" onclick="window.location='document-viewer.html'">
+            <div class="document-info">
+              <h4>Barangay Certificate of Indigency.pdf</h4>
+              <span class="doc-status complete">Complete</span>
+            </div>
+            <div class="document-icon complete">✓</div>
+          </div>
+        </div>
+
+        <div class="documents-footer">
+          <a href="applicant-details.html" class="btn btn-secondary">‹ Back</a>
+          <a href="#" class="btn btn-primary">Request Follow up</a>
+        </div>
+      </div>
+
+    </main>
+  </div>
+  <script src="js/sidebar.js"></script>
+</body>
+</html>
