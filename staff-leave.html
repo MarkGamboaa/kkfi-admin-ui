@@ -6,6 +6,9 @@
   <title>Leave Management - KKFI Admin</title>
   <link rel="stylesheet" href="css/styles.css">
   <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
     .page-header {
       display: flex;
       justify-content: space-between;
@@ -310,80 +313,6 @@
       margin-left: 4px;
     }
 
-    /* Modal Styles */
-    .modal {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0,0,0,0.5);
-      z-index: 1000;
-      align-items: center;
-      justify-content: center;
-    }
-    .modal-content {
-      background: #fff;
-      border-radius: 12px;
-      width: 100%;
-      max-width: 500px;
-      max-height: 90vh;
-      overflow-y: auto;
-    }
-    .modal-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 20px 24px;
-      border-bottom: 1px solid #eee;
-    }
-    .modal-header h3 { margin: 0; font-size: 18px; }
-    .modal-close {
-      background: none;
-      border: none;
-      font-size: 24px;
-      cursor: pointer;
-      color: #888;
-      line-height: 1;
-    }
-    .modal-close:hover { color: #333; }
-    .modal-body { padding: 24px; }
-    .modal-footer {
-      display: flex;
-      justify-content: flex-end;
-      gap: 12px;
-      padding: 16px 24px;
-      border-top: 1px solid #eee;
-      background: #fafafa;
-    }
-    .modal-footer .btn {
-      padding: 10px 20px;
-      border-radius: 8px;
-      font-size: 14px;
-      cursor: pointer;
-    }
-    .modal-footer .btn-outline {
-      background: #fff;
-      border: 1px solid #ddd;
-      color: #666;
-    }
-    .modal-footer .btn-primary {
-      background: #5b5f97;
-      border: 1px solid #5b5f97;
-      color: #fff;
-    }
-    .modal-footer .btn-success {
-      background: #2e7d32;
-      border: 1px solid #2e7d32;
-      color: #fff;
-    }
-    .modal-footer .btn-danger {
-      background: #c62828;
-      border: 1px solid #c62828;
-      color: #fff;
-    }
-
     .form-group { margin-bottom: 16px; }
     .form-group label {
       display: block;
@@ -400,6 +329,7 @@
       border: 1px solid #ddd;
       border-radius: 8px;
       font-size: 14px;
+      box-sizing: border-box;
     }
     .form-group input:focus,
     .form-group select:focus,
@@ -412,6 +342,30 @@
       grid-template-columns: 1fr 1fr;
       gap: 16px;
     }
+    .btn {
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-size: 14px;
+      cursor: pointer;
+    }
+    .btn-outline {
+      background: #fff;
+      border: 1px solid #ddd;
+      color: #666;
+    }
+    .btn-outline:hover { background: #f5f5f5; }
+    .btn-primary {
+      background: #5b5f97;
+      border: 1px solid #5b5f97;
+      color: #fff;
+    }
+    .btn-primary:hover { background: #4a4e7a; }
+    .btn-danger {
+      background: #c62828;
+      border: 1px solid #c62828;
+      color: #fff;
+    }
+    .btn-danger:hover { background: #b71c1c; }
   </style>
 </head>
 <body>
@@ -538,27 +492,27 @@
   </div>
 
   <!-- Add Leave Modal -->
-  <div id="addLeaveModal" class="modal">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h3>New Leave Request</h3>
-        <button class="modal-close" onclick="closeAddLeaveModal()">&times;</button>
+  <div id="addLeaveModal" onclick="if(event.target === this) closeAddLeaveModal()" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 9999;">
+    <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: #fff; border-radius: 12px; width: 500px; max-width: 90%;">
+      <div style="display: flex; justify-content: space-between; align-items: center; padding: 20px 24px; border-bottom: 1px solid #eee;">
+        <h3 style="margin: 0; font-size: 18px;">New Leave Request</h3>
+        <button onclick="closeAddLeaveModal()" style="background: none; border: none; font-size: 24px; cursor: pointer; color: #888;">&times;</button>
       </div>
-      <div class="modal-body">
+      <div style="padding: 24px;">
         <form id="addLeaveForm">
           <div class="form-group">
             <label>Staff Member <span style="color: #c62828;">*</span></label>
-            <select id="staffSelect" required>
-              <option value="">Select staff member</option>
-              <option value="STF-001">Juan Santos - Program Manager</option>
-              <option value="STF-002">Maria Clara Dela Cruz - Finance Officer</option>
-              <option value="STF-003">Roberto Garcia - HR Coordinator</option>
-              <option value="STF-004">Angela Villanueva - Administrative Assistant</option>
-              <option value="STF-005">Pedro Ramos - Scholar Coordinator</option>
-              <option value="STF-006">Carmen Torres - IT Specialist</option>
-              <option value="STF-007">Francisco Padilla - Executive Director</option>
-              <option value="STF-008">Luisa Morales - Communications Officer</option>
-            </select>
+            <input type="text" id="staffSelect" list="staffList" placeholder="Type to search staff..." required>
+            <datalist id="staffList">
+              <option value="Juan Santos - Program Manager">
+              <option value="Maria Clara Dela Cruz - Finance Officer">
+              <option value="Roberto Garcia - HR Coordinator">
+              <option value="Angela Villanueva - Administrative Assistant">
+              <option value="Pedro Ramos - Scholar Coordinator">
+              <option value="Carmen Torres - IT Specialist">
+              <option value="Francisco Padilla - Executive Director">
+              <option value="Luisa Morales - Communications Officer">
+            </datalist>
           </div>
           <div class="form-group">
             <label>Leave Type <span style="color: #c62828;">*</span></label>
@@ -589,7 +543,7 @@
           </div>
         </form>
       </div>
-      <div class="modal-footer">
+      <div style="display: flex; justify-content: flex-end; gap: 12px; padding: 16px 24px; border-top: 1px solid #eee; background: #fafafa;">
         <button class="btn btn-outline" onclick="closeAddLeaveModal()">Cancel</button>
         <button class="btn btn-primary" onclick="submitNewLeave()">Submit Request</button>
       </div>
@@ -597,29 +551,29 @@
   </div>
 
   <!-- View Leave Modal -->
-  <div id="viewLeaveModal" class="modal">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h3>Leave Request Details</h3>
-        <button class="modal-close" onclick="closeViewLeaveModal()">&times;</button>
+  <div id="viewLeaveModal" onclick="if(event.target === this) closeViewLeaveModal()" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 9999;">
+    <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: #fff; border-radius: 12px; width: 500px; max-width: 90%;">
+      <div style="display: flex; justify-content: space-between; align-items: center; padding: 20px 24px; border-bottom: 1px solid #eee;">
+        <h3 style="margin: 0; font-size: 18px;">Leave Request Details</h3>
+        <button onclick="closeViewLeaveModal()" style="background: none; border: none; font-size: 24px; cursor: pointer; color: #888;">&times;</button>
       </div>
-      <div class="modal-body" id="viewLeaveContent">
+      <div style="padding: 24px;" id="viewLeaveContent">
         <!-- Populated dynamically -->
       </div>
-      <div class="modal-footer" id="viewLeaveFooter">
+      <div style="display: flex; justify-content: flex-end; gap: 12px; padding: 16px 24px; border-top: 1px solid #eee; background: #fafafa;" id="viewLeaveFooter">
         <button class="btn btn-outline" onclick="closeViewLeaveModal()">Close</button>
       </div>
     </div>
   </div>
 
   <!-- Reject Modal -->
-  <div id="rejectModal" class="modal">
-    <div class="modal-content" style="max-width: 420px;">
-      <div class="modal-header">
-        <h3>Reject Leave Request</h3>
-        <button class="modal-close" onclick="closeRejectModal()">&times;</button>
+  <div id="rejectModal" onclick="if(event.target === this) closeRejectModal()" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 9999;">
+    <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: #fff; border-radius: 12px; width: 420px; max-width: 90%;">
+      <div style="display: flex; justify-content: space-between; align-items: center; padding: 20px 24px; border-bottom: 1px solid #eee;">
+        <h3 style="margin: 0; font-size: 18px;">Reject Leave Request</h3>
+        <button onclick="closeRejectModal()" style="background: none; border: none; font-size: 24px; cursor: pointer; color: #888;">&times;</button>
       </div>
-      <div class="modal-body">
+      <div style="padding: 24px;">
         <p>Are you sure you want to reject this leave request?</p>
         <p><strong>Leave ID:</strong> <span id="rejectLeaveId"></span></p>
         <div class="form-group" style="margin-top: 16px;">
@@ -627,7 +581,7 @@
           <textarea id="rejectReason" rows="3" placeholder="Please provide a reason..." required></textarea>
         </div>
       </div>
-      <div class="modal-footer">
+      <div style="display: flex; justify-content: flex-end; gap: 12px; padding: 16px 24px; border-top: 1px solid #eee; background: #fafafa;">
         <button class="btn btn-outline" onclick="closeRejectModal()">Cancel</button>
         <button class="btn btn-danger" onclick="confirmReject()">Reject Request</button>
       </div>
