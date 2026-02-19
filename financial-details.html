@@ -5,110 +5,323 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Financial Details - KKFI Admin</title>
   <link rel="stylesheet" href="css/styles.css">
+  <style>
+    .info-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 20px; }
+    .info-card {
+      background: #fff; border: 2px solid #e0e0e0; border-radius: 8px;
+      padding: 16px; cursor: pointer; transition: all 0.2s ease;
+    }
+    .info-card:hover { border-color: #5b5f97; background: #fafaff; }
+    .info-card.active { border-color: #5b5f97; background: #f0f1fa; }
+    .info-card-title { font-weight: 600; font-size: 14px; color: #333; }
+    .info-card-desc { font-size: 12px; color: #888; margin-top: 4px; }
+    .info-panel { display: none; }
+    .info-panel.active { display: block; }
+    
+    .summary-cards {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+    .summary-card {
+      background: #fff;
+      border-radius: 12px;
+      padding: 20px;
+      border: 1px solid #eee;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    }
+    .summary-card .label {
+      font-size: 13px;
+      color: #666;
+      margin-bottom: 8px;
+    }
+    .summary-card .value {
+      font-size: 24px;
+      font-weight: 600;
+      color: #333;
+    }
+    .summary-card .value.positive { color: #2e7d32; }
+    .summary-card .value.warning { color: #ef6c00; }
+    
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 500;
+    }
+    .status-badge::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+    }
+    .status-badge.on-track { background: #e8f5e9; color: #2e7d32; }
+    .status-badge.on-track::before { background: #2e7d32; }
+    .status-badge.pending-docs { background: #fff3e0; color: #ef6c00; }
+    .status-badge.pending-docs::before { background: #ef6c00; }
+    .status-badge.on-hold { background: #ffebee; color: #c62828; }
+    .status-badge.on-hold::before { background: #c62828; }
+    .status-badge.at-risk { background: #fff3e0; color: #ef6c00; }
+    .status-badge.at-risk::before { background: #ef6c00; }
+    .status-badge.completed { background: #e8f5e9; color: #2e7d32; }
+    .status-badge.completed::before { background: #2e7d32; }
+    .status-badge.pending { background: #fff3e0; color: #ef6c00; }
+    .status-badge.pending::before { background: #ef6c00; }
+    
+    .table-card {
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+      border: 1px solid #eee;
+      overflow: hidden;
+    }
+    .data-table { margin: 0; border-radius: 0; box-shadow: none; }
+    .data-table th { 
+      background: #fafafa; 
+      font-weight: 600;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: #666;
+    }
+    .data-table th, .data-table td { padding: 14px 16px; }
+  </style>
 </head>
 <body>
   <div class="layout">
     <div id="sidebar-container"></div>
 
-    <!-- MAIN CONTENT -->
     <main class="content">
       
       <!-- Header -->
       <div class="applicant-header">
         <a href="financial.html" class="back-btn">‹</a>
-        <div class="applicant-avatar">JM</div>
+        <div class="applicant-avatar" id="scholar-initials"></div>
         <div class="applicant-info">
           <h2>
-            Juan Miguel Santos Reyes
-            <span class="status-badge on-track">On Track</span>
+            <span id="scholar-name"></span>
+            <span class="status-badge" id="financial-status"></span>
           </h2>
-          <div class="app-id">R124556</div>
+          <div class="app-id" id="scholar-id"></div>
           <div class="app-date">School Year 2025-2026</div>
         </div>
       </div>
 
-      <!-- Financial Summary -->
+      <!-- Financial Summary Cards -->
+      <div class="summary-cards">
+        <div class="summary-card">
+          <div class="label">Total Allocated</div>
+          <div class="value" id="total-allocated">₱0</div>
+        </div>
+        <div class="summary-card">
+          <div class="label">Total Released</div>
+          <div class="value positive" id="total-released">₱0</div>
+        </div>
+        <div class="summary-card">
+          <div class="label">Remaining Balance</div>
+          <div class="value" id="remaining-balance">₱0</div>
+        </div>
+        <div class="summary-card">
+          <div class="label">Next Release</div>
+          <div class="value" id="next-release" style="font-size: 18px;">—</div>
+        </div>
+      </div>
+
+      <!-- Information Grid -->
       <section class="form-section">
-        <h3 class="section-title">Financial Summary</h3>
-        <div class="form-grid">
-          <div class="form-group">
-            <label>Total Amount Allocated</label>
-            <input type="text" value="₱56,000" disabled>
+        <h3 class="section-title">Financial Record</h3>
+        <div class="info-grid">
+          <div class="info-card active" data-panel="scholar">
+            <div class="info-card-title">Scholar Info</div>
+            <div class="info-card-desc">Name, school, program</div>
           </div>
-          <div class="form-group">
-            <label>Total Amount Released</label>
-            <input type="text" value="₱14,000" disabled>
+          <div class="info-card" data-panel="disbursement">
+            <div class="info-card-title">Disbursement History</div>
+            <div class="info-card-desc">Transactions & payments</div>
           </div>
-          <div class="form-group">
-            <label>Remaining Balance</label>
-            <input type="text" value="₱42,000" disabled>
-          </div>
-          <div class="form-group">
-            <label>Last Release Date</label>
-            <input type="text" value="Jan 15, 2026" disabled>
-          </div>
-          <div class="form-group">
-            <label>Next Scheduled Release</label>
-            <input type="text" value="Feb 15, 2026" disabled>
-          </div>
-          <div class="form-group">
-            <label>Payment Method</label>
-            <input type="text" value="Bank Transfer" disabled>
+
+          <div class="info-card" data-panel="notes">
+            <div class="info-card-title">Notes & Remarks</div>
+            <div class="info-card-desc">Comments, flags</div>
           </div>
         </div>
       </section>
 
-      <!-- Disbursement History -->
-      <section class="form-section">
-        <h3 class="section-title">Disbursement History</h3>
-        <table>
-          <thead>
-            <tr>
-              <th>Transaction ID</th>
-              <th>Date</th>
-              <th>Amount</th>
-              <th>Type</th>
-              <th>Status</th>
-              <th>Remarks</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>#TXN-2026-0115</td>
-              <td>Jan 15, 2026</td>
-              <td>₱7,000</td>
-              <td>Monthly Allowance</td>
-              <td><span class="status-badge compliant">Completed</span></td>
-              <td>2nd Semester - January</td>
-            </tr>
-            <tr>
-              <td>#TXN-2025-1215</td>
-              <td>Dec 15, 2025</td>
-              <td>₱7,000</td>
-              <td>Monthly Allowance</td>
-              <td><span class="status-badge compliant">Completed</span></td>
-              <td>2nd Semester - December</td>
-            </tr>
-            <tr>
-              <td>#TXN-2025-1001</td>
-              <td>Oct 01, 2025</td>
-              <td>₱0</td>
-              <td>Book Allowance</td>
-              <td><span class="status-badge pending">Pending</span></td>
-              <td>Awaiting receipts</td>
-            </tr>
-          </tbody>
-        </table>
-      </section>
+      <!-- Scholar Info Panel -->
+      <div id="panel-scholar" class="info-panel active">
+        <section class="form-section">
+          <h3 class="section-title">Scholar Information</h3>
+          <div class="form-grid">
+            <div class="form-group">
+              <label>Full Name</label>
+              <input type="text" id="full-name" disabled>
+            </div>
+            <div class="form-group">
+              <label>Program</label>
+              <input type="text" id="program" disabled>
+            </div>
+            <div class="form-group">
+              <label>Year Level</label>
+              <input type="text" id="year-level" disabled>
+            </div>
+            <div class="form-group">
+              <label>School</label>
+              <input type="text" id="school" disabled>
+            </div>
+            <div class="form-group">
+              <label>Scholarship Type</label>
+              <input type="text" id="scholarship-type" disabled>
+            </div>
+            <div class="form-group">
+              <label>Compliance Status</label>
+              <input type="text" id="compliance-status" disabled>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- Disbursement History Panel -->
+      <div id="panel-disbursement" class="info-panel">
+        <section class="form-section">
+          <h3 class="section-title">Disbursement History</h3>
+          <div class="table-card">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Transaction ID</th>
+                  <th>Date</th>
+                  <th>Amount</th>
+                  <th>Type</th>
+                  <th>Status</th>
+                  <th>Remarks</th>
+                </tr>
+              </thead>
+              <tbody id="disbursement-tbody">
+                <!-- Dynamically populated -->
+              </tbody>
+            </table>
+          </div>
+        </section>
+      </div>
+
+
+
+      <!-- Notes Panel -->
+      <div id="panel-notes" class="info-panel">
+        <section class="form-section">
+          <h3 class="section-title">Notes & Remarks</h3>
+          <div class="form-group">
+            <label>Admin Notes</label>
+            <textarea id="admin-notes" rows="4" disabled style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; font-size: 14px;"></textarea>
+          </div>
+        </section>
+      </div>
 
       <!-- Action Bar -->
       <div class="action-bar">
+        <a href="financial.html" class="btn btn-outline">← Back to Financial Tracking</a>
         <button class="btn btn-primary">💳 Process Disbursement</button>
-        <button class="btn btn-outline">📄 Generate Statement</button>
       </div>
 
     </main>
   </div>
+  
   <script src="js/sidebar.js"></script>
+  <script src="js/data.js"></script>
+  <script>
+    // Get scholar ID from URL
+    const params = new URLSearchParams(window.location.search);
+    const scholarId = params.get('id') || 'LM823748';
+    const scholar = getScholarById(scholarId);
+
+    if (scholar) {
+      // Determine financial status based on compliance
+      let financialStatus, financialStatusText;
+      if (scholar.status === 'compliant') {
+        financialStatus = 'on-track';
+        financialStatusText = 'On Track';
+      } else if (scholar.status === 'at-risk') {
+        financialStatus = 'pending-docs';
+        financialStatusText = 'Pending Docs';
+      } else {
+        financialStatus = 'on-hold';
+        financialStatusText = 'On Hold';
+      }
+
+      // Populate header
+      document.getElementById('scholar-initials').textContent = scholar.initials;
+      document.getElementById('scholar-name').textContent = `${scholar.firstName} ${scholar.lastName}`;
+      document.getElementById('scholar-id').textContent = scholar.id;
+      
+      const statusBadge = document.getElementById('financial-status');
+      statusBadge.textContent = financialStatusText;
+      statusBadge.className = `status-badge ${financialStatus}`;
+
+      // Financial calculations
+      const monthlyAllowance = 7000;
+      const totalAllocated = 56000;
+      
+      // Generate disbursement history
+      const disbursements = [
+        { txnId: '#TXN-2026-0115', date: 'Jan 15, 2026', amount: 7000, type: 'Monthly Allowance', status: 'completed', remarks: '2nd Semester - January' },
+        { txnId: '#TXN-2025-1215', date: 'Dec 15, 2025', amount: 7000, type: 'Monthly Allowance', status: 'completed', remarks: '2nd Semester - December' },
+        { txnId: '#TXN-2025-1001', date: 'Oct 01, 2025', amount: 0, type: 'Book Allowance', status: 'pending', remarks: 'Awaiting receipts' }
+      ];
+      
+      const totalReleased = disbursements.filter(d => d.status === 'completed').reduce((sum, d) => sum + d.amount, 0);
+      const remainingBalance = totalAllocated - totalReleased;
+
+      // Financial summary
+      document.getElementById('total-allocated').textContent = `₱${totalAllocated.toLocaleString()}`;
+      document.getElementById('total-released').textContent = `₱${totalReleased.toLocaleString()}`;
+      document.getElementById('remaining-balance').textContent = `₱${remainingBalance.toLocaleString()}`;
+      document.getElementById('next-release').textContent = financialStatus === 'on-track' ? 'Feb 15, 2026' : '—';
+
+      // Scholar Information
+      document.getElementById('full-name').value = `${scholar.firstName} ${scholar.middleName} ${scholar.lastName}`;
+      document.getElementById('program').value = scholar.course;
+      document.getElementById('year-level').value = scholar.yearLevel;
+      document.getElementById('school').value = scholar.school;
+      document.getElementById('scholarship-type').value = scholar.scholarshipType || 'Full Scholarship';
+      document.getElementById('compliance-status').value = scholar.status === 'compliant' ? 'Compliant' : scholar.status === 'at-risk' ? 'At Risk' : 'Non-Compliant';
+
+      // Disbursement History
+      document.getElementById('disbursement-tbody').innerHTML = disbursements.map(d => `
+        <tr>
+          <td>${d.txnId}</td>
+          <td>${d.date}</td>
+          <td>₱${d.amount.toLocaleString()}</td>
+          <td>${d.type}</td>
+          <td><span class="status-badge ${d.status}">${d.status === 'completed' ? 'Completed' : 'Pending'}</span></td>
+          <td>${d.remarks}</td>
+        </tr>
+      `).join('');
+
+
+
+      // Notes
+      document.getElementById('admin-notes').value = financialStatus === 'on-track' 
+        ? 'Scholar is in good financial standing. All disbursements on schedule.'
+        : financialStatus === 'pending-docs'
+        ? 'Awaiting document submission before next disbursement can be processed.'
+        : 'Financial disbursements on hold pending compliance review.';
+    }
+
+    // Panel switching
+    document.querySelectorAll('.info-card').forEach(card => {
+      card.addEventListener('click', () => {
+        document.querySelectorAll('.info-card').forEach(c => c.classList.remove('active'));
+        document.querySelectorAll('.info-panel').forEach(p => p.classList.remove('active'));
+        
+        card.classList.add('active');
+        const panelId = 'panel-' + card.dataset.panel;
+        document.getElementById(panelId).classList.add('active');
+      });
+    });
+  </script>
 </body>
 </html>

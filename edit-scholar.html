@@ -15,11 +15,11 @@
       
       <!-- Header -->
       <div class="applicant-header">
-        <a href="scholar-details.html" class="back-btn">‹</a>
-        <div class="applicant-avatar">MA</div>
+        <a href="scholar-details.html" class="back-btn" id="back-btn">‹</a>
+        <div class="applicant-avatar" id="scholar-initials">MA</div>
         <div class="applicant-info">
           <h2>Edit Scholar Profile</h2>
-          <div class="app-id">LM619284</div>
+          <div class="app-id" id="scholar-id">LM619284</div>
         </div>
       </div>
 
@@ -108,16 +108,22 @@
         <h3 class="section-title">Educational Information</h3>
         <div class="form-grid">
           <div class="form-group">
-            <label>University/College <span style="color: #dc3545;">*</span></label>
+            <label>School <span style="color: #dc3545;">*</span></label>
             <select>
-              <option>PUP Manila</option>
+              <option>Polytechnic University of the Philippines - Main</option>
               <option selected>Bulacan State University</option>
-              <option>Pamantasan ng Lungsod ng Maynila (PLM)</option>
-              <option>TUP Manila</option>
-              <option>Bulacan Agricultural State College</option>
-              <option>EARIST</option>
-              <option>Philippine Normal University</option>
-              <option>Other</option>
+              <option>Philippine Normal University - Manila</option>
+              <option>Eulogio Amang Rodriguez Institute of Science and Technology</option>
+              <option>Technological University of the Philippines - Manila</option>
+              <option>Pamantasan ng Lungsod ng Maynila</option>
+              <option>University of Makati</option>
+              <option>Pamantasan ng Lungsod ng Pasay</option>
+              <option>Marikina Polytechnic College</option>
+              <option>Pamantasan ng Lungsod ng Valenzuela</option>
+              <option>Rizal Technological University</option>
+              <option>Pamantasan ng Lungsod ng Muntinlupa</option>
+              <option>Taguig City University</option>
+              <option>University of Caloocan City</option>
             </select>
           </div>
           <div class="form-group">
@@ -136,6 +142,34 @@
               <option selected>3rd Year</option>
               <option>4th Year</option>
               <option>5th Year</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Current Semester <span style="color: #dc3545;">*</span></label>
+            <select>
+              <option selected>1st Semester</option>
+              <option>2nd Semester</option>
+              <option>3rd Semester (Trimester)</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Program Level <span style="color: #dc3545;">*</span></label>
+            <select>
+              <option selected>Undergraduate</option>
+              <option>Masters</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Board Exam Program</label>
+            <select>
+              <option selected>Not Applicable</option>
+              <option>Licensure Exam for Teachers (LET)</option>
+              <option>CPA Board Exam</option>
+              <option>Nursing Board Exam</option>
+              <option>Civil Engineering Board Exam</option>
+              <option>Electrical Engineering Board Exam</option>
+              <option>Criminology Board Exam</option>
+              <option>Other Board Exam</option>
             </select>
           </div>
           <div class="form-group">
@@ -164,9 +198,9 @@
           <div class="form-group">
             <label>Scholarship Type <span style="color: #dc3545;">*</span></label>
             <select>
-              <option selected>Tertiary Scholarship Program</option>
+              <option selected>Tertiary Scholarship</option>
               <option>KKFI Employee-Child Education Grant</option>
-              <option>Vocational & Technology Scholarship</option>
+              <option>Vocational and Technology Scholarship</option>
             </select>
           </div>
           <div class="form-group">
@@ -227,12 +261,28 @@
       <!-- Action Bar -->
       <div class="action-bar">
         <button class="btn btn-primary">💾 Save Changes</button>
-        <a href="scholar-details.html" class="btn btn-outline">Cancel</a>
+        <a href="scholar-details.html" class="btn btn-outline" id="cancel-btn">Cancel</a>
         <button class="btn btn-danger" style="margin-left: auto;">🗑️ Delete Scholar</button>
       </div>
 
     </main>
   </div>
   <script src="js/sidebar.js"></script>
+  <script src="js/data.js"></script>
+  <script>
+    // Get scholar ID from URL
+    const params = new URLSearchParams(window.location.search);
+    const scholarId = params.get('id');
+    
+    if (scholarId) {
+      const scholar = getScholarById(scholarId);
+      if (scholar) {
+        document.getElementById('scholar-initials').textContent = scholar.initials;
+        document.getElementById('scholar-id').textContent = scholar.id;
+        document.getElementById('back-btn').href = `scholar-details.html?id=${scholar.id}`;
+        document.getElementById('cancel-btn').href = `scholar-details.html?id=${scholar.id}`;
+      }
+    }
+  </script>
 </body>
 </html>

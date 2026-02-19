@@ -5,6 +5,237 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Staff Records - KKFI Admin</title>
   <link rel="stylesheet" href="css/styles.css">
+  <style>
+    .page-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+    }
+    .page-header h1 { margin: 0; }
+    .header-actions {
+      display: flex;
+      gap: 12px;
+    }
+    .header-btn {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 16px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      background: #fff;
+      font-size: 14px;
+      cursor: pointer;
+      color: #333;
+      text-decoration: none;
+    }
+    .header-btn:hover { border-color: #5b5f97; }
+    .header-btn svg { width: 16px; height: 16px; }
+    .header-btn.primary {
+      background: #5b5f97;
+      color: #fff;
+      border-color: #5b5f97;
+    }
+    .header-btn.primary:hover { background: #4a4e7a; }
+    
+    .table-card {
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+      border: 1px solid #eee;
+      overflow: hidden;
+    }
+    .table-controls {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 20px;
+      border-bottom: 1px solid #f0f0f0;
+    }
+    .rows-control {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+      color: #666;
+    }
+    .rows-select {
+      padding: 6px 10px;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      font-size: 14px;
+    }
+    .search-box {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 14px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      background: #fff;
+    }
+    .search-box input {
+      border: none;
+      outline: none;
+      font-size: 14px;
+      width: 200px;
+    }
+    .search-box svg { color: #999; width: 16px; height: 16px; }
+    
+    .data-table { margin: 0; border-radius: 0; box-shadow: none; }
+    .data-table th { 
+      background: #fafafa; 
+      font-weight: 600;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: #666;
+    }
+    .data-table th, .data-table td { padding: 14px 16px; }
+    
+    .staff-cell {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .staff-avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: #5b5f97;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      font-size: 13px;
+    }
+    
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 500;
+      white-space: nowrap;
+    }
+    .status-badge::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+    }
+    .status-badge.active { background: #e8f5e9; color: #2e7d32; }
+    .status-badge.active::before { background: #2e7d32; }
+    .status-badge.on-leave { background: #fff3e0; color: #ef6c00; }
+    .status-badge.on-leave::before { background: #ef6c00; }
+    .status-badge.inactive { background: #ffebee; color: #c62828; }
+    .status-badge.inactive::before { background: #c62828; }
+    
+    .view-btn {
+      padding: 6px 16px;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      background: #fff;
+      font-size: 13px;
+      cursor: pointer;
+      color: #333;
+      text-decoration: none;
+      display: inline-block;
+    }
+    .view-btn:hover { border-color: #5b5f97; background: #fafaff; }
+    
+    .checkbox-cell { width: 40px; }
+    .checkbox-cell input { width: 16px; height: 16px; cursor: pointer; }
+    
+    /* Filter Dropdown */
+    .filter-dropdown {
+      position: relative;
+      display: inline-block;
+    }
+    .filter-menu {
+      display: none;
+      position: absolute;
+      top: 100%;
+      right: 0;
+      margin-top: 8px;
+      background: #fff;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      min-width: 250px;
+      max-height: 400px;
+      overflow-y: auto;
+      z-index: 100;
+      padding: 8px 0;
+    }
+    .filter-menu.show { display: block; }
+    .filter-section {
+      padding: 8px 16px;
+      border-bottom: 1px solid #eee;
+    }
+    .filter-section:last-child { border-bottom: none; }
+    .filter-section-title {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: #888;
+      margin-bottom: 8px;
+    }
+    .filter-menu label {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 6px 0;
+      cursor: pointer;
+      font-size: 13px;
+      transition: background 0.2s;
+    }
+    .filter-menu label:hover { color: #5b5f97; }
+    .filter-menu input[type="checkbox"] { width: 14px; height: 14px; }
+    .filter-actions {
+      display: flex;
+      gap: 8px;
+      padding: 12px 16px;
+      border-top: 1px solid #eee;
+      background: #fafafa;
+    }
+    .filter-actions button {
+      flex: 1;
+      padding: 8px 12px;
+      border-radius: 6px;
+      font-size: 13px;
+      cursor: pointer;
+    }
+    .filter-actions .clear-btn {
+      background: #fff;
+      border: 1px solid #ddd;
+      color: #666;
+    }
+    .filter-actions .clear-btn:hover {
+      background: #f5f5f5;
+      border-color: #bbb;
+    }
+    .filter-actions .apply-btn {
+      background: #5b5f97;
+      border: 1px solid #5b5f97;
+      color: #fff;
+    }
+    .filter-count {
+      background: #5b5f97;
+      color: #fff;
+      font-size: 11px;
+      padding: 2px 6px;
+      border-radius: 10px;
+      margin-left: 4px;
+    }
+
+    .header-btn.active { border-color: #5b5f97; background: #f0f1fa; }
+  </style>
 </head>
 <body>
   <div class="layout">
@@ -12,298 +243,239 @@
 
     <!-- MAIN CONTENT -->
     <main class="content">
+      <!-- Page Header -->
       <div class="page-header">
-        <h1 class="page-title">Staff Records</h1>
+        <h1>Staff Records</h1>
         <div class="header-actions">
-          <a href="add-staff.html" class="btn btn-primary">+ Add Staff</a>
-          <a href="staff-leave.html" class="btn btn-outline">📅 Leave Management</a>
-          <button class="btn btn-filter">🔽 Filter</button>
-          <button class="btn btn-filter">↕️ Sort By A-Z</button>
+          <div class="filter-dropdown">
+            <button class="header-btn" id="filter-btn">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"/></svg>
+              Filter
+              <span class="filter-count" id="filter-count" style="display: none;">0</span>
+            </button>
+            <div class="filter-menu" id="filter-menu">
+              <div class="filter-section">
+                <div class="filter-section-title">Status</div>
+                <label><input type="checkbox" name="status" value="active" checked> Active</label>
+                <label><input type="checkbox" name="status" value="on-leave" checked> On Leave</label>
+                <label><input type="checkbox" name="status" value="inactive" checked> Inactive</label>
+              </div>
+              <div class="filter-section">
+                <div class="filter-section-title">Department</div>
+                <label><input type="checkbox" name="department" value="Programs" checked> Programs</label>
+                <label><input type="checkbox" name="department" value="Finance" checked> Finance</label>
+                <label><input type="checkbox" name="department" value="Human Resources" checked> Human Resources</label>
+                <label><input type="checkbox" name="department" value="Administration" checked> Administration</label>
+                <label><input type="checkbox" name="department" value="IT" checked> IT</label>
+                <label><input type="checkbox" name="department" value="Executive" checked> Executive</label>
+              </div>
+              <div class="filter-actions">
+                <button class="clear-btn" id="clear-filters">Clear All</button>
+                <button class="apply-btn" id="apply-filters">Apply</button>
+              </div>
+            </div>
+          </div>
+          <button class="header-btn" id="sort-btn">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4h13M3 8h9m-9 4h6m4 0l4-4m0 0l4 4m-4-4v12"/></svg>
+            <span id="sort-label">Sort By A-Z</span>
+          </button>
+          <a href="staff-leave.html" class="header-btn">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+            Leave Management
+          </a>
+          <a href="add-staff.html" class="header-btn primary">+ Add Staff</a>
         </div>
       </div>
 
-      <!-- Stats Cards -->
-      <div class="stats-cards">
-        <div class="stat-card">
-          <div class="stat-icon staff">👔</div>
-          <div class="stat-info">
-            <h3>24</h3>
-            <p>Total Staff</p>
-            <div class="stat-meta">
-              <span>Active: <strong>22</strong></span>
-              <span>On Leave: <strong>2</strong></span>
-            </div>
-          </div>
-        </div>
-        
-        <div class="stat-card">
-          <div class="stat-icon leave">🏖️</div>
-          <div class="stat-info">
-            <h3>8</h3>
-            <p>Pending Leave Requests</p>
-            <div class="stat-meta">
-              <span>Vacation: <strong>5</strong></span>
-              <span>Sick: <strong>3</strong></span>
-            </div>
-          </div>
-        </div>
-        
-        <div class="stat-card">
-          <div class="stat-icon departments">🏢</div>
-          <div class="stat-info">
-            <h3>5</h3>
-            <p>Departments</p>
-            <div class="stat-meta">
-              <span>Admin: <strong>8</strong></span>
-              <span>Programs: <strong>10</strong></span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="table-container">
-        <div class="table-header">
-          <div class="table-controls">
-            <div class="rows-per-page">
-              Row Per Page
-              <select>
-                <option>10</option>
-                <option>25</option>
-                <option>50</option>
-              </select>
-              Entries
-            </div>
+      <!-- Table Card -->
+      <div class="table-card">
+        <!-- Table Controls -->
+        <div class="table-controls">
+          <div class="rows-control">
+            <span>Row Per Page</span>
+            <select class="rows-select" id="rows-per-page">
+              <option value="10">10</option>
+              <option value="25">25</option>
+              <option value="50">50</option>
+            </select>
+            <span>Entries</span>
           </div>
           <div class="search-box">
-            <input type="text" placeholder="Search staff...">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+            <input type="text" id="search-input" placeholder="Search">
           </div>
         </div>
-        
-        <table>
+
+        <!-- Table -->
+        <table class="data-table">
           <thead>
             <tr>
-              <th class="checkbox-cell"><input type="checkbox"></th>
-              <th class="sortable">Staff ID</th>
-              <th class="sortable">Name</th>
-              <th class="sortable">Position</th>
-              <th class="sortable">Department</th>
-              <th class="sortable">Email</th>
-              <th class="sortable">Mobile</th>
-              <th class="sortable">Status</th>
+              <th class="checkbox-cell"><input type="checkbox" id="select-all"></th>
+              <th>ID ↕</th>
+              <th>Staff ↕</th>
+              <th>Position ↕</th>
+              <th>Department ↕</th>
+              <th>Status ↕</th>
               <th>Actions</th>
             </tr>
           </thead>
-          <tbody>
-            <tr onclick="window.location='staff-details.html'">
-              <td class="checkbox-cell"><input type="checkbox" onclick="event.stopPropagation()"></td>
-              <td><a href="staff-details.html" class="id-link">STF-001</a></td>
-              <td>
-                <div class="user-cell">
-                  <div class="user-avatar">JR</div>
-                  Juan Reyes Santos
-                </div>
-              </td>
-              <td>Program Manager</td>
-              <td>Programs</td>
-              <td>juan.reyes@kkfi.org</td>
-              <td>+63 917 123 4567</td>
-              <td><span class="status-badge active">Active</span></td>
-              <td class="actions-cell" onclick="event.stopPropagation()">
-                <a href="edit-staff.html" class="btn btn-icon" title="Edit">✏️</a>
-                <button class="btn btn-icon" title="Delete" onclick="confirmDelete('STF-001')">🗑️</button>
-              </td>
-            </tr>
-            <tr onclick="window.location='staff-details.html'">
-              <td class="checkbox-cell"><input type="checkbox" onclick="event.stopPropagation()"></td>
-              <td><a href="staff-details.html" class="id-link">STF-002</a></td>
-              <td>
-                <div class="user-cell">
-                  <div class="user-avatar">MC</div>
-                  Maria Clara Dela Cruz
-                </div>
-              </td>
-              <td>Finance Officer</td>
-              <td>Finance</td>
-              <td>maria.clara@kkfi.org</td>
-              <td>+63 918 234 5678</td>
-              <td><span class="status-badge on-leave">On Vacation</span></td>
-              <td class="actions-cell" onclick="event.stopPropagation()">
-                <a href="edit-staff.html" class="btn btn-icon" title="Edit">✏️</a>
-                <button class="btn btn-icon" title="Delete" onclick="confirmDelete('STF-002')">🗑️</button>
-              </td>
-            </tr>
-            <tr onclick="window.location='staff-details.html'">
-              <td class="checkbox-cell"><input type="checkbox" onclick="event.stopPropagation()"></td>
-              <td><a href="staff-details.html" class="id-link">STF-003</a></td>
-              <td>
-                <div class="user-cell">
-                  <div class="user-avatar">RM</div>
-                  Roberto Mendoza Garcia
-                </div>
-              </td>
-              <td>HR Coordinator</td>
-              <td>Human Resources</td>
-              <td>roberto.mendoza@kkfi.org</td>
-              <td>+63 919 345 6789</td>
-              <td><span class="status-badge active">Active</span></td>
-              <td class="actions-cell" onclick="event.stopPropagation()">
-                <a href="edit-staff.html" class="btn btn-icon" title="Edit">✏️</a>
-                <button class="btn btn-icon" title="Delete" onclick="confirmDelete('STF-003')">🗑️</button>
-              </td>
-            </tr>
-            <tr onclick="window.location='staff-details.html'">
-              <td class="checkbox-cell"><input type="checkbox" onclick="event.stopPropagation()"></td>
-              <td><a href="staff-details.html" class="id-link">STF-004</a></td>
-              <td>
-                <div class="user-cell">
-                  <div class="user-avatar">AL</div>
-                  Angela Lopez Villanueva
-                </div>
-              </td>
-              <td>Administrative Assistant</td>
-              <td>Administration</td>
-              <td>angela.lopez@kkfi.org</td>
-              <td>+63 920 456 7890</td>
-              <td><span class="status-badge active">Active</span></td>
-              <td class="actions-cell" onclick="event.stopPropagation()">
-                <a href="edit-staff.html" class="btn btn-icon" title="Edit">✏️</a>
-                <button class="btn btn-icon" title="Delete" onclick="confirmDelete('STF-004')">🗑️</button>
-              </td>
-            </tr>
-            <tr onclick="window.location='staff-details.html'">
-              <td class="checkbox-cell"><input type="checkbox" onclick="event.stopPropagation()"></td>
-              <td><a href="staff-details.html" class="id-link">STF-005</a></td>
-              <td>
-                <div class="user-cell">
-                  <div class="user-avatar">PE</div>
-                  Pedro Enriquez Ramos
-                </div>
-              </td>
-              <td>Scholar Coordinator</td>
-              <td>Programs</td>
-              <td>pedro.enriquez@kkfi.org</td>
-              <td>+63 921 567 8901</td>
-              <td><span class="status-badge sick-leave">Sick Leave</span></td>
-              <td class="actions-cell" onclick="event.stopPropagation()">
-                <a href="edit-staff.html" class="btn btn-icon" title="Edit">✏️</a>
-                <button class="btn btn-icon" title="Delete" onclick="confirmDelete('STF-005')">🗑️</button>
-              </td>
-            </tr>
-            <tr onclick="window.location='staff-details.html'">
-              <td class="checkbox-cell"><input type="checkbox" onclick="event.stopPropagation()"></td>
-              <td><a href="staff-details.html" class="id-link">STF-006</a></td>
-              <td>
-                <div class="user-cell">
-                  <div class="user-avatar">CR</div>
-                  Carmen Rojas Torres
-                </div>
-              </td>
-              <td>IT Specialist</td>
-              <td>IT</td>
-              <td>carmen.rojas@kkfi.org</td>
-              <td>+63 922 678 9012</td>
-              <td><span class="status-badge active">Active</span></td>
-              <td class="actions-cell" onclick="event.stopPropagation()">
-                <a href="edit-staff.html" class="btn btn-icon" title="Edit">✏️</a>
-                <button class="btn btn-icon" title="Delete" onclick="confirmDelete('STF-006')">🗑️</button>
-              </td>
-            </tr>
-            <tr onclick="window.location='staff-details.html'">
-              <td class="checkbox-cell"><input type="checkbox" onclick="event.stopPropagation()"></td>
-              <td><a href="staff-details.html" class="id-link">STF-007</a></td>
-              <td>
-                <div class="user-cell">
-                  <div class="user-avatar">FG</div>
-                  Francisco Gomez Padilla
-                </div>
-              </td>
-              <td>Executive Director</td>
-              <td>Executive</td>
-              <td>francisco.gomez@kkfi.org</td>
-              <td>+63 923 789 0123</td>
-              <td><span class="status-badge active">Active</span></td>
-              <td class="actions-cell" onclick="event.stopPropagation()">
-                <a href="edit-staff.html" class="btn btn-icon" title="Edit">✏️</a>
-                <button class="btn btn-icon" title="Delete" onclick="confirmDelete('STF-007')">🗑️</button>
-              </td>
-            </tr>
-            <tr onclick="window.location='staff-details.html'">
-              <td class="checkbox-cell"><input type="checkbox" onclick="event.stopPropagation()"></td>
-              <td><a href="staff-details.html" class="id-link">STF-008</a></td>
-              <td>
-                <div class="user-cell">
-                  <div class="user-avatar">LB</div>
-                  Luisa Bautista Morales
-                </div>
-              </td>
-              <td>Communications Officer</td>
-              <td>Administration</td>
-              <td>luisa.bautista@kkfi.org</td>
-              <td>+63 924 890 1234</td>
-              <td><span class="status-badge active">Active</span></td>
-              <td class="actions-cell" onclick="event.stopPropagation()">
-                <a href="edit-staff.html" class="btn btn-icon" title="Edit">✏️</a>
-                <button class="btn btn-icon" title="Delete" onclick="confirmDelete('STF-008')">🗑️</button>
-              </td>
-            </tr>
+          <tbody id="staff-tbody">
+            <!-- Dynamically populated -->
           </tbody>
         </table>
-
-        <div class="pagination">
-          <span class="disabled">Pre</span>
-          <a href="#" class="active">1</a>
-          <a href="#">2</a>
-          <span>...</span>
-          <a href="#">5</a>
-          <a href="#">Next</a>
-        </div>
       </div>
 
     </main>
   </div>
 
-  <!-- Delete Confirmation Modal -->
-  <div id="deleteModal" class="modal" style="display: none;">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h3>⚠️ Confirm Delete</h3>
-      </div>
-      <div class="modal-body">
-        <p>Are you sure you want to delete this staff record? This action cannot be undone.</p>
-        <p><strong>Staff ID:</strong> <span id="deleteStaffId"></span></p>
-      </div>
-      <div class="modal-footer">
-        <button class="btn btn-outline" onclick="closeModal()">Cancel</button>
-        <button class="btn btn-danger" onclick="deleteStaff()">Delete</button>
-      </div>
-    </div>
-  </div>
-
+  <script src="js/sidebar.js"></script>
   <script>
-    function confirmDelete(staffId) {
-      document.getElementById('deleteModal').style.display = 'flex';
-      document.getElementById('deleteStaffId').textContent = staffId;
-    }
+    // Staff data
+    const staffData = [
+      { id: "STF-001", firstName: "Juan", lastName: "Santos", initials: "JR", position: "Program Manager", department: "Programs", email: "juan.reyes@kkfi.org", status: "active" },
+      { id: "STF-002", firstName: "Maria Clara", lastName: "Dela Cruz", initials: "MC", position: "Finance Officer", department: "Finance", email: "maria.clara@kkfi.org", status: "on-leave" },
+      { id: "STF-003", firstName: "Roberto", lastName: "Garcia", initials: "RM", position: "HR Coordinator", department: "Human Resources", email: "roberto.mendoza@kkfi.org", status: "active" },
+      { id: "STF-004", firstName: "Angela", lastName: "Villanueva", initials: "AL", position: "Administrative Assistant", department: "Administration", email: "angela.lopez@kkfi.org", status: "active" },
+      { id: "STF-005", firstName: "Pedro", lastName: "Ramos", initials: "PE", position: "Scholar Coordinator", department: "Programs", email: "pedro.enriquez@kkfi.org", status: "on-leave" },
+      { id: "STF-006", firstName: "Carmen", lastName: "Torres", initials: "CR", position: "IT Specialist", department: "IT", email: "carmen.rojas@kkfi.org", status: "active" },
+      { id: "STF-007", firstName: "Francisco", lastName: "Padilla", initials: "FG", position: "Executive Director", department: "Executive", email: "francisco.gomez@kkfi.org", status: "active" },
+      { id: "STF-008", firstName: "Luisa", lastName: "Morales", initials: "LB", position: "Communications Officer", department: "Administration", email: "luisa.bautista@kkfi.org", status: "active" }
+    ];
 
-    function closeModal() {
-      document.getElementById('deleteModal').style.display = 'none';
-    }
-
-    function deleteStaff() {
-      // In a real application, this would make an API call to delete the staff
-      alert('Staff record deleted successfully!');
-      closeModal();
-      // Refresh the page or remove the row from the table
-      location.reload();
-    }
-
-    // Close modal when clicking outside
-    document.getElementById('deleteModal').addEventListener('click', function(e) {
-      if (e.target === this) {
-        closeModal();
+    // Render staff
+    function renderStaff(filteredStaff) {
+      const tbody = document.getElementById('staff-tbody');
+      
+      if (filteredStaff.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="7" style="text-align:center; padding:40px; color:#888;">No staff found</td></tr>';
+        return;
       }
+
+      tbody.innerHTML = filteredStaff.map(staff => {
+        const statusClass = staff.status === 'active' ? 'active' : 
+                           staff.status === 'on-leave' ? 'on-leave' : 'inactive';
+        const statusText = staff.status === 'active' ? 'Active' : 
+                          staff.status === 'on-leave' ? 'On Leave' : 'Inactive';
+        
+        return `
+          <tr>
+            <td class="checkbox-cell"><input type="checkbox"></td>
+            <td>${staff.id}</td>
+            <td>
+              <div class="staff-cell">
+                <div class="staff-avatar">${staff.initials}</div>
+                <span>${staff.firstName} ${staff.lastName}</span>
+              </div>
+            </td>
+            <td>${staff.position}</td>
+            <td>${staff.department}</td>
+            <td><span class="status-badge ${statusClass}">${statusText}</span></td>
+            <td>
+              <a href="staff-details.html?id=${staff.id}" class="view-btn">View</a>
+            </td>
+          </tr>
+        `;
+      }).join('');
+    }
+    renderStaff(staffData);
+
+    // Select all checkbox
+    document.getElementById('select-all').addEventListener('change', function() {
+      const checkboxes = document.querySelectorAll('#staff-tbody input[type="checkbox"]');
+      checkboxes.forEach(cb => cb.checked = this.checked);
+    });
+
+    // Filter functionality
+    let filters = {
+      status: ['active', 'on-leave', 'inactive'],
+      department: ['Programs', 'Finance', 'Human Resources', 'Administration', 'IT', 'Executive']
+    };
+    let sortAsc = true;
+
+    document.getElementById('filter-btn').addEventListener('click', function(e) {
+      e.stopPropagation();
+      document.getElementById('filter-menu').classList.toggle('show');
+      this.classList.toggle('active');
+    });
+
+    // Apply filters button
+    document.getElementById('apply-filters').addEventListener('click', function() {
+      filters.status = Array.from(document.querySelectorAll('input[name="status"]:checked')).map(cb => cb.value);
+      filters.department = Array.from(document.querySelectorAll('input[name="department"]:checked')).map(cb => cb.value);
+      
+      updateFilterCount();
+      applyFiltersAndSort();
+      document.getElementById('filter-menu').classList.remove('show');
+      document.getElementById('filter-btn').classList.remove('active');
+    });
+
+    // Clear filters button - unchecks all
+    document.getElementById('clear-filters').addEventListener('click', function() {
+      document.querySelectorAll('#filter-menu input[type="checkbox"]').forEach(cb => cb.checked = false);
+    });
+
+    function updateFilterCount() {
+      const totalFilters = 3 + 6; // All possible checkboxes
+      const activeFilters = document.querySelectorAll('#filter-menu input[type="checkbox"]:checked').length;
+      const filterCountEl = document.getElementById('filter-count');
+      
+      if (activeFilters < totalFilters) {
+        filterCountEl.textContent = totalFilters - activeFilters;
+        filterCountEl.style.display = 'inline';
+      } else {
+        filterCountEl.style.display = 'none';
+      }
+    }
+
+    // Sort functionality
+    document.getElementById('sort-btn').addEventListener('click', function() {
+      sortAsc = !sortAsc;
+      document.getElementById('sort-label').textContent = sortAsc ? 'Sort By A-Z' : 'Sort By Z-A';
+      this.classList.toggle('active', !sortAsc);
+      applyFiltersAndSort();
+    });
+
+    function applyFiltersAndSort() {
+      let filtered = staffData.filter(s => {
+        const statusMatch = filters.status.includes(s.status);
+        const deptMatch = filters.department.includes(s.department);
+        return statusMatch && deptMatch;
+      });
+      
+      // Apply search
+      const searchTerm = document.getElementById('search-input').value.toLowerCase();
+      if (searchTerm) {
+        filtered = filtered.filter(s => 
+          s.firstName.toLowerCase().includes(searchTerm) ||
+          s.lastName.toLowerCase().includes(searchTerm) ||
+          s.id.toLowerCase().includes(searchTerm) ||
+          s.position.toLowerCase().includes(searchTerm) ||
+          s.department.toLowerCase().includes(searchTerm)
+        );
+      }
+
+      // Sort by name
+      filtered.sort((a, b) => {
+        const nameA = `${a.firstName} ${a.lastName}`.toLowerCase();
+        const nameB = `${b.firstName} ${b.lastName}`.toLowerCase();
+        return sortAsc ? nameA.localeCompare(nameB) : nameB.localeCompare(nameA);
+      });
+
+      renderStaff(filtered);
+    }
+
+    // Search listener
+    document.getElementById('search-input').addEventListener('input', applyFiltersAndSort);
+
+    // Close filter menu when clicking outside
+    document.addEventListener('click', function() {
+      document.getElementById('filter-menu').classList.remove('show');
+      document.getElementById('filter-btn').classList.remove('active');
+    });
+
+    document.getElementById('filter-menu').addEventListener('click', function(e) {
+      e.stopPropagation();
     });
   </script>
-  <script src="js/sidebar.js"></script>
 </body>
 </html>

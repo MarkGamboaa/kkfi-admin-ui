@@ -5,6 +5,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Scholar Details - KKFI Admin</title>
   <link rel="stylesheet" href="css/styles.css">
+  <style>
+    .info-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 20px; }
+    .info-card {
+      background: #fff; border: 2px solid #e0e0e0; border-radius: 8px;
+      padding: 16px; cursor: pointer; transition: all 0.2s ease;
+    }
+    .info-card:hover { border-color: #5b5f97; background: #fafaff; }
+    .info-card.active { border-color: #5b5f97; background: #f0f1fa; }
+    .info-card-title { font-weight: 600; font-size: 14px; color: #333; }
+    .info-card-desc { font-size: 12px; color: #888; margin-top: 4px; }
+    .info-panel { display: none; }
+    .info-panel.active { display: block; }
+  </style>
 </head>
 <body>
   <div class="layout">
@@ -16,131 +29,333 @@
       <!-- Scholar Header -->
       <div class="applicant-header">
         <a href="scholars.html" class="back-btn">‹</a>
-        <div class="applicant-avatar">CN</div>
+        <div class="applicant-avatar" id="scholar-initials"></div>
         <div class="applicant-info">
           <h2>
-            Carlo Navarro Flores
+            <span id="scholar-name"></span>
             <span class="status-badge compliant">Active</span>
           </h2>
-          <div class="app-id">LM823748</div>
-          <div class="app-date">Scholar since: 22 Apr 2024</div>
+          <div class="app-id" id="scholar-id"></div>
+          <div class="app-date" id="scholar-since"></div>
         </div>
       </div>
 
-      <!-- Personal Information -->
+      <!-- Information Grid -->
       <section class="form-section">
-        <h3 class="section-title">Personal Information</h3>
-        <div class="form-grid">
-          <div class="form-group">
-            <label>First Name</label>
-            <input type="text" value="Carlo" disabled>
+        <h3 class="section-title">Scholar Information</h3>
+        <div class="info-grid">
+          <div class="info-card active" data-panel="personal">
+            <div class="info-card-title">Personal Information</div>
+            <div class="info-card-desc">Name, gender, birthdate</div>
           </div>
-          <div class="form-group">
-            <label>Middle Name</label>
-            <input type="text" value="Navarro" disabled>
+          <div class="info-card" data-panel="contact">
+            <div class="info-card-title">Contact Information</div>
+            <div class="info-card-desc">Email, phone, social</div>
           </div>
-          <div class="form-group">
-            <label>Last Name</label>
-            <input type="text" value="Flores" disabled>
+          <div class="info-card" data-panel="educational">
+            <div class="info-card-title">Educational Information</div>
+            <div class="info-card-desc">School, course, GPA</div>
           </div>
-          <div class="form-group">
-            <label>Gender</label>
-            <input type="text" value="Male" disabled>
+          <div class="info-card" data-panel="socioeconomic">
+            <div class="info-card-title">Socio-Economic Information</div>
+            <div class="info-card-desc">Family income, dependents</div>
           </div>
-          <div class="form-group">
-            <label>Date of Birth</label>
-            <input type="text" value="15/03/2003" disabled>
-          </div>
-          <div class="form-group">
-            <label>Citizenship</label>
-            <input type="text" value="Filipino" disabled>
+          <div class="info-card" data-panel="scholarship">
+            <div class="info-card-title">Scholarship Status</div>
+            <div class="info-card-desc">Compliance, disbursements</div>
           </div>
         </div>
       </section>
 
-      <!-- Contact Information -->
-      <section class="form-section">
-        <h3 class="section-title">Contact Information</h3>
-        <div class="form-grid">
-          <div class="form-group">
-            <label>Email Address</label>
-            <input type="text" value="carlo.flores@email.com" disabled>
+      <!-- Personal Information Panel -->
+      <div id="panel-personal" class="info-panel active">
+        <section class="form-section">
+          <h3 class="section-title">Personal Information</h3>
+          <div class="form-grid">
+            <div class="form-group">
+              <label>First Name</label>
+              <input type="text" id="first-name" disabled>
+            </div>
+            <div class="form-group">
+              <label>Middle Name</label>
+              <input type="text" id="middle-name" disabled>
+            </div>
+            <div class="form-group">
+              <label>Last Name</label>
+              <input type="text" id="last-name" disabled>
+            </div>
+            <div class="form-group">
+              <label>Gender</label>
+              <input type="text" id="gender" disabled>
+            </div>
+            <div class="form-group">
+              <label>Date of Birth</label>
+              <input type="text" id="dob" disabled>
+            </div>
+            <div class="form-group">
+              <label>Civil Status</label>
+              <input type="text" id="civil-status" disabled>
+            </div>
           </div>
-          <div class="form-group">
-            <label>Mobile Number</label>
-            <input type="text" value="+1 78429 82414" disabled>
-          </div>
-          <div class="form-group">
-            <label>Student Number</label>
-            <input type="text" value="202301239" disabled>
-          </div>
-        </div>
-      </section>
+        </section>
+      </div>
 
-      <!-- Educational Information -->
-      <section class="form-section">
-        <h3 class="section-title">Educational Information</h3>
-        <div class="form-grid">
-          <div class="form-group">
-            <label>School/Institution Name</label>
-            <input type="text" value="PUP Manila" disabled>
+      <!-- Contact Information Panel -->
+      <div id="panel-contact" class="info-panel">
+        <section class="form-section">
+          <h3 class="section-title">Contact Information</h3>
+          <div class="form-grid">
+            <div class="form-group">
+              <label>Email Address</label>
+              <input type="text" id="email" disabled>
+            </div>
+            <div class="form-group">
+              <label>Phone Number</label>
+              <input type="text" id="phone" disabled>
+            </div>
+            <div class="form-group">
+              <label>Facebook</label>
+              <input type="text" id="facebook" disabled>
+            </div>
+            <div class="form-group">
+              <label>Messenger</label>
+              <input type="text" id="messenger" disabled>
+            </div>
           </div>
-          <div class="form-group">
-            <label>Course/Program</label>
-            <input type="text" value="Bachelor of Science in Engineering" disabled>
+          <div class="form-group" style="margin-top: 20px;">
+            <label>Complete Address</label>
+            <input type="text" id="address" disabled>
           </div>
-          <div class="form-group">
-            <label>Year Level</label>
-            <input type="text" value="3rd Year" disabled>
+          <div class="form-grid" style="margin-top: 20px;">
+            <div class="form-group">
+              <label>Barangay</label>
+              <input type="text" id="barangay" disabled>
+            </div>
+            <div class="form-group">
+              <label>City/Municipality</label>
+              <input type="text" id="city" disabled>
+            </div>
+            <div class="form-group">
+              <label>Province</label>
+              <input type="text" id="province" disabled>
+            </div>
           </div>
-          <div class="form-group">
-            <label>Scholarship Type</label>
-            <input type="text" value="Tertiary Scholarship Program" disabled>
-          </div>
-          <div class="form-group">
-            <label>Current GPA</label>
-            <input type="text" value="3.8" disabled>
-          </div>
-          <div class="form-group">
-            <label>Academic Status</label>
-            <input type="text" value="Good Standing" disabled>
-          </div>
-        </div>
-      </section>
+        </section>
+      </div>
 
-      <!-- Scholarship Status -->
-      <section class="form-section">
-        <h3 class="section-title">Scholarship Status</h3>
-        <div class="form-grid two-col">
-          <div class="form-group">
-            <label>Compliance Status</label>
-            <input type="text" value="Compliant" disabled>
+      <!-- Educational Information Panel -->
+      <div id="panel-educational" class="info-panel">
+        <section class="form-section">
+          <h3 class="section-title">Educational Information</h3>
+          <div class="form-grid">
+            <div class="form-group">
+              <label>School</label>
+              <input type="text" id="school" disabled>
+            </div>
+            <div class="form-group">
+              <label>Course/Program</label>
+              <input type="text" id="course" disabled>
+            </div>
+            <div class="form-group">
+              <label>Year Level</label>
+              <input type="text" id="year-level" disabled>
+            </div>
+            <div class="form-group">
+              <label>Semester</label>
+              <input type="text" id="semester" disabled>
+            </div>
+            <div class="form-group">
+              <label>Program Level</label>
+              <input type="text" id="program-level" disabled>
+            </div>
+            <div class="form-group">
+              <label>Board Exam Program</label>
+              <input type="text" id="board-exam" disabled>
+            </div>
+            <div class="form-group">
+              <label>Student ID</label>
+              <input type="text" id="student-id" disabled>
+            </div>
+            <div class="form-group">
+              <label>Current GPA</label>
+              <input type="text" id="current-gpa" disabled>
+            </div>
+            <div class="form-group">
+              <label>GPA Status</label>
+              <input type="text" id="gpa-status" disabled>
+            </div>
           </div>
-          <div class="form-group">
-            <label>Last Renewal Date</label>
-            <input type="text" value="Jan 15, 2026" disabled>
+        </section>
+      </div>
+
+      <!-- Socio-Economic Information Panel -->
+      <div id="panel-socioeconomic" class="info-panel">
+        <section class="form-section">
+          <h3 class="section-title">Socio-Economic Information</h3>
+          <div class="form-grid">
+            <div class="form-group">
+              <label>Father's Name</label>
+              <input type="text" id="father-name" disabled>
+            </div>
+            <div class="form-group">
+              <label>Father's Occupation</label>
+              <input type="text" id="father-occupation" disabled>
+            </div>
+            <div class="form-group">
+              <label>Father's Monthly Income</label>
+              <input type="text" id="father-income" disabled>
+            </div>
+            <div class="form-group">
+              <label>Mother's Name</label>
+              <input type="text" id="mother-name" disabled>
+            </div>
+            <div class="form-group">
+              <label>Mother's Occupation</label>
+              <input type="text" id="mother-occupation" disabled>
+            </div>
+            <div class="form-group">
+              <label>Mother's Monthly Income</label>
+              <input type="text" id="mother-income" disabled>
+            </div>
+            <div class="form-group">
+              <label>Number of Siblings</label>
+              <input type="text" id="siblings" disabled>
+            </div>
+            <div class="form-group">
+              <label>Total Family Monthly Income</label>
+              <input type="text" id="family-income" disabled>
+            </div>
+            <div class="form-group">
+              <label>Housing Type</label>
+              <input type="text" id="housing" disabled>
+            </div>
           </div>
-          <div class="form-group">
-            <label>Total Amount Received</label>
-            <input type="text" value="₱84,000" disabled>
+        </section>
+      </div>
+
+      <!-- Scholarship Status Panel -->
+      <div id="panel-scholarship" class="info-panel">
+        <section class="form-section">
+          <h3 class="section-title">Scholarship Status</h3>
+          <div class="form-grid">
+            <div class="form-group">
+              <label>Scholarship Type</label>
+              <input type="text" id="scholarship-type" disabled>
+            </div>
+            <div class="form-group">
+              <label>Amount Per Semester</label>
+              <input type="text" id="scholarship-amount" disabled>
+            </div>
+            <div class="form-group">
+              <label>Compliance Status</label>
+              <input type="text" id="compliance-status" disabled>
+            </div>
+            <div class="form-group">
+              <label>Current GPA</label>
+              <input type="text" id="scholarship-gpa" disabled>
+            </div>
+            <div class="form-group">
+              <label>Required GPA</label>
+              <input type="text" id="required-gpa" disabled>
+            </div>
+            <div class="form-group">
+              <label>Events Attended</label>
+              <input type="text" id="events-attended" disabled>
+            </div>
           </div>
-          <div class="form-group">
-            <label>Next Disbursement</label>
-            <input type="text" value="Feb 15, 2026" disabled>
-          </div>
-        </div>
-      </section>
+        </section>
+      </div>
 
       <!-- Action Bar -->
       <div class="action-bar">
-        <a href="documents.html" class="btn btn-primary">📄 View Documents</a>
-        <a href="financial-details.html" class="btn btn-outline">💰 Financial Records</a>
-        <a href="edit-scholar.html" class="btn btn-secondary">✏️ Edit Information</a>
-        <button class="btn btn-danger">⚠️ Mark as Inactive</button>
+        <a href="scholars.html" class="btn btn-outline">← Back to Scholars</a>
+        <a href="edit-scholar.html" class="btn btn-secondary" id="edit-scholar-link">✏️ Edit Scholar</a>
+        <a href="compliance-details.html" class="btn btn-primary" id="view-compliance-link">📊 View Compliance</a>
       </div>
 
     </main>
   </div>
+  
   <script src="js/sidebar.js"></script>
+  <script src="js/data.js"></script>
+  <script>
+    // Get scholar ID from URL
+    const params = new URLSearchParams(window.location.search);
+    const scholarId = params.get('id') || 'LM823748';
+    const scholar = getScholarById(scholarId);
+
+    if (scholar) {
+      // Populate header
+      document.getElementById('scholar-initials').textContent = scholar.initials;
+      document.getElementById('scholar-name').textContent = `${scholar.firstName} ${scholar.middleName} ${scholar.lastName}`;
+      document.getElementById('scholar-id').textContent = scholar.id;
+      document.getElementById('scholar-since').textContent = `Scholar since: ${scholar.scholarSince}`;
+
+      // Update compliance link
+      document.getElementById('view-compliance-link').href = `compliance-details.html?id=${scholar.id}`;
+      document.getElementById('edit-scholar-link').href = `edit-scholar.html?id=${scholar.id}`;
+
+      // Personal Information
+      document.getElementById('first-name').value = scholar.firstName;
+      document.getElementById('middle-name').value = scholar.middleName;
+      document.getElementById('last-name').value = scholar.lastName;
+      document.getElementById('gender').value = scholar.gender;
+      document.getElementById('dob').value = scholar.dateOfBirth;
+      document.getElementById('civil-status').value = scholar.civilStatus;
+
+      // Contact Information
+      document.getElementById('email').value = scholar.email;
+      document.getElementById('phone').value = scholar.phone;
+      document.getElementById('facebook').value = scholar.facebook;
+      document.getElementById('messenger').value = scholar.messenger;
+      document.getElementById('address').value = scholar.address;
+      document.getElementById('barangay').value = scholar.barangay;
+      document.getElementById('city').value = scholar.city;
+      document.getElementById('province').value = scholar.province;
+
+      // Educational Information
+      document.getElementById('school').value = scholar.school;
+      document.getElementById('course').value = scholar.course;
+      document.getElementById('year-level').value = scholar.yearLevel;
+      document.getElementById('semester').value = scholar.semester || 'N/A';
+      document.getElementById('program-level').value = scholar.programLevel || 'N/A';
+      document.getElementById('board-exam').value = scholar.boardExam || 'N/A';
+      document.getElementById('student-id').value = scholar.studentId;
+      document.getElementById('current-gpa').value = scholar.gpa;
+      document.getElementById('gpa-status').value = scholar.gpaStatus;
+
+      // Socio-Economic Information
+      document.getElementById('father-name').value = scholar.fatherName;
+      document.getElementById('father-occupation').value = scholar.fatherOccupation;
+      document.getElementById('father-income').value = scholar.fatherIncome;
+      document.getElementById('mother-name').value = scholar.motherName;
+      document.getElementById('mother-occupation').value = scholar.motherOccupation;
+      document.getElementById('mother-income').value = scholar.motherIncome;
+      document.getElementById('siblings').value = scholar.siblings;
+      document.getElementById('family-income').value = scholar.familyIncome;
+      document.getElementById('housing').value = scholar.housingType;
+
+      // Scholarship Status
+      document.getElementById('scholarship-type').value = scholar.scholarshipType;
+      document.getElementById('scholarship-amount').value = scholar.scholarshipAmount;
+      const statusText = scholar.status === 'non-compliant' ? 'Non-Compliant' : 
+                        scholar.status === 'at-risk' ? 'At Risk' : 'Compliant';
+      document.getElementById('compliance-status').value = statusText;
+      document.getElementById('scholarship-gpa').value = scholar.gpa;
+      document.getElementById('required-gpa').value = scholar.requiredGpa;
+      document.getElementById('events-attended').value = scholar.eventsAttended;
+    }
+
+    // Panel switching
+    document.querySelectorAll('.info-card').forEach(card => {
+      card.addEventListener('click', function() {
+        document.querySelectorAll('.info-card').forEach(c => c.classList.remove('active'));
+        document.querySelectorAll('.info-panel').forEach(p => p.classList.remove('active'));
+        
+        this.classList.add('active');
+        document.getElementById('panel-' + this.dataset.panel).classList.add('active');
+      });
+    });
+  </script>
 </body>
 </html>

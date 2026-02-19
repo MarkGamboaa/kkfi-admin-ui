@@ -1317,6 +1317,33 @@ tr:hover {
   margin-bottom: 0;
 }
 
+/* Page header row */
+.header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.header-row h1 {
+  margin: 0;
+}
+
+/* Action link in tables */
+.action-link {
+  color: #5b5f97;
+  text-decoration: none;
+  font-weight: 500;
+  padding: 6px 12px;
+  border-radius: 6px;
+  transition: background 0.2s;
+}
+
+.action-link:hover {
+  background: #f0f1fa;
+  text-decoration: none;
+}
+
 /* Leave detail header */
 .leave-detail-header {
   padding-bottom: 15px;
@@ -1439,6 +1466,39 @@ tr.leave-rejected:hover {
   border-color: #5b5f97;
 }
 
+/* Stats Row (Generic) */
+.stats-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.stat-card {
+  background: #fff;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  border: 1px solid #eee;
+}
+
+.stat-card .stat-value {
+  font-size: 32px;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 4px;
+}
+
+.stat-card .stat-label {
+  font-size: 13px;
+  color: #888;
+}
+
+.stat-card.compliant { border-left: 4px solid #4CAF50; }
+.stat-card.at-risk { border-left: 4px solid #FF9800; }
+.stat-card.non-compliant { border-left: 4px solid #f44336; }
+.stat-card.pending { border-left: 4px solid #2196F3; }
+
 /* Dashboard Stats Row */
 .dashboard-stats-row {
   display: grid;
@@ -1475,6 +1535,44 @@ tr.leave-rejected:hover {
 .sparkline {
   width: 100%;
   height: 100%;
+}
+
+/* Filter Row */
+.filter-row {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.search-input {
+  flex: 1;
+  min-width: 200px;
+  padding: 10px 14px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.search-input:focus {
+  border-color: #5b5f97;
+}
+
+.filter-select {
+  padding: 10px 14px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 14px;
+  background: #fff;
+  cursor: pointer;
+  outline: none;
+  min-width: 150px;
+}
+
+.filter-select:focus {
+  border-color: #5b5f97;
 }
 
 /* Dashboard Charts Row */

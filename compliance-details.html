@@ -5,6 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Compliance Details - KKFI Admin</title>
   <link rel="stylesheet" href="css/styles.css">
+  <style>
+    .document-icon.warning { background: #fff8e1; color: #f5a623; }
+    .doc-status.warning { color: #f5a623; }
+  </style>
 </head>
 <body>
   <div class="layout">
@@ -16,14 +20,14 @@
       <!-- Header -->
       <div class="applicant-header">
         <a href="compliance.html" class="back-btn">‹</a>
-        <div class="applicant-avatar">MD</div>
+        <div class="applicant-avatar" id="scholar-initials"></div>
         <div class="applicant-info">
           <h2>
-            Mark Dizon Bautista
-            <span class="status-badge non-compliant">Non-Compliant</span>
+            <span id="scholar-name"></span>
+            <span class="status-badge" id="scholar-status"></span>
           </h2>
-          <div class="app-id">LM823746</div>
-          <div class="app-date">Scholar since: 05 May 2024</div>
+          <div class="app-id" id="scholar-id"></div>
+          <div class="app-date" id="scholar-since"></div>
         </div>
       </div>
 
@@ -33,27 +37,23 @@
         <div class="form-grid">
           <div class="form-group">
             <label>Current GPA</label>
-            <input type="text" value="2.3" disabled style="color: #dc3545; font-weight: bold;">
+            <input type="text" id="current-gpa" disabled>
           </div>
           <div class="form-group">
             <label>Required GPA</label>
-            <input type="text" value="2.5" disabled>
+            <input type="text" id="required-gpa" disabled>
           </div>
           <div class="form-group">
             <label>GPA Status</label>
-            <input type="text" value="Below Required" disabled style="color: #dc3545;">
+            <input type="text" id="gpa-status" disabled>
           </div>
           <div class="form-group">
             <label>Last Grade Submission</label>
-            <input type="text" value="Nov 15, 2025" disabled>
+            <input type="text" id="last-submission" disabled>
           </div>
           <div class="form-group">
-            <label>Community Service Hours</label>
-            <input type="text" value="8 of 20 hours" disabled style="color: #f5a623;">
-          </div>
-          <div class="form-group">
-            <label>Attendance at Events</label>
-            <input type="text" value="1 of 3 required" disabled style="color: #dc3545;">
+            <label>KKFI Events Attended</label>
+            <input type="text" id="events-attended" disabled>
           </div>
         </div>
       </section>
@@ -61,55 +61,28 @@
       <!-- Compliance Requirements -->
       <section class="form-section">
         <h3 class="section-title">Requirements Checklist</h3>
-        <div class="documents-grid">
-          <div class="document-card">
-            <div class="document-info">
-              <h4>Maintain Minimum GPA (2.5)</h4>
-              <span class="doc-status error">Current: 2.3 - Not Met</span>
-            </div>
-            <div class="document-icon error">✕</div>
-          </div>
-          
-          <div class="document-card">
-            <div class="document-info">
-              <h4>Submit Grades Every Semester</h4>
-              <span class="doc-status complete">Submitted on Nov 15, 2025</span>
-            </div>
-            <div class="document-icon complete">✓</div>
-          </div>
-          
-          <div class="document-card">
-            <div class="document-info">
-              <h4>Complete 20 Community Service Hours</h4>
-              <span class="doc-status error">8 hours completed - Incomplete</span>
-            </div>
-            <div class="document-icon error">✕</div>
-          </div>
-          
-          <div class="document-card">
-            <div class="document-info">
-              <h4>Attend 3 KKFI Events per Year</h4>
-              <span class="doc-status error">1 of 3 attended</span>
-            </div>
-            <div class="document-icon error">✕</div>
-          </div>
-          
-          <div class="document-card">
-            <div class="document-info">
-              <h4>Submit Narrative Report</h4>
-              <span class="doc-status complete">Submitted on Dec 01, 2025</span>
-            </div>
-            <div class="document-icon complete">✓</div>
-          </div>
-          
-          <div class="document-card">
-            <div class="document-info">
-              <h4>No Academic Violations</h4>
-              <span class="doc-status complete">No violations recorded</span>
-            </div>
-            <div class="document-icon complete">✓</div>
-          </div>
+        <div class="documents-grid" id="requirements-checklist">
+          <!-- Dynamically populated -->
         </div>
+      </section>
+
+      <!-- Event Attendance Tracking -->
+      <section class="form-section">
+        <h3 class="section-title">Event Attendance</h3>
+        <p style="color: #666; font-size: 13px; margin-bottom: 15px;">Attendance is submitted by scholars through their account.</p>
+        <table>
+          <thead>
+            <tr>
+              <th>Event Name</th>
+              <th>Event Date</th>
+              <th>Type</th>
+              <th>Attendance</th>
+            </tr>
+          </thead>
+          <tbody id="event-attendance-body">
+            <!-- Dynamically populated -->
+          </tbody>
+        </table>
       </section>
 
       <!-- Compliance History -->
@@ -120,33 +93,12 @@
             <tr>
               <th>Period</th>
               <th>GPA</th>
-              <th>Service Hours</th>
               <th>Events Attended</th>
               <th>Status</th>
             </tr>
           </thead>
-          <tbody>
-            <tr>
-              <td>AY 2025-2026 (1st Sem)</td>
-              <td style="color: #dc3545;">2.3</td>
-              <td>8 hrs</td>
-              <td>1</td>
-              <td><span class="status-badge non-compliant">Non-Compliant</span></td>
-            </tr>
-            <tr>
-              <td>AY 2024-2025 (2nd Sem)</td>
-              <td>2.6</td>
-              <td>22 hrs</td>
-              <td>3</td>
-              <td><span class="status-badge compliant">Compliant</span></td>
-            </tr>
-            <tr>
-              <td>AY 2024-2025 (1st Sem)</td>
-              <td>2.8</td>
-              <td>25 hrs</td>
-              <td>4</td>
-              <td><span class="status-badge compliant">Compliant</span></td>
-            </tr>
+          <tbody id="compliance-history-body">
+            <!-- Dynamically populated -->
           </tbody>
         </table>
       </section>
@@ -154,9 +106,8 @@
       <!-- Notes Section -->
       <section class="form-section">
         <h3 class="section-title">Notes & Communications</h3>
-        <div style="background: #fff8e1; border-left: 4px solid #f5a623; padding: 15px; border-radius: 0 8px 8px 0; margin-bottom: 15px;">
-          <strong style="color: #f57f17;">Warning Notice Sent</strong>
-          <p style="color: #666; font-size: 13px; margin-top: 5px;">A compliance warning was sent on Jan 10, 2026 regarding GPA and community service requirements.</p>
+        <div id="status-notice">
+          <!-- Dynamically populated -->
         </div>
         <div class="form-group">
           <label>Add Note</label>
@@ -165,15 +116,201 @@
       </section>
 
       <!-- Action Bar -->
-      <div class="action-bar">
-        <button class="btn btn-primary">📧 Send Reminder</button>
-        <button class="btn btn-outline">📄 Generate Compliance Report</button>
-        <button class="btn btn-secondary">⚠️ Issue Warning</button>
-        <button class="btn btn-danger">🚫 Suspend Scholarship</button>
+      <div class="action-bar" id="action-bar">
+        <!-- Dynamically populated based on status -->
       </div>
 
     </main>
   </div>
+  
   <script src="js/sidebar.js"></script>
+  <script src="js/data.js"></script>
+  <script>
+    // Get scholar ID from URL
+    const params = new URLSearchParams(window.location.search);
+    const scholarId = params.get('id') || 'LM823748'; // Default to first scholar
+    const scholar = getScholarById(scholarId);
+
+    if (scholar) {
+      // Populate header
+      document.getElementById('scholar-initials').textContent = scholar.initials;
+      document.getElementById('scholar-name').textContent = `${scholar.firstName} ${scholar.middleName} ${scholar.lastName}`;
+      document.getElementById('scholar-id').textContent = scholar.id;
+      document.getElementById('scholar-since').textContent = `Scholar since: ${scholar.scholarSince}`;
+      
+      // Set status badge
+      const statusBadge = document.getElementById('scholar-status');
+      statusBadge.textContent = scholar.status === 'non-compliant' ? 'Non-Compliant' : 
+                                scholar.status === 'at-risk' ? 'At Risk' : 'Compliant';
+      statusBadge.className = `status-badge ${scholar.status}`;
+
+      // Populate compliance overview
+      const gpaColor = scholar.compliance.gpa.met ? '#28a745' : '#dc3545';
+      document.getElementById('current-gpa').value = scholar.gpa;
+      document.getElementById('current-gpa').style.color = gpaColor;
+      document.getElementById('current-gpa').style.fontWeight = 'bold';
+      
+      document.getElementById('required-gpa').value = scholar.requiredGpa;
+      
+      document.getElementById('gpa-status').value = scholar.gpaStatus;
+      document.getElementById('gpa-status').style.color = gpaColor;
+      
+      document.getElementById('last-submission').value = scholar.lastGradeSubmission;
+      if (!scholar.compliance.grades.met) {
+        document.getElementById('last-submission').style.color = '#dc3545';
+      }
+      
+      const eventsColor = scholar.compliance.events.met ? '#28a745' : 
+                          scholar.status === 'at-risk' ? '#f5a623' : '#dc3545';
+      document.getElementById('events-attended').value = scholar.eventsAttended;
+      document.getElementById('events-attended').style.color = eventsColor;
+
+      // Populate requirements checklist
+      const checklistHtml = `
+        <div class="document-card">
+          <div class="document-info">
+            <h4>Maintain Minimum GPA (${scholar.requiredGpa})</h4>
+            <span class="doc-status ${scholar.compliance.gpa.met ? 'complete' : 'error'}">
+              Current: ${scholar.gpa} - ${scholar.compliance.gpa.met ? 'Met' : 'Not Met'}
+            </span>
+          </div>
+          <div class="document-icon ${scholar.compliance.gpa.met ? 'complete' : 'error'}">
+            ${scholar.compliance.gpa.met ? '✓' : '✕'}
+          </div>
+        </div>
+        
+        <div class="document-card">
+          <div class="document-info">
+            <h4>Submit Grades Every Semester</h4>
+            <span class="doc-status ${scholar.compliance.grades.met ? 'complete' : 'error'}">
+              ${scholar.compliance.grades.met ? 'Submitted on ' + scholar.compliance.grades.date : 'Not Submitted - Overdue'}
+            </span>
+          </div>
+          <div class="document-icon ${scholar.compliance.grades.met ? 'complete' : 'error'}">
+            ${scholar.compliance.grades.met ? '✓' : '✕'}
+          </div>
+        </div>
+        
+        <div class="document-card">
+          <div class="document-info">
+            <h4>Attend KKFI Events</h4>
+            <span class="doc-status ${scholar.compliance.events.met ? 'complete' : scholar.status === 'at-risk' ? 'warning' : 'error'}">
+              ${scholar.compliance.events.attended} of ${scholar.compliance.events.required} attended${!scholar.compliance.events.met ? ' - Missing ' + (scholar.compliance.events.required - scholar.compliance.events.attended) + ' events' : ''}
+            </span>
+          </div>
+          <div class="document-icon ${scholar.compliance.events.met ? 'complete' : scholar.status === 'at-risk' ? 'warning' : 'error'}">
+            ${scholar.compliance.events.met ? '✓' : scholar.status === 'at-risk' ? '⚠' : '✕'}
+          </div>
+        </div>
+        
+        <div class="document-card">
+          <div class="document-info">
+            <h4>No Academic Violations</h4>
+            <span class="doc-status complete">No violations recorded</span>
+          </div>
+          <div class="document-icon complete">✓</div>
+        </div>
+      `;
+      document.getElementById('requirements-checklist').innerHTML = checklistHtml;
+
+      // Populate event attendance
+      let eventHtml = '';
+      scholar.eventAttendance.forEach(event => {
+        const typeStyle = event.type === 'Required' 
+          ? 'background: #e8f5e9; color: #2e7d32;' 
+          : 'background: #fff3e0; color: #e65100;';
+        
+        let attendanceHtml;
+        if (event.attended) {
+          attendanceHtml = '<span class="status-badge compliant">✓ Attended</span>';
+        } else if (event.type === 'Optional') {
+          attendanceHtml = '<span style="color: #999;">—</span>';
+        } else {
+          attendanceHtml = '<span class="status-badge non-compliant">✗ Not Attended</span>';
+        }
+        
+        eventHtml += `
+          <tr>
+            <td>${event.name}</td>
+            <td>${event.date}</td>
+            <td><span style="${typeStyle} padding: 3px 10px; border-radius: 12px; font-size: 11px;">${event.type}</span></td>
+            <td>${attendanceHtml}</td>
+          </tr>
+        `;
+      });
+      document.getElementById('event-attendance-body').innerHTML = eventHtml;
+
+      // Populate compliance history
+      let historyHtml = '';
+      scholar.complianceHistory.forEach(record => {
+        const gpaNum = parseFloat(record.gpa);
+        const gpaStyle = gpaNum >= 2.5 ? 'color: #28a745;' : 'color: #dc3545;';
+        const eventsStyle = record.status !== 'Compliant' && record.events < 3 ? 'color: #f5a623;' : '';
+        
+        historyHtml += `
+          <tr>
+            <td>${record.period}</td>
+            <td style="${gpaStyle}">${record.gpa}</td>
+            <td style="${eventsStyle}">${record.events}</td>
+            <td><span class="status-badge ${record.status.toLowerCase().replace(' ', '-')}">${record.status}</span></td>
+          </tr>
+        `;
+      });
+      document.getElementById('compliance-history-body').innerHTML = historyHtml;
+
+      // Populate status notice
+      let noticeHtml = '';
+      if (scholar.status === 'compliant') {
+        noticeHtml = `
+          <div style="background: #e8f5e9; border-left: 4px solid #28a745; padding: 15px; border-radius: 0 8px 8px 0; margin-bottom: 15px;">
+            <strong style="color: #2e7d32;">Excellent Standing</strong>
+            <p style="color: #666; font-size: 13px; margin-top: 5px;">Scholar maintains excellent academic standing and has perfect attendance in all required events.</p>
+          </div>
+        `;
+      } else if (scholar.status === 'at-risk') {
+        noticeHtml = `
+          <div style="background: #fff8e1; border-left: 4px solid #f5a623; padding: 15px; border-radius: 0 8px 8px 0; margin-bottom: 15px;">
+            <strong style="color: #f57f17;">At Risk - Event Attendance</strong>
+            <p style="color: #666; font-size: 13px; margin-top: 5px;">Scholar has missed ${scholar.compliance.events.required - scholar.compliance.events.attended} required KKFI events. Academic standing is good but event attendance needs improvement.</p>
+          </div>
+        `;
+      } else {
+        noticeHtml = `
+          <div style="background: #ffebee; border-left: 4px solid #dc3545; padding: 15px; border-radius: 0 8px 8px 0; margin-bottom: 15px;">
+            <strong style="color: #c62828;">Non-Compliant - Multiple Violations</strong>
+            <p style="color: #666; font-size: 13px; margin-top: 5px;">Scholar has multiple compliance issues that require immediate attention.</p>
+          </div>
+          <div style="background: #fff8e1; border-left: 4px solid #f5a623; padding: 15px; border-radius: 0 8px 8px 0; margin-bottom: 15px;">
+            <strong style="color: #f57f17;">Warning Notice Sent</strong>
+            <p style="color: #666; font-size: 13px; margin-top: 5px;">A final warning was sent regarding compliance violations.</p>
+          </div>
+        `;
+      }
+      document.getElementById('status-notice').innerHTML = noticeHtml;
+
+      // Populate action bar based on status
+      let actionHtml = '';
+      if (scholar.status === 'compliant') {
+        actionHtml = `
+          <button class="btn btn-outline">📄 Generate Compliance Report</button>
+          <button class="btn btn-primary">🏆 Send Commendation</button>
+        `;
+      } else if (scholar.status === 'at-risk') {
+        actionHtml = `
+          <button class="btn btn-primary">📧 Send Reminder</button>
+          <button class="btn btn-outline">📄 Generate Compliance Report</button>
+          <button class="btn btn-secondary">⚠️ Issue Warning</button>
+        `;
+      } else {
+        actionHtml = `
+          <button class="btn btn-primary">📧 Send Reminder</button>
+          <button class="btn btn-outline">📄 Generate Compliance Report</button>
+          <button class="btn btn-secondary">⚠️ Issue Warning</button>
+          <button class="btn btn-danger">🚫 Suspend Scholarship</button>
+        `;
+      }
+      document.getElementById('action-bar').innerHTML = actionHtml;
+    }
+  </script>
 </body>
 </html>

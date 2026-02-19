@@ -5,6 +5,40 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Renewal Details - KKFI Admin</title>
   <link rel="stylesheet" href="css/styles.css">
+  <style>
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 500;
+    }
+    .status-badge::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+    }
+    .status-badge.eligible { background: #e8f5e9; color: #2e7d32; }
+    .status-badge.eligible::before { background: #2e7d32; }
+    .status-badge.pending { background: #fff3e0; color: #ef6c00; }
+    .status-badge.pending::before { background: #ef6c00; }
+    .status-badge.ineligible { background: #ffebee; color: #c62828; }
+    .status-badge.ineligible::before { background: #c62828; }
+    .status-badge.completed { background: #e3f2fd; color: #1565c0; }
+    .status-badge.completed::before { background: #1565c0; }
+    
+    .gpa-indicator {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .gpa-indicator.good { color: #2e7d32; }
+    .gpa-indicator.warning { color: #ef6c00; }
+    .gpa-indicator.bad { color: #c62828; }
+  </style>
 </head>
 <body>
   <div class="layout">
@@ -16,13 +50,13 @@
       <!-- Header -->
       <div class="applicant-header">
         <a href="renewals.html" class="back-btn">‹</a>
-        <div class="applicant-avatar">CN</div>
+        <div class="applicant-avatar" id="scholar-initials"></div>
         <div class="applicant-info">
           <h2>
-            Carlo Navarro Flores
-            <span class="status-badge completed">Completed</span>
+            <span id="scholar-name"></span>
+            <span class="status-badge" id="renewal-status"></span>
           </h2>
-          <div class="app-id">LM823748</div>
+          <div class="app-id" id="scholar-id"></div>
           <div class="app-date">Renewal for AY 2025-2026</div>
         </div>
       </div>
@@ -33,27 +67,27 @@
         <div class="form-grid">
           <div class="form-group">
             <label>Full Name</label>
-            <input type="text" value="Carlo Navarro Flores" disabled>
+            <input type="text" id="full-name" disabled>
           </div>
           <div class="form-group">
             <label>Program</label>
-            <input type="text" value="Engineering" disabled>
+            <input type="text" id="program" disabled>
           </div>
           <div class="form-group">
             <label>Year Level</label>
-            <input type="text" value="3rd Year" disabled>
+            <input type="text" id="year-level" disabled>
           </div>
           <div class="form-group">
             <label>School</label>
-            <input type="text" value="Bulacan State University" disabled>
+            <input type="text" id="school" disabled>
           </div>
           <div class="form-group">
             <label>Current GPA</label>
-            <input type="text" value="3.8" disabled>
+            <input type="text" id="current-gpa" disabled>
           </div>
           <div class="form-group">
             <label>Scholarship Type</label>
-            <input type="text" value="Tertiary Scholarship Program" disabled>
+            <input type="text" id="scholarship-type" disabled>
           </div>
         </div>
       </section>
@@ -61,38 +95,8 @@
       <!-- Renewal Requirements -->
       <section class="form-section">
         <h3 class="section-title">Renewal Requirements</h3>
-        <div class="documents-grid">
-          <div class="document-card">
-            <div class="document-info">
-              <h4>Updated Grades / Report Card</h4>
-              <span class="doc-status complete">Submitted</span>
-            </div>
-            <div class="document-icon complete">✓</div>
-          </div>
-          
-          <div class="document-card">
-            <div class="document-info">
-              <h4>Certificate of Enrollment</h4>
-              <span class="doc-status complete">Submitted</span>
-            </div>
-            <div class="document-icon complete">✓</div>
-          </div>
-          
-          <div class="document-card">
-            <div class="document-info">
-              <h4>Narrative Report</h4>
-              <span class="doc-status complete">Submitted</span>
-            </div>
-            <div class="document-icon complete">✓</div>
-          </div>
-          
-          <div class="document-card">
-            <div class="document-info">
-              <h4>Community Service Proof</h4>
-              <span class="doc-status complete">Submitted</span>
-            </div>
-            <div class="document-icon complete">✓</div>
-          </div>
+        <div class="documents-grid" id="documents-grid">
+          <!-- Dynamically populated -->
         </div>
       </section>
 
@@ -102,32 +106,131 @@
         <div class="form-grid two-col">
           <div class="form-group">
             <label>Previous Semester GPA</label>
-            <input type="text" value="3.7" disabled>
+            <input type="text" id="prev-gpa" disabled>
           </div>
           <div class="form-group">
             <label>Current Semester GPA</label>
-            <input type="text" value="3.8" disabled>
+            <input type="text" id="curr-gpa" disabled>
           </div>
           <div class="form-group">
             <label>Required GPA</label>
-            <input type="text" value="2.5" disabled>
+            <input type="text" id="req-gpa" disabled>
           </div>
           <div class="form-group">
             <label>Eligibility Status</label>
-            <input type="text" value="Eligible for Renewal" disabled>
+            <input type="text" id="eligibility" disabled>
           </div>
         </div>
       </section>
 
       <!-- Action Bar -->
-      <div class="action-bar">
-        <button class="btn btn-success">✓ Approve Renewal</button>
-        <button class="btn btn-danger">✕ Deny Renewal</button>
-        <button class="btn btn-secondary">📧 Request Additional Documents</button>
+      <div class="action-bar" id="action-bar">
+        <!-- Dynamically populated -->
       </div>
 
     </main>
   </div>
+  
   <script src="js/sidebar.js"></script>
+  <script src="js/data.js"></script>
+  <script>
+    // Get scholar ID from URL
+    const params = new URLSearchParams(window.location.search);
+    const scholarId = params.get('id') || 'LM823748';
+    const scholar = getScholarById(scholarId);
+
+    if (scholar) {
+      // Determine renewal status based on compliance
+      let renewalStatus;
+      let renewalStatusText;
+      if (scholar.status === 'compliant') {
+        renewalStatus = 'eligible';
+        renewalStatusText = 'Eligible';
+      } else if (scholar.status === 'at-risk') {
+        renewalStatus = 'pending';
+        renewalStatusText = 'Pending';
+      } else {
+        renewalStatus = 'ineligible';
+        renewalStatusText = 'Ineligible';
+      }
+
+      // Populate header
+      document.getElementById('scholar-initials').textContent = scholar.initials;
+      document.getElementById('scholar-name').textContent = `${scholar.firstName} ${scholar.middleName} ${scholar.lastName}`;
+      document.getElementById('scholar-id').textContent = scholar.id;
+      
+      const statusBadge = document.getElementById('renewal-status');
+      statusBadge.textContent = renewalStatusText;
+      statusBadge.className = `status-badge ${renewalStatus}`;
+
+      // Scholar Information
+      document.getElementById('full-name').value = `${scholar.firstName} ${scholar.middleName} ${scholar.lastName}`;
+      document.getElementById('program').value = scholar.course;
+      document.getElementById('year-level').value = scholar.yearLevel;
+      document.getElementById('school').value = scholar.school;
+      document.getElementById('current-gpa').value = scholar.gpa || scholar.currentGpa || '3.0';
+      document.getElementById('scholarship-type').value = scholar.scholarshipType || 'Full Scholarship';
+
+      // Renewal Requirements
+      const requirements = [
+        { name: 'Updated Grades / Report Card', submitted: scholar.compliance?.grades?.met || true },
+        { name: 'Certificate of Enrollment', submitted: true },
+        { name: 'Proof of Residency', submitted: true },
+        { name: 'Financial Statement', submitted: renewalStatus !== 'ineligible' }
+      ];
+
+      let docsHtml = '';
+      requirements.forEach(req => {
+        docsHtml += `
+          <div class="document-card">
+            <div class="document-info">
+              <h4>${req.name}</h4>
+              <span class="doc-status ${req.submitted ? 'complete' : 'error'}">
+                ${req.submitted ? 'Submitted' : 'Not Submitted'}
+              </span>
+            </div>
+            <div class="document-icon ${req.submitted ? 'complete' : 'error'}">
+              ${req.submitted ? '✓' : '✕'}
+            </div>
+          </div>
+        `;
+      });
+      document.getElementById('documents-grid').innerHTML = docsHtml;
+
+      // Academic Performance
+      const gpa = parseFloat(scholar.gpa || scholar.currentGpa || '3.0');
+      const prevGpa = scholar.complianceHistory?.[1]?.gpa || '2.9';
+      const reqGpa = scholar.requiredGpa || '2.5';
+      
+      document.getElementById('prev-gpa').value = prevGpa;
+      document.getElementById('curr-gpa').value = gpa;
+      document.getElementById('req-gpa').value = reqGpa;
+      
+      const isEligible = gpa >= parseFloat(reqGpa);
+      document.getElementById('eligibility').value = isEligible ? 'Eligible for Renewal' : 'Below Required GPA';
+
+      // Action Bar based on status
+      let actionHtml = `<a href="renewals.html" class="btn btn-outline">← Back to Renewals</a>`;
+      
+      if (renewalStatus === 'eligible') {
+        actionHtml += `
+          <button class="btn btn-success">✓ Approve Renewal</button>
+          <button class="btn btn-secondary">📧 Send Confirmation</button>
+        `;
+      } else if (renewalStatus === 'pending') {
+        actionHtml += `
+          <button class="btn btn-success">✓ Approve Renewal</button>
+          <button class="btn btn-danger">✕ Deny Renewal</button>
+          <button class="btn btn-secondary">📧 Request Additional Documents</button>
+        `;
+      } else {
+        actionHtml += `
+          <button class="btn btn-danger">✕ Deny Renewal</button>
+          <button class="btn btn-secondary">🔄 Request Appeal</button>
+        `;
+      }
+      document.getElementById('action-bar').innerHTML = actionHtml;
+    }
+  </script>
 </body>
 </html>
