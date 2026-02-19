@@ -75,15 +75,6 @@
             <label>Confirm New Password</label>
             <input type="password" placeholder="Confirm new password">
           </div>
-          <div class="form-group">
-            <label>Two-Factor Authentication</label>
-            <select>
-              <option>Disabled</option>
-              <option>Email</option>
-              <option>SMS</option>
-              <option>Authenticator App</option>
-            </select>
-          </div>
         </div>
         <div style="text-align: right; margin-top: 10px;">
           <button class="btn btn-secondary">Update Password</button>
@@ -108,10 +99,6 @@
           </label>
           <label style="display: flex; align-items: center; gap: 12px; cursor: pointer;">
             <input type="checkbox" style="width: 18px; height: 18px;">
-            <span>Weekly summary reports</span>
-          </label>
-          <label style="display: flex; align-items: center; gap: 12px; cursor: pointer;">
-            <input type="checkbox" style="width: 18px; height: 18px;">
             <span>SMS notifications for urgent matters</span>
           </label>
         </div>
@@ -125,38 +112,18 @@
         <h3 class="section-title">System Settings</h3>
         <div class="form-grid">
           <div class="form-group">
-            <label>Academic Year</label>
-            <select>
-              <option>AY 2025-2026</option>
-              <option>AY 2024-2025</option>
-              <option>AY 2023-2024</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label>Current Semester</label>
-            <select>
-              <option>1st Semester</option>
-              <option>2nd Semester</option>
-              <option>Summer</option>
-            </select>
-          </div>
-          <div class="form-group">
             <label>Minimum GPA Requirement</label>
             <input type="number" step="0.1" value="2.5">
-          </div>
-          <div class="form-group">
-            <label>Required Community Service Hours</label>
-            <input type="number" value="20">
           </div>
           <div class="form-group">
             <label>Required Events per Year</label>
             <input type="number" value="3">
           </div>
           <div class="form-group">
-            <label>Default Allowance Amount (₱)</label>
-            <input type="number" value="15000">
+            <label>Income Threshold Limit</label>
+            <input type="text" value="15,000">
           </div>
-        </div>
+          </div>
         <div style="text-align: right; margin-top: 10px;">
           <button class="btn btn-primary">Update System Settings</button>
         </div>
@@ -186,14 +153,14 @@
             <tr>
               <td>Maria Santos</td>
               <td>maria.santos@kkfi.org</td>
-              <td>Financial Officer</td>
+              <td>Authorized Staff</td>
               <td><span class="status-badge compliant">Active</span></td>
               <td><button class="btn btn-outline" style="padding: 5px 10px; font-size: 12px;">Edit</button></td>
             </tr>
             <tr>
               <td>Pedro Reyes</td>
               <td>pedro.reyes@kkfi.org</td>
-              <td>Program Coordinator</td>
+              <td>Authorized Staff</td>
               <td><span class="status-badge compliant">Active</span></td>
               <td><button class="btn btn-outline" style="padding: 5px 10px; font-size: 12px;">Edit</button></td>
             </tr>
@@ -203,6 +170,11 @@
           <button class="btn btn-primary">+ Add New Admin User</button>
         </div>
       </section>
+
+      <!-- Logout -->
+      <div style="margin-top: 20px; text-align: right;">
+        <a href="login.html" class="btn btn-outline" style="color: #dc3545; border-color: #dc3545;">Logout</a>
+      </div>
 
     </main>
   </div>
