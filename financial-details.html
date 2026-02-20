@@ -160,6 +160,14 @@
               <label>Full Name</label>
               <input type="text" id="full-name" disabled>
             </div>
+              <!-- Signature Modal -->
+              <div id="signature-modal" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.4); z-index:1000; align-items:center; justify-content:center;">
+                <div style="background:#fff; border-radius:12px; box-shadow:0 2px 16px rgba(0,0,0,0.18); padding:32px 24px; max-width:400px; width:90%; position:relative;">
+                  <button onclick="closeSignatureModal()" style="position:absolute; top:12px; right:12px; background:none; border:none; font-size:22px; cursor:pointer;">&times;</button>
+                  <h3 style="margin-bottom:18px;">Signature for Transaction</h3>
+                  <div id="signature-modal-content" style="min-height:80px; text-align:center; color:#555; font-size:16px;"></div>
+                </div>
+              </div>
             <div class="form-group">
               <label>Program</label>
               <input type="text" id="program" disabled>
@@ -192,12 +200,12 @@
             <table class="data-table">
               <thead>
                 <tr>
-                  <th>Transaction ID</th>
                   <th>Date</th>
                   <th>Amount</th>
                   <th>Type</th>
                   <th>Status</th>
                   <th>Remarks</th>
+                    <th>Signature</th>
                 </tr>
               </thead>
               <tbody id="disbursement-tbody">
@@ -292,12 +300,12 @@
       // Disbursement History
       document.getElementById('disbursement-tbody').innerHTML = disbursements.map(d => `
         <tr>
-          <td>${d.txnId}</td>
           <td>${d.date}</td>
           <td>₱${d.amount.toLocaleString()}</td>
           <td>${d.type}</td>
           <td><span class="status-badge ${d.status}">${d.status === 'completed' ? 'Completed' : 'Pending'}</span></td>
           <td>${d.remarks}</td>
+          <td><button class="btn btn-outline btn-signature" onclick="viewSignature('${d.txnId}')">View Signature</button></td>
         </tr>
       `).join('');
 
@@ -322,6 +330,16 @@
         document.getElementById(panelId).classList.add('active');
       });
     });
+  </script>
+  <script>
+    function viewSignature(txnId) {
+      // Example: show modal with placeholder signature
+      document.getElementById('signature-modal-content').innerHTML = `<div style='margin-bottom:12px;'>Transaction ID: <b>${txnId}</b></div><div style='margin-bottom:12px;'>Signature image or data will appear here.</div><img src='image/signature-placeholder.png' alt='Signature' style='max-width:180px; border:1px solid #eee; border-radius:8px; margin-top:8px;'>`;
+      document.getElementById('signature-modal').style.display = 'flex';
+    }
+    function closeSignatureModal() {
+      document.getElementById('signature-modal').style.display = 'none';
+    }
   </script>
 </body>
 </html>
