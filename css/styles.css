@@ -318,20 +318,11 @@ body {
 }
 
 .search-box input {
-  padding: 8px 12px 8px 35px;
+  padding: 8px 12px;
   border: 1px solid #e0e0e0;
   border-radius: 6px;
   width: 200px;
   font-size: 13px;
-}
-
-.search-box::before {
-  content: "🔍";
-  position: absolute;
-  left: 10px;
-  top: 50%;
-  transform: translateY(-50%);
-  font-size: 12px;
 }
 
 table {
