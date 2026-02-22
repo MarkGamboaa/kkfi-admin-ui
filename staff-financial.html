@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Financial - KKFI Staff Portal</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    .page-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+    }
+    .page-header h1 { margin: 0; }
+    .header-actions {
+      display: flex;
+      gap: 12px;
+    }
+    .header-btn {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 16px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      background: #fff;
+      font-size: 14px;
+      cursor: pointer;
+      color: #333;
+    }
+    .header-btn:hover { border-color: #5b5f97; }
+    .header-btn svg { width: 16px; height: 16px; }
+    .header-btn.primary {
+      background: #5b5f97;
+      color: #fff;
+      border-color: #5b5f97;
+    }
+    .header-btn.primary:hover { background: #4a4e7a; }
+    
+    .table-card {
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+      border: 1px solid #eee;
+      overflow: hidden;
+    }
+    .table-controls {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 20px;
+      border-bottom: 1px solid #f0f0f0;
+    }
+    .rows-control {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+      color: #666;
+    }
+    .rows-select {
+      padding: 6px 10px;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      font-size: 14px;
+    }
+    .search-box {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 14px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      background: #fff;
+    }
+    .search-box input {
+      border: none;
+      outline: none;
+      font-size: 14px;
+      width: 200px;
+    }
+    .search-box svg { color: #999; width: 16px; height: 16px; }
+    
+    .data-table { margin: 0; border-radius: 0; box-shadow: none; }
+    .data-table th { 
+      background: #fafafa; 
+      font-weight: 600;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: #666;
+    }
+    .data-table th, .data-table td { padding: 14px 16px; }
+    
+    .scholar-cell {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .scholar-avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: #5b5f97;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      font-size: 13px;
+    }
+    
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 500;
+    }
+    .status-badge::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+    }
+    .status-badge.on-track { background: #e8f5e9; color: #2e7d32; }
+    .status-badge.on-track::before { background: #2e7d32; }
+    .status-badge.pending-docs { background: #fff3e0; color: #ef6c00; }
+    .status-badge.pending-docs::before { background: #ef6c00; }
+    .status-badge.on-hold { background: #ffebee; color: #c62828; }
+    .status-badge.on-hold::before { background: #c62828; }
+    .status-badge.at-risk { background: #fff3e0; color: #ef6c00; }
+    .status-badge.at-risk::before { background: #ef6c00; }
+    
+    .view-btn {
+      padding: 6px 16px;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      background: #fff;
+      font-size: 13px;
+      cursor: pointer;
+      color: #333;
+      text-decoration: none;
+      display: inline-block;
+    }
+    .view-btn:hover { border-color: #5b5f97; background: #fafaff; }
+    
+    .checkbox-cell { width: 40px; }
+    .checkbox-cell input { width: 16px; height: 16px; cursor: pointer; }
+    
+    /* Filter Dropdown */
+    .filter-dropdown {
+      position: relative;
+      display: inline-block;
+    }
+    .filter-menu {
+      display: none;
+      position: absolute;
+      top: 100%;
+      right: 0;
+      margin-top: 8px;
+      background: #fff;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      min-width: 180px;
+      z-index: 100;
+      padding: 8px 0;
+    }
+    .filter-menu.show { display: block; }
+    .filter-menu label {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 16px;
+      cursor: pointer;
+      font-size: 14px;
+      transition: background 0.2s;
+    }
+    .filter-menu label:hover { background: #f5f5f5; }
+    .filter-menu input[type="checkbox"] { width: 16px; height: 16px; }
+    
+    .header-btn.active { border-color: #5b5f97; background: #f0f1fa; }
+  </style>
+</head>
+<body>
+  <div class="layout">
+    <div id="sidebar-container"></div>
+
+    <!-- MAIN CONTENT -->
+    <main class="content">
+      <!-- Page Header -->
+      <div class="page-header">
+        <h1>Financial</h1>
+        <div class="header-actions">
+          <button class="header-btn" id="date-filter">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+            <span id="date-range">All Time</span>
+          </button>
+          <div class="filter-dropdown">
+            <button class="header-btn" id="filter-btn">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"/></svg>
+              Filter
+            </button>
+            <div class="filter-menu" id="filter-menu">
+              <label><input type="checkbox" value="on-track" checked> On Track</label>
+              <label><input type="checkbox" value="pending-docs" checked> Pending Docs</label>
+              <label><input type="checkbox" value="on-hold" checked> On Hold</label>
+              <label><input type="checkbox" value="at-risk" checked> At Risk</label>
+            </div>
+          </div>
+          <button class="header-btn" id="sort-btn">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4h13M3 8h9m-9 4h6m4 0l4-4m0 0l4 4m-4-4v12"/></svg>
+            <span id="sort-label">Sort By A-Z</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Table Card -->
+      <div class="table-card">
+        <!-- Table Controls -->
+        <div class="table-controls">
+          <div class="rows-control">
+            <span>Row Per Page</span>
+            <select class="rows-select" id="rows-per-page">
+              <option value="10">10</option>
+              <option value="25">25</option>
+              <option value="50">50</option>
+            </select>
+            <span>Entries</span>
+          </div>
+          <div class="search-box">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+            <input type="text" id="search-input" placeholder="Search">
+          </div>
+        </div>
+
+        <!-- Table -->
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th class="checkbox-cell"><input type="checkbox" id="select-all"></th>
+              <th>ID ↕</th>
+              <th>Scholar ↕</th>
+              <th>School Year ↕</th>
+              <th>Total Released ↕</th>
+              <th>Last Release ↕</th>
+              <th>Next Release ↕</th>
+              <th>Status ↕</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="financial-tbody">
+            <!-- Dynamically populated -->
+          </tbody>
+        </table>
+      </div>
+
+    </main>
+  </div>
+
+  <script src="js/staff-sidebar.js"></script>
+  <script src="js/data.js"></script>
+  <script>
+    // Generate financial data from scholars
+    const financialRecords = scholars.map((scholar, index) => {
+      let financialStatus;
+      if (scholar.status === 'compliant') {
+        financialStatus = 'on-track';
+      } else if (scholar.status === 'at-risk') {
+        financialStatus = Math.random() > 0.5 ? 'pending-docs' : 'at-risk';
+      } else {
+        financialStatus = 'on-hold';
+      }
+
+      const monthlyAllowance = 7000;
+      const monthsActive = Math.floor(Math.random() * 4) + 1;
+      const totalReleased = monthlyAllowance * monthsActive;
+      
+      const lastReleaseMonth = ['Jan', 'Feb', 'Dec', 'Nov', 'Oct'][Math.floor(Math.random() * 5)];
+      const lastReleaseYear = lastReleaseMonth === 'Jan' || lastReleaseMonth === 'Feb' ? '2026' : '2025';
+      const lastReleaseDay = Math.floor(Math.random() * 20) + 1;
+      
+      // Calculate next release month (one month after last release)
+      const monthOrder = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+      const lastMonthIdx = monthOrder.indexOf(lastReleaseMonth);
+      const nextMonthIdx = (lastMonthIdx + 1) % 12;
+      const nextReleaseMonth = monthOrder[nextMonthIdx];
+      const nextReleaseYear = lastReleaseMonth === 'Dec' ? '2026' : lastReleaseYear;
+      
+      return {
+        id: scholar.id,
+        initials: scholar.initials,
+        name: `${scholar.firstName} ${scholar.lastName}`,
+        schoolYear: '2025-2026',
+        totalReleased: totalReleased,
+        lastRelease: `${lastReleaseMonth} ${String(lastReleaseDay).padStart(2, '0')}, ${lastReleaseYear}`,
+        nextRelease: financialStatus === 'on-track' ? `${nextReleaseMonth} ${String(lastReleaseDay).padStart(2, '0')}, ${nextReleaseYear}` : '—',
+        status: financialStatus,
+        statusText: financialStatus === 'on-track' ? 'On Track' : 
+                    financialStatus === 'pending-docs' ? 'Pending Docs' :
+                    financialStatus === 'on-hold' ? 'On Hold' : 'At Risk'
+      };
+    });
+
+    let filteredRecords = [...financialRecords];
+    let sortAsc = true;
+    let activeFilters = ['on-track', 'pending-docs', 'on-hold', 'at-risk'];
+
+    function renderTable() {
+      const tbody = document.getElementById('financial-tbody');
+      
+      if (filteredRecords.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="9" style="text-align:center; padding:40px; color:#888;">No records found</td></tr>';
+        return;
+      }
+
+      tbody.innerHTML = filteredRecords.map(record => `
+        <tr>
+          <td class="checkbox-cell"><input type="checkbox"></td>
+          <td>${record.id}</td>
+          <td>
+            <div class="scholar-cell">
+              <div class="scholar-avatar">${record.initials}</div>
+              <span>${record.name}</span>
+            </div>
+          </td>
+          <td>${record.schoolYear}</td>
+          <td>₱${record.totalReleased.toLocaleString()}</td>
+          <td>${record.lastRelease}</td>
+          <td>${record.nextRelease}</td>
+          <td><span class="status-badge ${record.status}">${record.statusText}</span></td>
+          <td>
+            <a href="staff-financial-details.html?id=${record.id}" class="view-btn">View</a>
+          </td>
+        </tr>
+      `).join('');
+    }
+
+    function applyFiltersAndSort() {
+      const searchTerm = document.getElementById('search-input').value.toLowerCase();
+      
+      filteredRecords = financialRecords.filter(record => {
+        const matchesFilter = activeFilters.includes(record.status);
+        const matchesSearch = record.name.toLowerCase().includes(searchTerm) || 
+                              record.id.toLowerCase().includes(searchTerm);
+        return matchesFilter && matchesSearch;
+      });
+
+      filteredRecords.sort((a, b) => {
+        return sortAsc ? a.name.localeCompare(b.name) : b.name.localeCompare(a.name);
+      });
+
+      renderTable();
+    }
+
+    // Filter dropdown toggle
+    const filterBtn = document.getElementById('filter-btn');
+    const filterMenu = document.getElementById('filter-menu');
+
+    filterBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      filterMenu.classList.toggle('show');
+    });
+
+    document.addEventListener('click', () => {
+      filterMenu.classList.remove('show');
+    });
+
+    filterMenu.addEventListener('click', (e) => {
+      e.stopPropagation();
+    });
+
+    // Filter checkboxes
+    filterMenu.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
+      checkbox.addEventListener('change', () => {
+        activeFilters = Array.from(filterMenu.querySelectorAll('input[type="checkbox"]:checked'))
+          .map(cb => cb.value);
+        applyFiltersAndSort();
+      });
+    });
+
+    // Sort toggle
+    const sortBtn = document.getElementById('sort-btn');
+    const sortLabel = document.getElementById('sort-label');
+    
+    sortBtn.addEventListener('click', () => {
+      sortAsc = !sortAsc;
+      sortLabel.textContent = sortAsc ? 'Sort By A-Z' : 'Sort By Z-A';
+      applyFiltersAndSort();
+    });
+
+    // Search
+    document.getElementById('search-input').addEventListener('input', applyFiltersAndSort);
+
+    // Select all
+    document.getElementById('select-all').addEventListener('change', (e) => {
+      document.querySelectorAll('#financial-tbody input[type="checkbox"]').forEach(cb => {
+        cb.checked = e.target.checked;
+      });
+    });
+
+    // Initial render
+    applyFiltersAndSort();
+  </script>
+</body>
+</html>

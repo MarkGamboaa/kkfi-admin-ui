@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Applicant Details - KKFI Staff Portal</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    .info-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 20px; }
+    .info-card {
+      background: #fff; border: 2px solid #e0e0e0; border-radius: 8px;
+      padding: 16px; cursor: pointer; transition: all 0.2s ease;
+    }
+    .info-card:hover { border-color: #5b5f97; background: #fafaff; }
+    .info-card.active { border-color: #5b5f97; background: #f0f1fa; }
+    .info-card-title { font-weight: 600; font-size: 14px; color: #333; }
+    .info-card-desc { font-size: 12px; color: #888; margin-top: 4px; }
+    .info-panel { display: none; }
+    .info-panel.active { display: block; }
+  </style>
+</head>
+<body>
+  <div class="layout">
+    <div id="sidebar-container"></div>
+
+    <!-- MAIN CONTENT -->
+    <main class="content">
+      
+      <!-- Applicant Header -->
+      <div class="applicant-header">
+        <a href="staff-applicants.html" class="back-btn">‹</a>
+        <div class="applicant-avatar" id="applicant-initials"></div>
+        <div class="applicant-info">
+          <h2>
+            <span id="applicant-name"></span>
+            <span class="status-badge" id="applicant-status"></span>
+          </h2>
+          <div class="app-id" id="applicant-id"></div>
+          <div class="app-date" id="application-date"></div>
+        </div>
+      </div>
+
+      <!-- Information Grid -->
+      <section class="form-section">
+        <h3 class="section-title">Applicant Information</h3>
+        <div class="info-grid">
+          <div class="info-card active" data-panel="personal">
+            <div class="info-card-title">Personal Information</div>
+            <div class="info-card-desc">Name, gender, birthdate</div>
+          </div>
+          <div class="info-card" data-panel="contact">
+            <div class="info-card-title">Contact Information</div>
+            <div class="info-card-desc">Email, phone, social</div>
+          </div>
+          <div class="info-card" data-panel="educational">
+            <div class="info-card-title">Educational Information</div>
+            <div class="info-card-desc">School, course, GPA</div>
+          </div>
+          <div class="info-card" data-panel="socioeconomic">
+            <div class="info-card-title">Socio-Economic Information</div>
+            <div class="info-card-desc">Family income, dependents</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Personal Information Panel -->
+      <div id="panel-personal" class="info-panel active">
+        <section class="form-section">
+          <h3 class="section-title">Personal Information</h3>
+          <div class="form-grid">
+            <div class="form-group">
+              <label>First Name</label>
+              <input type="text" id="first-name" disabled>
+            </div>
+            <div class="form-group">
+              <label>Middle Name</label>
+              <input type="text" id="middle-name" disabled>
+            </div>
+            <div class="form-group">
+              <label>Last Name</label>
+              <input type="text" id="last-name" disabled>
+            </div>
+            <div class="form-group">
+              <label>Gender</label>
+              <input type="text" id="gender" disabled>
+            </div>
+            <div class="form-group">
+              <label>Date of Birth</label>
+              <input type="text" id="dob" disabled>
+            </div>
+            <div class="form-group">
+              <label>Civil Status</label>
+              <input type="text" id="civil-status" disabled>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- Contact Information Panel -->
+      <div id="panel-contact" class="info-panel">
+        <section class="form-section">
+          <h3 class="section-title">Contact Information</h3>
+          <div class="form-grid">
+            <div class="form-group">
+              <label>Email Address</label>
+              <input type="text" id="email" disabled>
+            </div>
+            <div class="form-group">
+              <label>Phone Number</label>
+              <input type="text" id="phone" disabled>
+            </div>
+            <div class="form-group">
+              <label>Facebook</label>
+              <input type="text" id="facebook" disabled>
+            </div>
+            <div class="form-group">
+              <label>Messenger</label>
+              <input type="text" id="messenger" disabled>
+            </div>
+          </div>
+          <div class="form-group" style="margin-top: 20px;">
+            <label>Complete Address</label>
+            <input type="text" id="address" disabled>
+          </div>
+          <div class="form-grid" style="margin-top: 20px;">
+            <div class="form-group">
+              <label>Barangay</label>
+              <input type="text" id="barangay" disabled>
+            </div>
+            <div class="form-group">
+              <label>City/Municipality</label>
+              <input type="text" id="city" disabled>
+            </div>
+            <div class="form-group">
+              <label>Province</label>
+              <input type="text" id="province" disabled>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- Educational Information Panel -->
+      <div id="panel-educational" class="info-panel">
+        <section class="form-section">
+          <h3 class="section-title">Educational Information</h3>
+          <div class="form-grid">
+            <div class="form-group">
+              <label>School</label>
+              <input type="text" id="school" disabled>
+            </div>
+            <div class="form-group">
+              <label>Course/Program</label>
+              <input type="text" id="course" disabled>
+            </div>
+            <div class="form-group">
+              <label>Year Level</label>
+              <input type="text" id="year-level" disabled>
+            </div>
+            <div class="form-group">
+              <label>Last GPA</label>
+              <input type="text" id="last-gpa" disabled>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- Socio-Economic Information Panel -->
+      <div id="panel-socioeconomic" class="info-panel">
+        <section class="form-section">
+          <h3 class="section-title">Socio-Economic Information</h3>
+          <div class="form-grid">
+            <div class="form-group">
+              <label>Father's Name</label>
+              <input type="text" id="father-name" disabled>
+            </div>
+            <div class="form-group">
+              <label>Father's Occupation</label>
+              <input type="text" id="father-occupation" disabled>
+            </div>
+            <div class="form-group">
+              <label>Father's Monthly Income</label>
+              <input type="text" id="father-income" disabled>
+            </div>
+            <div class="form-group">
+              <label>Mother's Name</label>
+              <input type="text" id="mother-name" disabled>
+            </div>
+            <div class="form-group">
+              <label>Mother's Occupation</label>
+              <input type="text" id="mother-occupation" disabled>
+            </div>
+            <div class="form-group">
+              <label>Mother's Monthly Income</label>
+              <input type="text" id="mother-income" disabled>
+            </div>
+            <div class="form-group">
+              <label>Number of Siblings</label>
+              <input type="text" id="siblings" disabled>
+            </div>
+            <div class="form-group">
+              <label>Total Family Monthly Income</label>
+              <input type="text" id="family-income" disabled>
+            </div>
+            <div class="form-group">
+              <label>Housing Type</label>
+              <input type="text" id="housing" disabled>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- Documents Section -->
+      <section class="form-section">
+        <h3 class="section-title">Submitted Documents</h3>
+        <div class="documents-grid" id="documents-grid">
+          <!-- Dynamically populated -->
+        </div>
+      </section>
+
+      <!-- Action Bar -->
+      <div class="action-bar" id="action-bar">
+        <!-- Dynamically populated -->
+      </div>
+
+    </main>
+  </div>
+  
+  <script src="js/staff-sidebar.js"></script>
+  <script src="js/data.js"></script>
+  <script>
+    // Get applicant ID from URL
+    const params = new URLSearchParams(window.location.search);
+    const applicantId = params.get('id') || 'AP2026001';
+    const applicant = getApplicantById(applicantId);
+
+    if (applicant) {
+      // Populate header
+      document.getElementById('applicant-initials').textContent = applicant.initials;
+      document.getElementById('applicant-name').textContent = `${applicant.firstName} ${applicant.middleName} ${applicant.lastName}`;
+      document.getElementById('applicant-id').textContent = applicant.id;
+      document.getElementById('application-date').textContent = `Applied: ${applicant.applicationDate}`;
+      
+      // Set status badge
+      const statusBadge = document.getElementById('applicant-status');
+      const statusMap = {
+        'pending': { text: 'Pending', class: 'pending' },
+        'under-review': { text: 'Under Review', class: 'at-risk' },
+        'approved': { text: 'Approved', class: 'compliant' },
+        'rejected': { text: 'Rejected', class: 'non-compliant' }
+      };
+      const status = statusMap[applicant.status] || statusMap['pending'];
+      statusBadge.textContent = status.text;
+      statusBadge.className = `status-badge ${status.class}`;
+
+      // Personal Information
+      document.getElementById('first-name').value = applicant.firstName;
+      document.getElementById('middle-name').value = applicant.middleName;
+      document.getElementById('last-name').value = applicant.lastName;
+      document.getElementById('gender').value = applicant.gender;
+      document.getElementById('dob').value = applicant.dateOfBirth;
+      document.getElementById('civil-status').value = applicant.civilStatus;
+
+      // Contact Information
+      document.getElementById('email').value = applicant.email;
+      document.getElementById('phone').value = applicant.phone;
+      document.getElementById('facebook').value = applicant.facebook;
+      document.getElementById('messenger').value = applicant.messenger;
+      document.getElementById('address').value = applicant.address;
+      document.getElementById('barangay').value = applicant.barangay;
+      document.getElementById('city').value = applicant.city;
+      document.getElementById('province').value = applicant.province;
+
+      // Educational Information
+      document.getElementById('school').value = applicant.school;
+      document.getElementById('course').value = applicant.course;
+      document.getElementById('year-level').value = applicant.yearLevel;
+      document.getElementById('last-gpa').value = applicant.lastGpa;
+
+      // Socio-Economic Information
+      document.getElementById('father-name').value = applicant.fatherName;
+      document.getElementById('father-occupation').value = applicant.fatherOccupation;
+      document.getElementById('father-income').value = applicant.fatherIncome;
+      document.getElementById('mother-name').value = applicant.motherName;
+      document.getElementById('mother-occupation').value = applicant.motherOccupation;
+      document.getElementById('mother-income').value = applicant.motherIncome;
+      document.getElementById('siblings').value = applicant.siblings;
+      document.getElementById('family-income').value = applicant.familyIncome;
+      document.getElementById('housing').value = applicant.housingType;
+
+      // Documents
+      const docs = applicant.documents;
+      const docNames = {
+        applicationForm: 'Application Form',
+        gradesCopy: 'Copy of Grades',
+        birthCertificate: 'PSA Birth Certificate',
+        indigancyCertificate: 'Certificate of Indigency',
+        photo: '2x2 ID Photo',
+        enrollmentCert: 'Certificate of Enrollment'
+      };
+      
+      let docsHtml = '';
+      for (const [key, submitted] of Object.entries(docs)) {
+        docsHtml += `
+          <div class="document-card">
+            <div class="document-info">
+              <h4>${docNames[key]}</h4>
+              <span class="doc-status ${submitted ? 'complete' : 'error'}">
+                ${submitted ? 'Submitted' : 'Not Submitted'}
+              </span>
+            </div>
+            <div class="document-icon ${submitted ? 'complete' : 'error'}">
+              ${submitted ? '✓' : '✕'}
+            </div>
+          </div>
+        `;
+      }
+      document.getElementById('documents-grid').innerHTML = docsHtml;
+
+      // Action Bar based on status
+      let actionHtml = `<a href="staff-applicants.html" class="btn btn-outline">← Back to Applicants</a>`;
+      
+      if (applicant.status === 'pending' || applicant.status === 'under-review') {
+        actionHtml += `
+          <button class="btn btn-secondary">📧 Request Documents</button>
+          <button class="btn btn-danger">❌ Reject</button>
+          <button class="btn btn-primary">✅ Approve</button>
+        `;
+      } else if (applicant.status === 'approved') {
+        actionHtml += `
+          <button class="btn btn-primary">📄 Generate Welcome Letter</button>
+        `;
+      } else if (applicant.status === 'rejected') {
+        actionHtml += `
+          <button class="btn btn-secondary">🔄 Reconsider</button>
+        `;
+      }
+      document.getElementById('action-bar').innerHTML = actionHtml;
+    }
+
+    // Panel switching
+    document.querySelectorAll('.info-card').forEach(card => {
+      card.addEventListener('click', function() {
+        document.querySelectorAll('.info-card').forEach(c => c.classList.remove('active'));
+        document.querySelectorAll('.info-panel').forEach(p => p.classList.remove('active'));
+        
+        this.classList.add('active');
+        document.getElementById('panel-' + this.dataset.panel).classList.add('active');
+      });
+    });
+  </script>
+</body>
+</html>

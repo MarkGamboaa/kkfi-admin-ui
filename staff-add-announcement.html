@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Add News/Event - KKFI Staff Portal</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    .type-selector { display: flex; gap: 12px; margin-bottom: 20px; }
+    .type-option {
+      flex: 1; padding: 20px; border: 2px solid #e0e0e0; border-radius: 8px;
+      text-align: center; cursor: pointer; transition: all 0.2s;
+    }
+    .type-option:hover { border-color: #5b5f97; background: #fafaff; }
+    .type-option.active { border-color: #5b5f97; background: #f0f1fa; }
+    .type-option .icon { font-size: 24px; margin-bottom: 8px; }
+    .type-option .label { font-weight: 600; color: #333; }
+    .event-fields { display: none; }
+    .event-fields.active { display: block; }
+  </style>
+</head>
+<body>
+  <div class="layout">
+    <div id="sidebar-container"></div>
+
+    <!-- MAIN CONTENT -->
+    <main class="content">
+      <!-- Header -->
+      <div class="applicant-header">
+        <a href="staff-announcement.html" class="back-btn">‹</a>
+        <div class="applicant-info">
+          <h2>Create Announcement or Event</h2>
+        </div>
+      </div>
+
+      <section class="form-section">
+        <h3 class="section-title">Type</h3>
+        <div class="type-selector">
+          <div class="type-option active" data-type="announcement">
+            <div class="icon">📣</div>
+            <div class="label">Announcement</div>
+          </div>
+          <div class="type-option" data-type="event">
+            <div class="icon">📅</div>
+            <div class="label">Event</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="form-section">
+        <h3 class="section-title">Details</h3>
+        <div class="form-group">
+          <label>Title</label>
+          <input type="text" placeholder="Enter title">
+        </div>
+        
+        <div class="form-group" style="margin-top: 20px;">
+          <label>Target Audience</label>
+          <select style="width: 100%; padding: 12px 15px; border: 1px solid #e0e0e0; border-radius: 8px; font-size: 14px;">
+            <option>All (Scholars & Applicants)</option>
+            <option>Scholars Only</option>
+            <option>Applicants Only</option>
+          </select>
+        </div>
+
+        <div class="form-group" style="margin-top: 20px;">
+          <label>Content / Description</label>
+          <textarea rows="8" placeholder="Write your content here..." style="width: 100%; padding: 15px; border: 1px solid #e0e0e0; border-radius: 8px; font-size: 14px; resize: vertical; font-family: inherit;"></textarea>
+        </div>
+
+        <!-- Event-specific fields -->
+        <div id="event-fields" class="event-fields">
+          <div class="form-grid two-col" style="margin-top: 20px;">
+            <div class="form-group">
+              <label>Event Date</label>
+              <input type="date">
+            </div>
+            <div class="form-group">
+              <label>Event Time</label>
+              <input type="time">
+            </div>
+          </div>
+          <div class="form-group" style="margin-top: 20px;">
+            <label>Venue / Location</label>
+            <input type="text" placeholder="Enter event venue or location">
+          </div>
+          <div class="form-group" style="margin-top: 20px;">
+            <label>
+              <input type="checkbox" style="width: auto; margin-right: 8px;">
+              This is a required event for compliance
+            </label>
+          </div>
+        </div>
+
+        <div class="form-grid two-col" style="margin-top: 20px;">
+          <div class="form-group">
+            <label>Publish Date</label>
+            <input type="date">
+          </div>
+          <div class="form-group">
+            <label>Publish Time</label>
+            <input type="time">
+          </div>
+        </div>
+
+        <div class="form-group" style="margin-top: 20px;">
+          <label>
+            <input type="checkbox" style="width: auto; margin-right: 8px;">
+            Send email notification to recipients
+          </label>
+        </div>
+      </section>
+
+      <!-- Action Bar -->
+      <div class="action-bar">
+        <a href="staff-announcement.html" class="btn btn-outline">Cancel</a>
+        <button class="btn btn-secondary">💾 Save as Draft</button>
+        <button class="btn btn-primary">📢 Publish Now</button>
+      </div>
+
+    </main>
+  </div>
+  <script src="js/staff-sidebar.js"></script>
+  <script>
+    document.querySelectorAll('.type-option').forEach(option => {
+      option.addEventListener('click', function() {
+        document.querySelectorAll('.type-option').forEach(o => o.classList.remove('active'));
+        this.classList.add('active');
+        const type = this.dataset.type;
+        if (type === 'event') {
+          document.getElementById('event-fields').classList.add('active');
+        } else {
+          document.getElementById('event-fields').classList.remove('active');
+        }
+      });
+    });
+  </script>
+</body>
+</html>
