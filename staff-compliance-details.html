@@ -52,7 +52,7 @@
             <input type="text" id="last-submission" disabled>
           </div>
           <div class="form-group">
-            <label>KKFI Events Attended</label>
+            <label>KKFI Activities Attended</label>
             <input type="text" id="events-attended" disabled>
           </div>
         </div>
@@ -66,15 +66,15 @@
         </div>
       </section>
 
-      <!-- Event Attendance Tracking -->
+      <!-- Activity Attendance Tracking -->
       <section class="form-section">
-        <h3 class="section-title">Event Attendance</h3>
+        <h3 class="section-title">Activity Attendance</h3>
         <p style="color: #666; font-size: 13px; margin-bottom: 15px;">Attendance is submitted by scholars through their account.</p>
         <table>
           <thead>
             <tr>
-              <th>Event Name</th>
-              <th>Event Date</th>
+              <th>Activity Name</th>
+              <th>Activity Date</th>
               <th>Type</th>
               <th>Attendance</th>
             </tr>
@@ -93,7 +93,7 @@
             <tr>
               <th>Period</th>
               <th>GPA</th>
-              <th>Events Attended</th>
+              <th>Activities Attended</th>
               <th>Status</th>
             </tr>
           </thead>
@@ -193,9 +193,9 @@
         
         <div class="document-card">
           <div class="document-info">
-            <h4>Attend KKFI Events</h4>
+            <h4>Attend KKFI Activities</h4>
             <span class="doc-status ${scholar.compliance.events.met ? 'complete' : scholar.status === 'at-risk' ? 'warning' : 'error'}">
-              ${scholar.compliance.events.attended} of ${scholar.compliance.events.required} attended${!scholar.compliance.events.met ? ' - Missing ' + (scholar.compliance.events.required - scholar.compliance.events.attended) + ' events' : ''}
+              ${scholar.compliance.events.attended} of ${scholar.compliance.events.required} attended${!scholar.compliance.events.met ? ' - Missing ' + (scholar.compliance.events.required - scholar.compliance.events.attended) + ' activities' : ''}
             </span>
           </div>
           <div class="document-icon ${scholar.compliance.events.met ? 'complete' : scholar.status === 'at-risk' ? 'warning' : 'error'}">
@@ -270,8 +270,8 @@
       } else if (scholar.status === 'at-risk') {
         noticeHtml = `
           <div style="background: #fff8e1; border-left: 4px solid #f5a623; padding: 15px; border-radius: 0 8px 8px 0; margin-bottom: 15px;">
-            <strong style="color: #f57f17;">At Risk - Event Attendance</strong>
-            <p style="color: #666; font-size: 13px; margin-top: 5px;">Scholar has missed ${scholar.compliance.events.required - scholar.compliance.events.attended} required KKFI events. Academic standing is good but event attendance needs improvement.</p>
+            <strong style="color: #f57f17;">At Risk - Activity Attendance</strong>
+            <p style="color: #666; font-size: 13px; margin-top: 5px;">Scholar has missed ${scholar.compliance.events.required - scholar.compliance.events.attended} required KKFI activities. Academic standing is good but activity attendance needs improvement.</p>
           </div>
         `;
       } else {
