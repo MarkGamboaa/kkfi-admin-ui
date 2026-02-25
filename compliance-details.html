@@ -292,19 +292,16 @@
       let actionHtml = '';
       if (scholar.status === 'compliant') {
         actionHtml = `
-          <button class="btn btn-outline">📄 Generate Compliance Report</button>
           <button class="btn btn-primary">🏆 Send Commendation</button>
         `;
       } else if (scholar.status === 'at-risk') {
         actionHtml = `
           <button class="btn btn-primary">📧 Send Reminder</button>
-          <button class="btn btn-outline">📄 Generate Compliance Report</button>
-          <button class="btn btn-secondary">⚠️ Issue Warning</button>
+          <button class="btn btn-secondary">⚠️ Issue Warning</button>Comc
         `;
       } else {
         actionHtml = `
           <button class="btn btn-primary">📧 Send Reminder</button>
-          <button class="btn btn-outline">📄 Generate Compliance Report</button>
           <button class="btn btn-secondary">⚠️ Issue Warning</button>
           <button class="btn btn-danger">🚫 Suspend Scholarship</button>
         `;

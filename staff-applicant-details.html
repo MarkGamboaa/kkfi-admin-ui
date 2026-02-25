@@ -17,6 +17,131 @@
     .info-card-desc { font-size: 12px; color: #888; margin-top: 4px; }
     .info-panel { display: none; }
     .info-panel.active { display: block; }
+
+    /* Request Document Modal */
+    #request-modal {
+      position: fixed !important;
+      top: 0 !important;
+      left: 0 !important;
+      width: 100% !important;
+      height: 100% !important;
+      background: rgba(0, 0, 0, 0.5) !important;
+      z-index: 99999 !important;
+      display: none;
+      justify-content: center !important;
+      align-items: center !important;
+    }
+    #request-modal.show { display: flex !important; }
+    
+    #request-modal .req-modal {
+      background: #fff;
+      border-radius: 12px;
+      width: 400px;
+      max-width: 90%;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+    }
+    #request-modal .req-modal-header {
+      padding: 20px 24px;
+      border-bottom: 1px solid #eee;
+    }
+    #request-modal .req-modal-header h2 {
+      margin: 0;
+      font-size: 18px;
+      color: #333;
+      font-weight: 600;
+    }
+    #request-modal .req-modal-body {
+      padding: 20px 24px;
+    }
+    #request-modal .req-form-group {
+      margin-bottom: 16px;
+    }
+    #request-modal .req-form-group:last-child { margin-bottom: 0; }
+    #request-modal .req-label {
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      color: #555;
+      margin-bottom: 8px;
+    }
+    #request-modal .req-checklist {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      max-height: 150px;
+      overflow-y: auto;
+      padding: 4px;
+    }
+    #request-modal .req-check-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      color: #333;
+      cursor: pointer;
+      padding: 8px 10px;
+      background: #f8f9fa;
+      border-radius: 6px;
+      border: 1px solid #eee;
+      margin: 0;
+      font-weight: 400;
+    }
+    #request-modal .req-check-item:hover {
+      background: #f0f1fa;
+      border-color: #5b5f97;
+    }
+    #request-modal .req-check-item input {
+      width: 14px;
+      height: 14px;
+      accent-color: #5b5f97;
+    }
+    #request-modal .req-select,
+    #request-modal .req-textarea {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      font-size: 14px;
+      font-family: inherit;
+      box-sizing: border-box;
+    }
+    #request-modal .req-select:focus,
+    #request-modal .req-textarea:focus {
+      outline: none;
+      border-color: #5b5f97;
+    }
+    #request-modal .req-textarea {
+      resize: vertical;
+      min-height: 60px;
+    }
+    #request-modal .req-modal-footer {
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+      padding: 16px 24px;
+      border-top: 1px solid #eee;
+      background: #fafafa;
+      border-radius: 0 0 12px 12px;
+    }
+    #request-modal .req-btn {
+      padding: 10px 20px;
+      border-radius: 6px;
+      font-size: 14px;
+      cursor: pointer;
+      font-weight: 500;
+    }
+    #request-modal .req-btn-cancel {
+      border: 1px solid #ddd;
+      background: #fff;
+      color: #666;
+    }
+    #request-modal .req-btn-cancel:hover { background: #f5f5f5; }
+    #request-modal .req-btn-submit {
+      border: none;
+      background: #5b5f97;
+      color: #fff;
+    }
+    #request-modal .req-btn-submit:hover { background: #4a4e7d; }
   </style>
 </head>
 <body>
@@ -224,6 +349,48 @@
 
     </main>
   </div>
+
+  <!-- Request Documents Modal -->
+  <div id="request-modal">
+    <div class="req-modal">
+      <div class="req-modal-header">
+        <h2>Request Documents</h2>
+      </div>
+      <div class="req-modal-body">
+        <div class="req-form-group">
+          <span class="req-label">Select Documents to Request</span>
+          <div class="req-checklist">
+            <label class="req-check-item"><input type="checkbox" value="birth_certificate"> PSA Birth Certificate</label>
+            <label class="req-check-item"><input type="checkbox" value="transcript"> Transcript of Records</label>
+            <label class="req-check-item"><input type="checkbox" value="enrollment_cert"> Certificate of Enrollment</label>
+            <label class="req-check-item"><input type="checkbox" value="indigency_cert"> Certificate of Indigency</label>
+            <label class="req-check-item"><input type="checkbox" value="grades_copy"> Copy of Grades</label>
+            <label class="req-check-item"><input type="checkbox" value="id_photo"> 2x2 ID Photo</label>
+            <label class="req-check-item"><input type="checkbox" value="valid_id"> Valid Government ID</label>
+            <label class="req-check-item"><input type="checkbox" value="recommendation"> Recommendation Letter</label>
+          </div>
+        </div>
+        
+        <div class="req-form-group">
+          <span class="req-label">Priority Level</span>
+          <select class="req-select" id="request-priority">
+            <option value="normal">Normal</option>
+            <option value="urgent">Urgent</option>
+            <option value="low">Low Priority</option>
+          </select>
+        </div>
+        
+        <div class="req-form-group">
+          <span class="req-label">Additional Notes (Optional)</span>
+          <textarea class="req-textarea" id="request-notes" placeholder="Enter any additional instructions..."></textarea>
+        </div>
+      </div>
+      <div class="req-modal-footer">
+        <button class="req-btn req-btn-cancel" onclick="closeRequestModal()">Cancel</button>
+        <button class="req-btn req-btn-submit" onclick="submitRequest()">Send Request</button>
+      </div>
+    </div>
+  </div>
   
   <script src="js/staff-sidebar.js"></script>
   <script src="js/data.js"></script>
@@ -321,7 +488,7 @@
       
       if (applicant.status === 'pending' || applicant.status === 'under-review') {
         actionHtml += `
-          <button class="btn btn-secondary">📧 Request Documents</button>
+          <button class="btn btn-secondary" onclick="openRequestModal()">📧 Request Documents</button>
           <button class="btn btn-danger">❌ Reject</button>
           <button class="btn btn-primary">✅ Approve</button>
         `;
@@ -346,6 +513,44 @@
         this.classList.add('active');
         document.getElementById('panel-' + this.dataset.panel).classList.add('active');
       });
+    });
+
+    // Request Document Modal Functions
+    function openRequestModal() {
+      document.getElementById('request-modal').classList.add('show');
+      // Reset form
+      document.querySelectorAll('.req-checklist input').forEach(cb => cb.checked = false);
+      document.getElementById('request-priority').value = 'normal';
+      document.getElementById('request-notes').value = '';
+    }
+
+    function closeRequestModal() {
+      document.getElementById('request-modal').classList.remove('show');
+    }
+
+    function submitRequest() {
+      const selectedDocs = Array.from(document.querySelectorAll('.req-checklist input:checked')).map(cb => cb.value);
+      if (selectedDocs.length === 0) {
+        alert('Please select at least one document to request.');
+        return;
+      }
+      const priority = document.getElementById('request-priority').value;
+      const notes = document.getElementById('request-notes').value;
+      
+      console.log('Request submitted:', {
+        applicantId: applicantId,
+        documents: selectedDocs,
+        priority: priority,
+        notes: notes
+      });
+      
+      alert('Document request sent successfully!');
+      closeRequestModal();
+    }
+
+    // Close modal when clicking outside
+    document.getElementById('request-modal').addEventListener('click', function(e) {
+      if (e.target === this) closeRequestModal();
     });
   </script>
 </body>
